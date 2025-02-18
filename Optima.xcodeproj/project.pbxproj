@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1EEE64AA2D63D38000C43761 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64A92D63D38000C43761 /* SplashViewController.swift */; };
+		1EEE64AE2D63D3A500C43761 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */; };
+		1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */; };
+		1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B72D64122B00C43761 /* OnboardingSecViewController.swift */; };
+		1EEE64BA2D64123C00C43761 /* OnboardingThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B92D64123C00C43761 /* OnboardingThirdViewController.swift */; };
+		1EEE64BC2D6420BB00C43761 /* ChooseRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64BB2D6420BB00C43761 /* ChooseRoleViewController.swift */; };
+		1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		1E43513E2D62AB60008872C8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +37,13 @@
 		1E4351272D62AB5E008872C8 /* Optima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Optima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E43513D2D62AB60008872C8 /* OptimaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4351472D62AB60008872C8 /* OptimaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EEE64A92D63D38000C43761 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstViewController.swift; sourceTree = "<group>"; };
+		1EEE64B72D64122B00C43761 /* OnboardingSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecViewController.swift; sourceTree = "<group>"; };
+		1EEE64B92D64123C00C43761 /* OnboardingThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdViewController.swift; sourceTree = "<group>"; };
+		1EEE64BB2D6420BB00C43761 /* ChooseRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoleViewController.swift; sourceTree = "<group>"; };
+		1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Style.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +105,12 @@
 		1E43511E2D62AB5E008872C8 = {
 			isa = PBXGroup;
 			children = (
+				1EEE64A82D63D2ED00C43761 /* Resources */,
+				1EEE64A72D63D2DC00C43761 /* Helpers */,
+				1EEE64A62D63D2D000C43761 /* Managers */,
+				1EEE64A52D63D2C400C43761 /* Models */,
+				1EEE64A42D63D2B800C43761 /* Views */,
+				1EEE64A32D63D2A000C43761 /* Controllers */,
 				1E4351292D62AB5E008872C8 /* Optima */,
 				1E4351402D62AB60008872C8 /* OptimaTests */,
 				1E43514A2D62AB60008872C8 /* OptimaUITests */,
@@ -103,6 +126,55 @@
 				1E4351472D62AB60008872C8 /* OptimaUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1EEE64A32D63D2A000C43761 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1EEE64A92D63D38000C43761 /* SplashViewController.swift */,
+				1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */,
+				1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */,
+				1EEE64B72D64122B00C43761 /* OnboardingSecViewController.swift */,
+				1EEE64B92D64123C00C43761 /* OnboardingThirdViewController.swift */,
+				1EEE64BB2D6420BB00C43761 /* ChooseRoleViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1EEE64A42D63D2B800C43761 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1EEE64A52D63D2C400C43761 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1EEE64A62D63D2D000C43761 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		1EEE64A72D63D2DC00C43761 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1EEE64A82D63D2ED00C43761 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +321,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EEE64BA2D64123C00C43761 /* OnboardingThirdViewController.swift in Sources */,
+				1EEE64BC2D6420BB00C43761 /* ChooseRoleViewController.swift in Sources */,
+				1EEE64AE2D63D3A500C43761 /* OnboardingPageViewController.swift in Sources */,
+				1EEE64AA2D63D38000C43761 /* SplashViewController.swift in Sources */,
+				1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */,
+				1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */,
+				1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
