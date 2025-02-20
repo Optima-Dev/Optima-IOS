@@ -13,8 +13,9 @@ class SplashScreenViewController: UIViewController {
     func navigateToOnboarding() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let onboardingVC = storyboard.instantiateViewController(withIdentifier: "OnboardingPageViewController") as! OnboardingPageViewController
-        
-        if let window = UIApplication.shared.windows.first {
+
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = scene.windows.first {
             window.rootViewController = onboardingVC
             window.makeKeyAndVisible()
         }
