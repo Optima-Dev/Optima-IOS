@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */; };
+		1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */; };
 		1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */; };
-		1E8E7C952D66947300400B02 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E7C942D66947300400B02 /* LoginViewController.swift */; };
 		1E8E7C972D6694F900400B02 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E7C962D6694F900400B02 /* SignupViewController.swift */; };
 		1EEE64AE2D63D3A500C43761 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */; };
 		1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */; };
@@ -17,6 +17,11 @@
 		1EEE64BA2D64123C00C43761 /* OnboardingThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B92D64123C00C43761 /* OnboardingThirdViewController.swift */; };
 		1EEE64BC2D6420BB00C43761 /* ChooseRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64BB2D6420BB00C43761 /* ChooseRoleViewController.swift */; };
 		1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */; };
+		1EFA95D82D6D12CE00139613 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFA95D72D6D12CE00139613 /* AuthService.swift */; };
+		1EFA95DA2D6D17DA00139613 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFA95D92D6D17DA00139613 /* ResetPasswordViewController.swift */; };
+		1EFA96442D6D54C600139613 /* EnterCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFA96432D6D54C600139613 /* EnterCodeViewController.swift */; };
+		1EFA96462D6D5DB200139613 /* WarningPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFA96452D6D5DB200139613 /* WarningPopupView.swift */; };
+		1EFA96482D6D63DB00139613 /* ConfirmPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFA96472D6D63DB00139613 /* ConfirmPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,11 +43,11 @@
 
 /* Begin PBXFileReference section */
 		1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyTermsViewController.swift; sourceTree = "<group>"; };
+		1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		1E4351272D62AB5E008872C8 /* Optima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Optima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E43513D2D62AB60008872C8 /* OptimaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4351472D62AB60008872C8 /* OptimaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E8E7C942D66947300400B02 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E8E7C962D6694F900400B02 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +55,11 @@
 		1EEE64B92D64123C00C43761 /* OnboardingThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdViewController.swift; sourceTree = "<group>"; };
 		1EEE64BB2D6420BB00C43761 /* ChooseRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoleViewController.swift; sourceTree = "<group>"; };
 		1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Style.swift"; sourceTree = "<group>"; };
+		1EFA95D72D6D12CE00139613 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		1EFA95D92D6D17DA00139613 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		1EFA96432D6D54C600139613 /* EnterCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterCodeViewController.swift; sourceTree = "<group>"; };
+		1EFA96452D6D5DB200139613 /* WarningPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningPopupView.swift; sourceTree = "<group>"; };
+		1EFA96472D6D63DB00139613 /* ConfirmPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -144,8 +154,11 @@
 				1EEE64B92D64123C00C43761 /* OnboardingThirdViewController.swift */,
 				1EEE64BB2D6420BB00C43761 /* ChooseRoleViewController.swift */,
 				1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */,
-				1E8E7C942D66947300400B02 /* LoginViewController.swift */,
+				1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */,
 				1E8E7C962D6694F900400B02 /* SignupViewController.swift */,
+				1EFA95D92D6D17DA00139613 /* ResetPasswordViewController.swift */,
+				1EFA96432D6D54C600139613 /* EnterCodeViewController.swift */,
+				1EFA96472D6D63DB00139613 /* ConfirmPasswordViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -154,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */,
+				1EFA96452D6D5DB200139613 /* WarningPopupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,6 +182,7 @@
 		1EEE64A62D63D2D000C43761 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				1EFA95D72D6D12CE00139613 /* AuthService.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -335,11 +350,16 @@
 				1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */,
 				1EEE64AE2D63D3A500C43761 /* OnboardingPageViewController.swift in Sources */,
 				1E8E7C972D6694F900400B02 /* SignupViewController.swift in Sources */,
+				1EFA96442D6D54C600139613 /* EnterCodeViewController.swift in Sources */,
+				1EFA96462D6D5DB200139613 /* WarningPopupView.swift in Sources */,
 				1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */,
+				1EFA96482D6D63DB00139613 /* ConfirmPasswordViewController.swift in Sources */,
 				1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */,
 				1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */,
+				1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */,
+				1EFA95DA2D6D17DA00139613 /* ResetPasswordViewController.swift in Sources */,
 				1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */,
-				1E8E7C952D66947300400B02 /* LoginViewController.swift in Sources */,
+				1EFA95D82D6D12CE00139613 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,13 +400,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TF9BXGG6VZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Optima/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to the camera to help you use Optima.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to the microphone to help you use Optima.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -407,13 +431,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TF9BXGG6VZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Optima/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to the camera to help you use Optima.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to the microphone to help you use Optima.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
