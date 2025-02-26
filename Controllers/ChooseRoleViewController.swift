@@ -1,7 +1,20 @@
 import UIKit
 
 class ChooseRoleViewController: UIViewController {
+    
+    
+    @IBAction func blindButtonTapped(_ sender: UIButton) {
+        UserDefaults.standard.set("Blind", forKey: "userRole")
+        print("🔹 User selected role: Blind")
+        // No need to manually navigate, Storyboard handles this
+    }
 
+    @IBAction func volunteerButtonTapped(_ sender: UIButton) {
+        UserDefaults.standard.set("Volunteer", forKey: "userRole")
+        print("🔹 User selected role: Volunteer")
+        // No need to manually navigate, Storyboard handles this
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

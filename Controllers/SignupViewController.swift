@@ -2,74 +2,66 @@ import UIKit
 
 class SignupViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var googleLoginButton: UIButton!  // Google Login button
+    @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
+    
+    // MARK: - Properties
+    private let mainColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
+    private var isPasswordVisible = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setBackgroundImage()
+        configureUI()
+        setupGestureRecognizers()
         setupTextFields()
-        setupButtons()
-        errorLabel.isHidden = true
-        
-        // Add tap gesture recognizer to dismiss keyboard
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
-        
-        // Setting up text field delegates
-        firstNameTextField.delegate = self
-        lastNameTextField.delegate = self
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
     }
     
-    // MARK: - Setup Methods
-    func setBackgroundImage() {
+    // MARK: - UI Configuration
+    private func configureUI() {
+        setBackgroundImage()
+        setupButtons()
+        errorLabel.isHidden = true
+    }
+    
+    private func setBackgroundImage() {
         let backgroundImage = UIImageView(frame: view.bounds)
         backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
-        backgroundImage.clipsToBounds = true
-        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(backgroundImage)
-        view.sendSubviewToBack(backgroundImage)
-        
-        NSLayoutConstraint.activate([
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        view.insertSubview(backgroundImage, at: 0)
     }
-
-    func setupTextFields() {
-        configureTextField(firstNameTextField, withIcon: "personIcon", placeholder: "First Name")
-        configureTextField(lastNameTextField, withIcon: "personIcon", placeholder: "Last Name")
-        configureTextField(emailTextField, withIcon: "mail", placeholder: "example@gmail.com")
-        configureTextField(passwordTextField, withIcon: "pass", placeholder: "******")
+    
+    private func setupTextFields() {
+        configureTextField(firstNameTextField, icon: "personIcon", placeholder: "First Name")
+        configureTextField(lastNameTextField, icon: "personIcon", placeholder: "Last Name")
+        configureTextField(emailTextField, icon: "mail", placeholder: "Email")
+        configurePasswordTextField()
     }
-
-    func configureTextField(_ textField: UITextField, withIcon iconName: String, placeholder: String) {
-        let icon = UIImageView(image: UIImage(named: iconName))
-        icon.contentMode = .scaleAspectFit
-        icon.frame = CGRect(x: 10, y: 0, width: 20, height: 20)
+    
+    private func configurePasswordTextField() {
+        configureTextField(passwordTextField, icon: "pass", placeholder: "Password")
+        passwordTextField.isSecureTextEntry = true
+        addPasswordToggleButton()
+    }
+    
+    private func configureTextField(_ textField: UITextField, icon: String, placeholder: String) {
+        let iconView = UIImageView(image: UIImage(named: icon))
+        iconView.contentMode = .scaleAspectFit
+        iconView.frame = CGRect(x: 12, y: 0, width: 24, height: 24)
         
-        let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
-        iconContainer.addSubview(icon)
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 24))
+        containerView.addSubview(iconView)
         
-        textField.leftView = iconContainer
+        textField.leftView = containerView
         textField.leftViewMode = .always
-        textField.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1).cgColor
-        textField.layer.borderWidth = 2.0
-        textField.layer.cornerRadius = 20.0
-        textField.backgroundColor = .white
-        textField.textColor = .black
+        textField.layer.borderColor = mainColor.cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 20
         textField.attributedPlaceholder = NSAttributedString(
             string: placeholder,
             attributes: [
@@ -78,110 +70,180 @@ class SignupViewController: UIViewController {
             ]
         )
     }
-
-    func setupButtons() {
-        signUpButton.backgroundColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
-        signUpButton.setTitleColor(.white, for: .normal)
-        signUpButton.layer.cornerRadius = 20.0
+    
+    private func addPasswordToggleButton() {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "pass1"), for: .normal)
+        button.setImage(UIImage(named: "eyepass"), for: .selected)
+        button.frame = CGRect(x: 0, y: 0, width: 40, height: 24)
+        button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         
-        // Google Login button styling - matching text field border
-        googleLoginButton.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1).cgColor
-        googleLoginButton.layer.borderWidth = 2.0
-        googleLoginButton.layer.cornerRadius = 20.0
-        googleLoginButton.backgroundColor = .white // Background white similar to text fields
-        googleLoginButton.setTitleColor(UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1), for: .normal)
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 24))
+        containerView.addSubview(button)
+        
+        passwordTextField.rightView = containerView
+        passwordTextField.rightViewMode = .always
     }
-
-    // MARK: - Action Methods
+    
+    private func setupButtons() {
+        signUpButton.layer.cornerRadius = 20
+        googleLoginButton.layer.cornerRadius = 20
+        googleLoginButton.layer.borderWidth = 2
+        googleLoginButton.layer.borderColor = mainColor.cgColor
+    }
+    
+    // MARK: - Actions
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
-        if let firstName = firstNameTextField.text, let lastName = lastNameTextField.text, let email = emailTextField.text, let password = passwordTextField.text {
-            let (isFirstNameValid, firstNameError) = validateName(firstName)
-            let (isLastNameValid, lastNameError) = validateName(lastName)
-            let (isEmailValid, emailError) = validateEmail(email)
-            let (isPasswordValid, passwordError) = validatePassword(password)
-            
-            if isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid {
-                errorLabel.isHidden = true
-                performSignUp(firstName: firstName, lastName: lastName, email: email, password: password)
-            } else {
-                showError(firstNameError, lastNameError, emailError, passwordError)
-            }
-        }
+        handleSignup()
     }
-
-    func showError(_ firstNameError: String?, _ lastNameError: String?, _ emailError: String?, _ passwordError: String?) {
-        var errorMessage = ""
-        if let firstNameError = firstNameError {
-            errorMessage += firstNameError + "\n"
-        }
-        if let lastNameError = lastNameError {
-            errorMessage += lastNameError + "\n"
-        }
-        if let emailError = emailError {
-            errorMessage += emailError + "\n"
-        }
-        if let passwordError = passwordError {
-            errorMessage += passwordError
-        }
-        
-        errorLabel.text = errorMessage
-        errorLabel.isHidden = false
+    
+    @objc private func togglePasswordVisibility(_ sender: UIButton) {
+        isPasswordVisible.toggle()
+        sender.isSelected = isPasswordVisible
+        passwordTextField.isSecureTextEntry = !isPasswordVisible
     }
-
-    // MARK: - Validation Methods
-    func validateName(_ name: String) -> (Bool, String?) {
-        if name.isEmpty {
-            return (false, "Name cannot be empty.")
-        }
+    
+    // MARK: - Validation Logic
+    private func validateName(_ name: String) -> (isValid: Bool, error: String?) {
+        let trimmedName = name.trimmingCharacters(in: .whitespaces)
+        guard !trimmedName.isEmpty else { return (false, "Name cannot be empty") }
+        guard trimmedName.count >= 2 else { return (false, "Name must be at least 2 characters") }
         return (true, nil)
     }
-
-    func validateEmail(_ email: String) -> (Bool, String?) {
+    
+    private func validateEmail(_ email: String) -> (isValid: Bool, error: String?) {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        if !emailPredicate.evaluate(with: email) {
-            return (false, "Invalid email: should include @")
-        }
-        return (true, nil)
+        let isValid = NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
+        return isValid ? (true, nil) : (false, "Invalid email format")
     }
-
-    func validatePassword(_ password: String) -> (Bool, String?) {
+    
+    private func validatePassword(_ password: String) -> (isValid: Bool, error: String?) {
         let passwordRegex = "^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$"
-        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        if !passwordPredicate.evaluate(with: password) {
-            return (false, "Password must be at least 8 characters, contain a number and a symbol")
-        }
-        return (true, nil)
+        let isValid = NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
+        return isValid ? (true, nil) : (false, "Password must contain:\n- 8+ characters\n- 1 number\n- 1 special character")
     }
-
-    func performSignUp(firstName: String, lastName: String, email: String, password: String) {
-        // Networking logic here
-        print("First Name: \(firstName), Last Name: \(lastName), Email: \(email), Password: \(password)")
+    
+    private func handleSignup() {
+        dismissKeyboard()
         
-        // Navigate to the next screen
-        performSegue(withIdentifier: "goToHome", sender: self)
+        guard let firstName = firstNameTextField.text,
+              let lastName = lastNameTextField.text,
+              let email = emailTextField.text,
+              let password = passwordTextField.text else { return }
+        
+        let firstNameValidation = validateName(firstName)
+        let lastNameValidation = validateName(lastName)
+        let emailValidation = validateEmail(email)
+        let passwordValidation = validatePassword(password)
+        
+        if firstNameValidation.isValid &&
+            lastNameValidation.isValid &&
+            emailValidation.isValid &&
+            passwordValidation.isValid {
+            errorLabel.isHidden = true
+            handleSuccessfulSignup()
+        } else {
+            handleValidationErrors(
+                firstNameError: firstNameValidation.error,
+                lastNameError: lastNameValidation.error,
+                emailError: emailValidation.error,
+                passwordError: passwordValidation.error
+            )
+        }
     }
-
-    @objc func dismissKeyboard() {
+    
+    private func handleValidationErrors(firstNameError: String?,
+                                        lastNameError: String?,
+                                        emailError: String?,
+                                        passwordError: String?) {
+        var errorMessages = [String]()
+        
+        [firstNameError, lastNameError, emailError, passwordError].forEach {
+            if let error = $0 { errorMessages.append("• \(error)") }
+        }
+        
+        errorLabel.text = errorMessages.joined(separator: "\n\n")
+        errorLabel.isHidden = false
+        
+        // Highlight invalid fields
+        highlightField(firstNameTextField, isValid: firstNameError == nil)
+        highlightField(lastNameTextField, isValid: lastNameError == nil)
+        highlightField(emailTextField, isValid: emailError == nil)
+        highlightField(passwordTextField, isValid: passwordError == nil)
+    }
+    
+    private func highlightField(_ textField: UITextField, isValid: Bool) {
+        textField.layer.borderColor = isValid ? mainColor.cgColor : UIColor.red.cgColor
+    }
+    
+    // MARK: - Navigation
+    private func handleSuccessfulSignup() {
+        print("✅ Signup Successful")
+        let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "Blind"
+        userRole == "Blind" ? navigateToBlindHome() : navigateToVolunteerHome()
+    }
+    
+    private func navigateToBlindHome() {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "BlindHomeViewController") else {
+            showViewControllerError()
+            return
+        }
+        presentFullScreen(vc)
+    }
+    
+    private func navigateToVolunteerHome() {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "VolunteerHomeViewController") else {
+            showViewControllerError()
+            return
+        }
+        presentFullScreen(vc)
+    }
+    
+    private func presentFullScreen(_ viewController: UIViewController) {
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
+    }
+    
+    // MARK: - Error Handling
+    private func showViewControllerError() {
+        let alert = UIAlertController(
+            title: "Error",
+            message: "Failed to load view controller",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    // MARK: - Utilities
+    private func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension SignupViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        // Reset the border color once editing ends
-        textField.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1).cgColor
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        highlightField(textField, isValid: true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == firstNameTextField {
+        switch textField {
+        case firstNameTextField:
             lastNameTextField.becomeFirstResponder()
-        } else if textField == lastNameTextField {
+        case lastNameTextField:
             emailTextField.becomeFirstResponder()
-        } else if textField == emailTextField {
+        case emailTextField:
             passwordTextField.becomeFirstResponder()
-        } else if textField == passwordTextField {
-            textField.resignFirstResponder() // Dismiss the keyboard
+        case passwordTextField:
+            handleSignup()
+        default:
+            break
         }
         return true
     }

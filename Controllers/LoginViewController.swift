@@ -2,65 +2,88 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var googleLoginButton: UIButton!
-    @IBOutlet weak var errorLabel: UILabel!
+    
+    // MARK: - Properties
+    private let mainColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
+    private var isPasswordVisible = false
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureUI()
+        setupGestureRecognizers()
+    }
+    
+    // MARK: - UI Configuration
+    private func configureUI() {
         setBackgroundImage()
         setupTextFields()
         setupButtons()
-        errorLabel.isHidden = true
-        
-        // Add tap gesture recognizer to dismiss keyboard
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
+        setupTextFieldsDelegates()
     }
     
-    // MARK: - Setup Methods
-    func setBackgroundImage() {
+    /// Set up text field delegates
+    private func setupTextFieldsDelegates() {
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+    }
+    
+    /// Configure buttons appearance
+    private func setupButtons() {
+        loginButton.layer.cornerRadius = 20
+        googleLoginButton.layer.cornerRadius = 20
+        googleLoginButton.layer.borderWidth = 2
+        googleLoginButton.layer.borderColor = mainColor.cgColor
+    }
+    
+    /// Set background image for the view
+    private func setBackgroundImage() {
         let backgroundImage = UIImageView(frame: view.bounds)
         backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
-        backgroundImage.clipsToBounds = true
-        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(backgroundImage)
-        view.sendSubviewToBack(backgroundImage)
-        
-        NSLayoutConstraint.activate([
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        view.insertSubview(backgroundImage, at: 0)
     }
-
-    func setupTextFields() {
-        configureTextField(emailTextField, withIcon: "mail", placeholder: "example@gmail.com")
-        configureTextField(passwordTextField, withIcon: "pass", placeholder: "******")
+    
+    /// Configure text fields setup
+    private func setupTextFields() {
+        configureEmailTextField()
+        configurePasswordTextField()
     }
-
-    func configureTextField(_ textField: UITextField, withIcon iconName: String, placeholder: String) {
-        let icon = UIImageView(image: UIImage(named: iconName))
-        icon.contentMode = .scaleAspectFit
-        icon.frame = CGRect(x: 10, y: 0, width: 20, height: 20)
+    
+    // MARK: - Email TextField Configuration
+    private func configureEmailTextField() {
+        configureTextField(emailTextField, icon: "mail", placeholder: "example@gmail.com")
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.autocorrectionType = .no
+    }
+    
+    // MARK: - Password TextField Configuration
+    private func configurePasswordTextField() {
+        configureTextField(passwordTextField, icon: "pass", placeholder: "Password")
+        passwordTextField.isSecureTextEntry = true
+        addPasswordToggleButton()
+        passwordTextField.returnKeyType = .go
+    }
+    
+    /// Generic text field configuration
+    private func configureTextField(_ textField: UITextField, icon: String, placeholder: String) {
+        let iconView = UIImageView(image: UIImage(named: icon))
+        iconView.contentMode = .scaleAspectFit
+        iconView.frame = CGRect(x: 12, y: 0, width: 24, height: 24)
         
-        let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
-        iconContainer.addSubview(icon)
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 24))
+        containerView.addSubview(iconView)
         
-        textField.leftView = iconContainer
+        textField.leftView = containerView
         textField.leftViewMode = .always
-        textField.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1).cgColor
-        textField.layer.borderWidth = 2.0
-        textField.layer.cornerRadius = 20.0
-        textField.backgroundColor = .white
-        textField.textColor = .black
+        textField.layer.borderColor = mainColor.cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 20
         textField.attributedPlaceholder = NSAttributedString(
             string: placeholder,
             attributes: [
@@ -68,96 +91,190 @@ class LoginViewController: UIViewController {
                 .font: UIFont.systemFont(ofSize: 16)
             ]
         )
-        textField.delegate = self // Assign delegate to self
     }
-
-    func setupButtons() {
-        loginButton.backgroundColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
-        loginButton.setTitleColor(.white, for: .normal)
-        loginButton.layer.cornerRadius = 20.0
+    
+    /// Add password visibility toggle button
+    private func addPasswordToggleButton() {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "pass1"), for: .normal)
+        button.setImage(UIImage(named: "eyepass"), for: .selected)
+        button.frame = CGRect(x: 0, y: 0, width: 40, height: 24)
+        button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         
-        googleLoginButton.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1).cgColor
-        googleLoginButton.layer.borderWidth = 2.0
-        googleLoginButton.layer.cornerRadius = 20.0
-        googleLoginButton.setTitleColor(UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1), for: .normal)
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 24))
+        containerView.addSubview(button)
+        
+        passwordTextField.rightView = containerView
+        passwordTextField.rightViewMode = .always
     }
-
-    // MARK: - Action Methods
+    
+    // MARK: - Actions
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-        if let email = emailTextField.text, let password = passwordTextField.text {
-            let (isEmailValid, emailError) = validateEmail(email)
-            let (isPasswordValid, passwordError) = validatePassword(password)
-            
-            if isEmailValid && isPasswordValid {
-                errorLabel.isHidden = true
-                performLogin(email: email, password: password)
-            } else {
-                showError(emailError, passwordError)
-            }
-        }
+        handleLogin()
     }
-
-    func showError(_ emailError: String?, _ passwordError: String?) {
-        var errorMessage = ""
-        if let emailError = emailError {
-            errorMessage += emailError + "\n"
-        }
-        if let passwordError = passwordError {
-            errorMessage += passwordError
-        }
-        errorLabel.text = errorMessage
-        errorLabel.isHidden = false
+    
+    /// Toggle password visibility
+    @objc private func togglePasswordVisibility(_ sender: UIButton) {
+        isPasswordVisible.toggle()
+        sender.isSelected = isPasswordVisible
+        passwordTextField.isSecureTextEntry = !isPasswordVisible
     }
-
-    // MARK: - Validation Methods
-    func validateEmail(_ email: String) -> (Bool, String?) {
+    
+    // MARK: - Validation Logic
+    /// Validate email format
+    private func validateEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        if !emailPredicate.evaluate(with: email) {
-            return (false, "Invalid email: should include @")
-        }
-        return (true, nil)
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
     }
-
-    func validatePassword(_ password: String) -> (Bool, String?) {
+    
+    /// Validate password strength
+    private func validatePassword(_ password: String) -> Bool {
         let passwordRegex = "^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$"
-        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        if !passwordPredicate.evaluate(with: password) {
-            return (false, "Password must be at least 8 characters, contain a number and a symbol")
-        }
-        return (true, nil)
+        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-
-    func performLogin(email: String, password: String) {
-        // Networking logic goes here
-        print("Email: \(email), Password: \(password)")
+    
+    /// Handle validation errors
+    private func handleValidationErrors(emailValid: Bool, passwordValid: Bool) {
+        resetTextField(emailTextField)
+        resetTextField(passwordTextField)
         
-        // Navigate to the next screen (for now, just an example)
-        performSegue(withIdentifier: "goToHome", sender: self)
+        if !emailValid { showEmailError() }
+        if !passwordValid { showPasswordError() }
     }
-
-    @objc func dismissKeyboard() {
+    
+    /// Show email error state
+    private func showEmailError() {
+        emailTextField.text = ""
+        emailTextField.layer.borderColor = UIColor.red.cgColor
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: "Invalid email should contain @",
+            attributes: [
+                .foregroundColor: UIColor.red,
+                .font: UIFont.systemFont(ofSize: 16)
+            ]
+        )
+    }
+    
+    /// Show password error state
+    private func showPasswordError() {
+        passwordTextField.text = ""
+        passwordTextField.layer.borderColor = UIColor.red.cgColor
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: "Invalid password",
+            attributes: [
+                .foregroundColor: UIColor.red,
+                .font: UIFont.systemFont(ofSize: 16)
+            ]
+        )
+    }
+    
+    /// Reset text field to normal state
+    private func resetTextField(_ textField: UITextField) {
+        textField.layer.borderColor = mainColor.cgColor
+        textField.attributedPlaceholder = NSAttributedString(
+            string: textField == emailTextField ? "Email" : "Password",
+            attributes: [
+                .foregroundColor: UIColor(red: 138/255, green: 138/255, blue: 138/255, alpha: 1),
+                .font: UIFont.systemFont(ofSize: 16)
+            ]
+        )
+    }
+    
+    // MARK: - Navigation
+    private func handleSuccessfulLogin(email: String, password: String) {
+        print("✅ Login Successful")
+        let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "Blind"
+        userRole == "Blind" ? navigateToBlindHome() : navigateToVolunteerHome()
+    }
+    
+    /// Navigate to Blind home screen
+    private func navigateToBlindHome() {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "BlindHomeViewController") else {
+            showViewControllerError()
+            return
+        }
+        presentFullScreen(vc)
+    }
+    
+    /// Navigate to Volunteer home screen
+    private func navigateToVolunteerHome() {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "VolunteerHomeViewController") else {
+            showViewControllerError()
+            return
+        }
+        presentFullScreen(vc)
+    }
+    
+    /// Present view controller in full screen mode
+    private func presentFullScreen(_ viewController: UIViewController) {
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
+    }
+    
+    // MARK: - Error Handling
+    private func showViewControllerError() {
+        let alert = UIAlertController(
+            title: "Error",
+            message: "Failed to load view controller",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    // MARK: - Utilities
+    private func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    /// Handle login process
+    private func handleLogin() {
+        dismissKeyboard()
+        
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text else { return }
+        
+        let isEmailValid = validateEmail(email)
+        let isPasswordValid = validatePassword(password)
+        
+        if isEmailValid && isPasswordValid {
+            handleSuccessfulLogin(email: email, password: password)
+        } else {
+            handleValidationErrors(emailValid: isEmailValid, passwordValid: isPasswordValid)
+        }
+    }
+    
+    /// Dismiss keyboard
+    @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
-    // Called when the user begins editing the text field
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Optionally you can add logic when the text field begins editing
-        textField.layer.borderColor = UIColor.blue.cgColor // Adjust border color when editing begins
+        resetTextField(textField)
+        textField.layer.borderColor = mainColor.cgColor
     }
     
-    // Called when the user ends editing the text field
     func textFieldDidEndEditing(_ textField: UITextField) {
-        // Reset the border color once editing ends
-        textField.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1).cgColor
+        let isValid = textField == emailTextField ?
+            validateEmail(textField.text ?? "") :
+            validatePassword(textField.text ?? "")
+        
+        textField.layer.borderColor = isValid ? mainColor.cgColor : UIColor.red.cgColor
     }
     
-    // Called when the return key is pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Dismiss the keyboard when the user presses return
-        textField.resignFirstResponder()
+        switch textField {
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField:
+            handleLogin()
+        default:
+            break
+        }
         return true
     }
 }
