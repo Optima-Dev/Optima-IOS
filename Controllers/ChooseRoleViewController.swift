@@ -2,17 +2,14 @@ import UIKit
 
 class ChooseRoleViewController: UIViewController {
     
-    
     @IBAction func blindButtonTapped(_ sender: UIButton) {
-        UserDefaults.standard.set("Blind", forKey: "userRole")
-        print("🔹 User selected role: Blind")
-        // No need to manually navigate, Storyboard handles this
+        UserDefaults.standard.set("seeker", forKey: "userRole") // Changed to "seeker"
+        print("🔹 User selected role:seeker")
     }
 
     @IBAction func volunteerButtonTapped(_ sender: UIButton) {
-        UserDefaults.standard.set("Volunteer", forKey: "userRole")
-        print("🔹 User selected role: Volunteer")
-        // No need to manually navigate, Storyboard handles this
+        UserDefaults.standard.set("helper", forKey: "userRole") // Changed to "helper"
+        print("🔹 User selected role: helper")
     }
     
     override func viewDidLoad() {
@@ -29,9 +26,8 @@ class ChooseRoleViewController: UIViewController {
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(backgroundImage)
-        view.sendSubviewToBack(backgroundImage) // إرسال الصورة للخلف
-
-        // ضبط الـ Constraints لجعل الصورة تمتد على كل الشاشة
+        view.sendSubviewToBack(backgroundImage)
+        
         NSLayoutConstraint.activate([
             backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),

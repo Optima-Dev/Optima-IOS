@@ -1,25 +1,25 @@
 import Foundation
 
-class AuthService {
-    static let shared = AuthService()
+class LoginService {
+    static let shared = LoginService()
     
     private init() {}
 
-    func signUpUser(firstName: String, lastName: String, email: String, password: String, role: String, completion: @escaping (Result<SignupResponse, AuthError>) -> Void) {
-        let requestBody = SignupRequest(firstName: firstName, lastName: lastName, email: email, password: password, role: role)
+    func loginUser(email: String, password: String, completion: @escaping (Result<LoginResponse, AuthError>) -> Void) {
+        let requestBody = LoginRequest(email: email, password: password)
         
         APIManager.shared.performRequest(
-            url: APIEndpoints.signup,
+            url: APIEndpoints.login,
             method: "POST",
             body: requestBody.asDictionary
-        ) { (result: Result<SignupResponse, NetworkError>) in
+        ) { (result: Result<LoginResponse, NetworkError>) in
             switch result {
             case .success(let response):
                 if let token = response.token { // Success case (status 200)
-                    print("✅ Signup Successful, Token: \(token)")
+                    print("✅ Login Successful, Token: \(token)")
                     UserDefaults.standard.set(token, forKey: "authToken")
                     completion(.success(response))
-                } else if let errorMessage = response.message { // Error case (status 400)
+                } else if let errorMessage = response.message { // Error case (status 400 or 401)
                     print("🔴 Error: \(errorMessage)")
                     completion(.failure(.failed(errorMessage)))
                 } else {
@@ -31,12 +31,5 @@ class AuthService {
                 completion(.failure(.failed(error.localizedDescription)))
             }
         }
-    }
-}
-
-extension Encodable {
-    var asDictionary: [String: Any]? {
-        guard let data = try? JSONEncoder().encode(self) else { return nil }
-        return (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any]
     }
 }

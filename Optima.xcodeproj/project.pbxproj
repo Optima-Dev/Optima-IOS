@@ -11,6 +11,14 @@
 		1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */; };
 		1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */; };
 		1E8E7C972D6694F900400B02 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E7C962D6694F900400B02 /* SignupViewController.swift */; };
+		1EA866962D6FF13400B44BDE /* BlindHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */; };
+		1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */; };
+		1EA8669A2D6FF66100B44BDE /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */; };
+		1EA8669E2D7004D700B44BDE /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA8669D2D7004D700B44BDE /* APIEndpoints.swift */; };
+		1EA866A02D7012F800B44BDE /* APIManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA8669F2D7012F800B44BDE /* APIManger.swift */; };
+		1EA866A22D70204D00B44BDE /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866A12D70204C00B44BDE /* Models.swift */; };
+		1EA866A42D7026EA00B44BDE /* VolunteerhomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */; };
+		1EA866A62D70295F00B44BDE /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866A52D70295F00B44BDE /* LoginService.swift */; };
 		1EEE64AE2D63D3A500C43761 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */; };
 		1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */; };
 		1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B72D64122B00C43761 /* OnboardingSecViewController.swift */; };
@@ -49,6 +57,14 @@
 		1E43513D2D62AB60008872C8 /* OptimaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4351472D62AB60008872C8 /* OptimaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E8E7C962D6694F900400B02 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindHomeViewController.swift; sourceTree = "<group>"; };
+		1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingForBlindViewController.swift; sourceTree = "<group>"; };
+		1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
+		1EA8669D2D7004D700B44BDE /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		1EA8669F2D7012F800B44BDE /* APIManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManger.swift; sourceTree = "<group>"; };
+		1EA866A12D70204C00B44BDE /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerhomeViewController.swift; sourceTree = "<group>"; };
+		1EA866A52D70295F00B44BDE /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstViewController.swift; sourceTree = "<group>"; };
 		1EEE64B72D64122B00C43761 /* OnboardingSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +175,10 @@
 				1EFA95D92D6D17DA00139613 /* ResetPasswordViewController.swift */,
 				1EFA96432D6D54C600139613 /* EnterCodeViewController.swift */,
 				1EFA96472D6D63DB00139613 /* ConfirmPasswordViewController.swift */,
+				1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */,
+				1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */,
+				1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */,
+				1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -183,6 +203,10 @@
 			isa = PBXGroup;
 			children = (
 				1EFA95D72D6D12CE00139613 /* AuthService.swift */,
+				1EA8669F2D7012F800B44BDE /* APIManger.swift */,
+				1EA8669D2D7004D700B44BDE /* APIEndpoints.swift */,
+				1EA866A12D70204C00B44BDE /* Models.swift */,
+				1EA866A52D70295F00B44BDE /* LoginService.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -349,10 +373,15 @@
 				1EEE64BC2D6420BB00C43761 /* ChooseRoleViewController.swift in Sources */,
 				1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */,
 				1EEE64AE2D63D3A500C43761 /* OnboardingPageViewController.swift in Sources */,
+				1EA866A02D7012F800B44BDE /* APIManger.swift in Sources */,
 				1E8E7C972D6694F900400B02 /* SignupViewController.swift in Sources */,
 				1EFA96442D6D54C600139613 /* EnterCodeViewController.swift in Sources */,
 				1EFA96462D6D5DB200139613 /* WarningPopupView.swift in Sources */,
+				1EA866A42D7026EA00B44BDE /* VolunteerhomeViewController.swift in Sources */,
+				1EA866962D6FF13400B44BDE /* BlindHomeViewController.swift in Sources */,
+				1EA8669E2D7004D700B44BDE /* APIEndpoints.swift in Sources */,
 				1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */,
+				1EA866A22D70204D00B44BDE /* Models.swift in Sources */,
 				1EFA96482D6D63DB00139613 /* ConfirmPasswordViewController.swift in Sources */,
 				1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */,
 				1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */,
@@ -360,6 +389,9 @@
 				1EFA95DA2D6D17DA00139613 /* ResetPasswordViewController.swift in Sources */,
 				1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */,
 				1EFA95D82D6D12CE00139613 /* AuthService.swift in Sources */,
+				1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */,
+				1EA866A62D70295F00B44BDE /* LoginService.swift in Sources */,
+				1EA8669A2D6FF66100B44BDE /* AccountSettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! // Added for loading indicator
     
     // MARK: - Properties
     private let mainColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
@@ -20,6 +21,10 @@ class SignupViewController: UIViewController {
         configureUI()
         setupGestureRecognizers()
         setupTextFields()
+        
+        // Print the initial role for debugging
+        let role = getSelectedRole()
+        print("🔹 Initial role: \(role)")
     }
     
     // MARK: - UI Configuration
@@ -27,6 +32,7 @@ class SignupViewController: UIViewController {
         setBackgroundImage()
         setupButtons()
         errorLabel.isHidden = true
+        activityIndicator.isHidden = true // Hide loading indicator initially
     }
     
     private func setBackgroundImage() {
@@ -34,6 +40,15 @@ class SignupViewController: UIViewController {
         backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
+    }
+    
+    private func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     private func setupTextFields() {
@@ -110,39 +125,83 @@ class SignupViewController: UIViewController {
         guard trimmedName.count >= 2 else { return (false, "Name must be at least 2 characters") }
         return (true, nil)
     }
-    
+
     private func validateEmail(_ email: String) -> (isValid: Bool, error: String?) {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let isValid = NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
         return isValid ? (true, nil) : (false, "Invalid email format")
     }
-    
+
     private func validatePassword(_ password: String) -> (isValid: Bool, error: String?) {
         let passwordRegex = "^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$"
         let isValid = NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
         return isValid ? (true, nil) : (false, "Password must contain:\n- 8+ characters\n- 1 number\n- 1 special character")
     }
     
+    // MARK: - Role Handling
+    private func getSelectedRole() -> String {
+        let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper"
+        print("🔹 User selected role: \(role)")
+        return role
+    }
+    
+    // MARK: - Validation & Signup
     private func handleSignup() {
         dismissKeyboard()
-        
+
+        print("🔹 Signup button tapped")
+
         guard let firstName = firstNameTextField.text,
               let lastName = lastNameTextField.text,
               let email = emailTextField.text,
               let password = passwordTextField.text else { return }
-        
+
+        print("🔹 Validating user input")
+
         let firstNameValidation = validateName(firstName)
         let lastNameValidation = validateName(lastName)
         let emailValidation = validateEmail(email)
         let passwordValidation = validatePassword(password)
-        
+
         if firstNameValidation.isValid &&
             lastNameValidation.isValid &&
             emailValidation.isValid &&
             passwordValidation.isValid {
+
             errorLabel.isHidden = true
-            handleSuccessfulSignup()
+            activityIndicator.isHidden = false // Show loading indicator
+            activityIndicator.startAnimating()
+            signUpButton.isEnabled = false // Disable signup button
+
+            let role = getSelectedRole()
+            print("🔹 Proceeding with signup for role: \(role)")
+
+            AuthService.shared.signUpUser(firstName: firstName, lastName: lastName, email: email, password: password, role: role) { result in
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating() // Stop loading indicator
+                    self.activityIndicator.isHidden = true // Hide loading indicator
+                    self.signUpButton.isEnabled = true // Enable signup button
+
+                    switch result {
+                    case .success(let response):
+                        if let token = response.token { // Success case (status 200)
+                            self.handleSuccessfulSignup()
+                        } else if let errorMessage = response.message { // Error case (status 400)
+                            print("🔴 Error: \(errorMessage)")
+                            self.errorLabel.text = errorMessage
+                            self.errorLabel.isHidden = false
+                        }
+                    case .failure(let error):
+                        let errorMessage = error.localizedDescription
+                        print("🔴 Error: \(errorMessage)")
+                        self.errorLabel.text = errorMessage
+                        self.errorLabel.isHidden = false
+                    }
+                }
+            }
+
         } else {
+            print("🔴 Validation failed")
             handleValidationErrors(
                 firstNameError: firstNameValidation.error,
                 lastNameError: lastNameValidation.error,
@@ -151,100 +210,53 @@ class SignupViewController: UIViewController {
             )
         }
     }
-    
+    private func handleSuccessfulSignup() {
+        if let token = UserDefaults.standard.string(forKey: "authToken") {
+            print("✅ Signup Successful, Token: \(token)")
+            
+            // Get the selected role
+            let role = getSelectedRole()
+            
+            // Navigate to the appropriate screen based on the role
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            if role == "helper" {
+                // Navigate to VolunteerHomeViewController
+                if let volunteerHomeVC = storyboard.instantiateViewController(withIdentifier: "VolunteerHomeViewController") as? VolunteerHomeViewController {
+                    self.present(volunteerHomeVC, animated: true, completion: nil)
+                }
+            } else if role == "seeker" {
+                // Navigate to BlindHomeViewController
+                if let blindHomeVC = storyboard.instantiateViewController(withIdentifier: "BlindHomeViewController") as? BlindHomeViewController {
+                    self.present(blindHomeVC, animated: true, completion: nil)
+                }
+            }
+        } else {
+            print("✅ Signup Successful, but no token received")
+        }
+    }
+
     private func handleValidationErrors(firstNameError: String?,
                                         lastNameError: String?,
                                         emailError: String?,
                                         passwordError: String?) {
         var errorMessages = [String]()
         
-        [firstNameError, lastNameError, emailError, passwordError].forEach {
-            if let error = $0 { errorMessages.append("• \(error)") }
-        }
+        if let error = firstNameError { errorMessages.append("• \(error)") }
+        if let error = lastNameError { errorMessages.append("• \(error)") }
+        if let error = emailError { errorMessages.append("• \(error)") }
+        if let error = passwordError { errorMessages.append("• \(error)") }
         
         errorLabel.text = errorMessages.joined(separator: "\n\n")
         errorLabel.isHidden = false
-        
-        // Highlight invalid fields
+
         highlightField(firstNameTextField, isValid: firstNameError == nil)
         highlightField(lastNameTextField, isValid: lastNameError == nil)
         highlightField(emailTextField, isValid: emailError == nil)
         highlightField(passwordTextField, isValid: passwordError == nil)
     }
-    
+
     private func highlightField(_ textField: UITextField, isValid: Bool) {
         textField.layer.borderColor = isValid ? mainColor.cgColor : UIColor.red.cgColor
-    }
-    
-    // MARK: - Navigation
-    private func handleSuccessfulSignup() {
-        print("✅ Signup Successful")
-        let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "Blind"
-        userRole == "Blind" ? navigateToBlindHome() : navigateToVolunteerHome()
-    }
-    
-    private func navigateToBlindHome() {
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "BlindHomeViewController") else {
-            showViewControllerError()
-            return
-        }
-        presentFullScreen(vc)
-    }
-    
-    private func navigateToVolunteerHome() {
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "VolunteerHomeViewController") else {
-            showViewControllerError()
-            return
-        }
-        presentFullScreen(vc)
-    }
-    
-    private func presentFullScreen(_ viewController: UIViewController) {
-        viewController.modalPresentationStyle = .fullScreen
-        present(viewController, animated: true)
-    }
-    
-    // MARK: - Error Handling
-    private func showViewControllerError() {
-        let alert = UIAlertController(
-            title: "Error",
-            message: "Failed to load view controller",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
-    // MARK: - Utilities
-    private func setupGestureRecognizers() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
-
-// MARK: - UITextFieldDelegate
-extension SignupViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        highlightField(textField, isValid: true)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case firstNameTextField:
-            lastNameTextField.becomeFirstResponder()
-        case lastNameTextField:
-            emailTextField.becomeFirstResponder()
-        case emailTextField:
-            passwordTextField.becomeFirstResponder()
-        case passwordTextField:
-            handleSignup()
-        default:
-            break
-        }
-        return true
     }
 }

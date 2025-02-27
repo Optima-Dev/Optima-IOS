@@ -7,6 +7,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var googleLoginButton: UIButton!
+    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! // Added for loading indicator
     
     // MARK: - Properties
     private let mainColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
@@ -17,6 +19,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         setupGestureRecognizers()
+        setupTextFieldsDelegates()
     }
     
     // MARK: - UI Configuration
@@ -24,7 +27,8 @@ class LoginViewController: UIViewController {
         setBackgroundImage()
         setupTextFields()
         setupButtons()
-        setupTextFieldsDelegates()
+        errorLabel.isHidden = true
+        activityIndicator.isHidden = true // Hide loading indicator initially
     }
     
     /// Set up text field delegates
@@ -182,9 +186,21 @@ class LoginViewController: UIViewController {
     
     // MARK: - Navigation
     private func handleSuccessfulLogin(email: String, password: String) {
-        print("✅ Login Successful")
-        let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "Blind"
-        userRole == "Blind" ? navigateToBlindHome() : navigateToVolunteerHome()
+        if let token = UserDefaults.standard.string(forKey: "authToken") {
+            print("✅ Login Successful, Token: \(token)")
+            
+            // Get the selected role
+            let role = UserDefaults.standard.string(forKey: "userRole") ?? "seeker"
+            
+            // Navigate to the appropriate screen based on the role
+            if role == "seeker" {
+                navigateToBlindHome()
+            } else {
+                navigateToVolunteerHome()
+            }
+        } else {
+            print("✅ Login Successful, but no token received")
+        }
     }
     
     /// Navigate to Blind home screen
@@ -239,7 +255,34 @@ class LoginViewController: UIViewController {
         let isPasswordValid = validatePassword(password)
         
         if isEmailValid && isPasswordValid {
-            handleSuccessfulLogin(email: email, password: password)
+            errorLabel.isHidden = true
+            activityIndicator.isHidden = false // Show loading indicator
+            activityIndicator.startAnimating()
+            loginButton.isEnabled = false // Disable login button
+
+            LoginService.shared.loginUser(email: email, password: password) { result in
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating() // Stop loading indicator
+                    self.activityIndicator.isHidden = true // Hide loading indicator
+                    self.loginButton.isEnabled = true // Enable login button
+
+                    switch result {
+                    case .success(let response):
+                        if let token = response.token { // Success case (status 200)
+                            self.handleSuccessfulLogin(email: email, password: password)
+                        } else if let errorMessage = response.message { // Error case (status 400 or 401)
+                            print("🔴 Error: \(errorMessage)")
+                            self.errorLabel.text = errorMessage
+                            self.errorLabel.isHidden = false
+                        }
+                    case .failure(let error):
+                        let errorMessage = error.localizedDescription
+                        print("🔴 Error: \(errorMessage)")
+                        self.errorLabel.text = errorMessage
+                        self.errorLabel.isHidden = false
+                    }
+                }
+            }
         } else {
             handleValidationErrors(emailValid: isEmailValid, passwordValid: isPasswordValid)
         }
