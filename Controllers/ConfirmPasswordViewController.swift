@@ -5,13 +5,16 @@ class ConfirmPasswordViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var resetButton: UIButton!
-    @IBOutlet weak var successPopup: UIView! // Pop-up view from storyboard
-    @IBOutlet weak var doneButton: UIButton! // Done button in the pop-up
-    @IBOutlet weak var dimmingView: UIView!  // Dimming view covering the background
-    @IBOutlet weak var topview: UIView!  // The view where we want to apply corner radius
+    @IBOutlet weak var successPopup: UIView!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var dimmingView: UIView!
+    @IBOutlet weak var topview: UIView!
+    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     // MARK: - Properties
-    private var isPasswordVisible = false // Track password visibility state
+    private var isPasswordVisible = false
+    var userEmail: String? //  EnterCodeViewController for email
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +23,11 @@ class ConfirmPasswordViewController: UIViewController {
         setupTextFields()
         setupButtons()
         
-        // Hide the success popup and dimming view initially
         successPopup.isHidden = true
         dimmingView.isHidden = true
+        errorLabel.isHidden = true
+        activityIndicator.isHidden = true
         
-        // Add tap gesture recognizer to dismiss keyboard
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
@@ -51,7 +54,7 @@ class ConfirmPasswordViewController: UIViewController {
     // MARK: - Text Field Setup
     func setupTextFields() {
         configureTextField(passwordTextField, withIcon: "pass", placeholder: "******")
-        addPasswordToggleButton() // Add eye button to toggle password visibility
+        addPasswordToggleButton()
     }
 
     func configureTextField(_ textField: UITextField, withIcon iconName: String, placeholder: String) {
@@ -76,14 +79,13 @@ class ConfirmPasswordViewController: UIViewController {
                 .font: UIFont.systemFont(ofSize: 16)
             ]
         )
-        textField.isSecureTextEntry = true // Hide password by default
+        textField.isSecureTextEntry = true
     }
 
-    // MARK: - Add Eye Button to Toggle Password Visibility
     private func addPasswordToggleButton() {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "pass1"), for: .normal) // Closed eye icon
-        button.setImage(UIImage(named: "eyepass"), for: .selected) // Open eye icon
+        button.setImage(UIImage(named: "pass1"), for: .normal)
+        button.setImage(UIImage(named: "eyepass"), for: .selected)
         button.frame = CGRect(x: 0, y: 0, width: 40, height: 24)
         button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         
@@ -94,7 +96,6 @@ class ConfirmPasswordViewController: UIViewController {
         passwordTextField.rightViewMode = .always
     }
 
-    // MARK: - Toggle Password Visibility
     @objc private func togglePasswordVisibility(_ sender: UIButton) {
         isPasswordVisible.toggle()
         sender.isSelected = isPasswordVisible
@@ -106,80 +107,82 @@ class ConfirmPasswordViewController: UIViewController {
         resetButton.backgroundColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
         resetButton.setTitleColor(.white, for: .normal)
         resetButton.layer.cornerRadius = 20.0
+        
+        doneButton.backgroundColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
+        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.layer.cornerRadius = 20.0
     }
 
     // MARK: - Reset Button Action
     @IBAction func resetButtonTapped(_ sender: UIButton) {
-        if let newPassword = passwordTextField.text {
-            let (isPasswordValid, passwordError) = validatePassword(newPassword)
-
-            if isPasswordValid {
-                passwordTextField.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1).cgColor
-                passwordTextField.attributedPlaceholder = NSAttributedString(
-                    string: "******",
-                    attributes: [
-                        .foregroundColor: UIColor(red: 138/255, green: 138/255, blue: 138/255, alpha: 1),
-                        .font: UIFont.systemFont(ofSize: 16)
-                    ]
-                )
-                performResetPassword(newPassword: newPassword)
-            } else {
-                showError(passwordError)
-            }
+        guard let newPassword = passwordTextField.text, !newPassword.isEmpty else {
+            showError(message: "Please enter a new password")
+            return
         }
-    }
-
-    // MARK: - Show Error Messages
-    func showError(_ passwordError: String?) {
-        // Change placeholder and border color to indicate error
-        passwordTextField.layer.borderColor = UIColor.red.cgColor
-        passwordTextField.attributedPlaceholder = NSAttributedString(
-            string: "Invalid password",
-            attributes: [
-                .foregroundColor: UIColor.red,
-                .font: UIFont.systemFont(ofSize: 16)
-            ]
-        )
+        
+        guard let userEmail = userEmail, !userEmail.isEmpty else {
+            showError(message: "Email is missing. Please try again.")
+            return
+        }
+        
+        let (isValid, errorMessage) = validatePassword(newPassword)
+        
+        if isValid {
+            passwordTextField.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1).cgColor
+            errorLabel.isHidden = true
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+            resetButton.isEnabled = false
+            
+            ResetPasswordService.shared.resetPassword(email: userEmail, newPassword: newPassword) { result in
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.resetButton.isEnabled = true
+                    
+                    switch result {
+                    case .success(let response):
+                        if response.message == "Password reset successfully" {
+                            self.showSuccessPopup()
+                        } else {
+                            self.showError(message: response.message ?? "Unknown error occurred")
+                        }
+                    case .failure(let error):
+                        self.showError(message: error.localizedDescription)
+                    }
+                }
+            }
+        } else {
+            showError(message: errorMessage ?? "Invalid password")
+        }
     }
 
     // MARK: - Password Validation
-    func validatePassword(_ password: String) -> (Bool, String?) {
+    private func validatePassword(_ password: String) -> (Bool, String?) {
         let passwordRegex = "^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$"
-        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        if !passwordPredicate.evaluate(with: password) {
-            return (false, "Password must be at least 8 characters, contain a number and a symbol")
-        }
-        return (true, nil)
-    }
-
-    // MARK: - Perform Password Reset
-    func performResetPassword(newPassword: String) {
-        // Networking logic goes here
-        print("Password reset successfully: \(newPassword)")
+        let isValid = NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
         
-        // Displaying the Success Pop-up
-        showSuccessPopup()
+        return isValid ? (true, nil) : (false, "Password must contain:\n- 8+ characters\n- 1 number\n- 1 special character")
     }
 
-    // MARK: - Show Success Popup
-    func showSuccessPopup() {
-        // Make the success pop-up visible
+    // MARK: - Error Handling
+    private func showError(message: String) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
+        passwordTextField.layer.borderColor = UIColor.red.cgColor
+    }
+
+    // MARK: - Success Handling
+    private func showSuccessPopup() {
         successPopup.isHidden = false
-        
-        // Show the dimming view with gray background
         dimmingView.isHidden = false
-        dimmingView.backgroundColor = UIColor(white: 0.2, alpha: 0.7) // Gray with transparency
+        dimmingView.backgroundColor = UIColor(white: 0.2, alpha: 0.7)
     }
 
     // MARK: - Done Button Action
     @IBAction func doneButtonTapped(_ sender: UIButton) {
-        // Dismiss the popup
         successPopup.isHidden = true
-        
-        // Hide the dimming view
         dimmingView.isHidden = true
-        
-        // Navigate to login screen
         performSegue(withIdentifier: "goToLogin", sender: self)
     }
 
@@ -188,18 +191,18 @@ class ConfirmPasswordViewController: UIViewController {
         view.endEditing(true)
     }
 
-    // MARK: - Apply Corner Radius to Popup
+    // MARK: - View Layout
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        // Apply corner radius to the top corners only of the topview
-        let path = UIBezierPath(
+        let maskPath = UIBezierPath(
             roundedRect: topview.bounds,
-            byRoundingCorners: [.topLeft, .topRight], // Top corners only
+            byRoundingCorners: [.topLeft, .topRight],
             cornerRadii: CGSize(width: 20, height: 20)
         )
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        topview.layer.mask = maskLayer
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = maskPath.cgPath
+        topview.layer.mask = shapeLayer
     }
 }

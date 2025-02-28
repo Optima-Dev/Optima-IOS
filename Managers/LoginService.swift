@@ -6,7 +6,8 @@ class LoginService {
     private init() {}
 
     func loginUser(email: String, password: String, completion: @escaping (Result<LoginResponse, AuthError>) -> Void) {
-        let requestBody = LoginRequest(email: email, password: password)
+        let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper" 
+        let requestBody = LoginRequest(email: email, password: password, role: role)
         
         APIManager.shared.performRequest(
             url: APIEndpoints.login,

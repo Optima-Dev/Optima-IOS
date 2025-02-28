@@ -8,7 +8,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! // Added for loading indicator
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Properties
     private let mainColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
@@ -28,16 +28,14 @@ class LoginViewController: UIViewController {
         setupTextFields()
         setupButtons()
         errorLabel.isHidden = true
-        activityIndicator.isHidden = true // Hide loading indicator initially
+        activityIndicator.isHidden = true
     }
     
-    /// Set up text field delegates
     private func setupTextFieldsDelegates() {
         emailTextField.delegate = self
         passwordTextField.delegate = self
     }
     
-    /// Configure buttons appearance
     private func setupButtons() {
         loginButton.layer.cornerRadius = 20
         googleLoginButton.layer.cornerRadius = 20
@@ -45,7 +43,6 @@ class LoginViewController: UIViewController {
         googleLoginButton.layer.borderColor = mainColor.cgColor
     }
     
-    /// Set background image for the view
     private func setBackgroundImage() {
         let backgroundImage = UIImageView(frame: view.bounds)
         backgroundImage.image = UIImage(named: "Background")
@@ -53,20 +50,17 @@ class LoginViewController: UIViewController {
         view.insertSubview(backgroundImage, at: 0)
     }
     
-    /// Configure text fields setup
     private func setupTextFields() {
         configureEmailTextField()
         configurePasswordTextField()
     }
     
-    // MARK: - Email TextField Configuration
     private func configureEmailTextField() {
         configureTextField(emailTextField, icon: "mail", placeholder: "example@gmail.com")
         emailTextField.keyboardType = .emailAddress
         emailTextField.autocorrectionType = .no
     }
     
-    // MARK: - Password TextField Configuration
     private func configurePasswordTextField() {
         configureTextField(passwordTextField, icon: "pass", placeholder: "Password")
         passwordTextField.isSecureTextEntry = true
@@ -74,7 +68,6 @@ class LoginViewController: UIViewController {
         passwordTextField.returnKeyType = .go
     }
     
-    /// Generic text field configuration
     private func configureTextField(_ textField: UITextField, icon: String, placeholder: String) {
         let iconView = UIImageView(image: UIImage(named: icon))
         iconView.contentMode = .scaleAspectFit
@@ -97,7 +90,6 @@ class LoginViewController: UIViewController {
         )
     }
     
-    /// Add password visibility toggle button
     private func addPasswordToggleButton() {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "pass1"), for: .normal)
@@ -117,7 +109,6 @@ class LoginViewController: UIViewController {
         handleLogin()
     }
     
-    /// Toggle password visibility
     @objc private func togglePasswordVisibility(_ sender: UIButton) {
         isPasswordVisible.toggle()
         sender.isSelected = isPasswordVisible
@@ -125,19 +116,16 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Validation Logic
-    /// Validate email format
     private func validateEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
     }
     
-    /// Validate password strength
     private func validatePassword(_ password: String) -> Bool {
         let passwordRegex = "^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
     
-    /// Handle validation errors
     private func handleValidationErrors(emailValid: Bool, passwordValid: Bool) {
         resetTextField(emailTextField)
         resetTextField(passwordTextField)
@@ -146,7 +134,6 @@ class LoginViewController: UIViewController {
         if !passwordValid { showPasswordError() }
     }
     
-    /// Show email error state
     private func showEmailError() {
         emailTextField.text = ""
         emailTextField.layer.borderColor = UIColor.red.cgColor
@@ -159,7 +146,6 @@ class LoginViewController: UIViewController {
         )
     }
     
-    /// Show password error state
     private func showPasswordError() {
         passwordTextField.text = ""
         passwordTextField.layer.borderColor = UIColor.red.cgColor
@@ -172,7 +158,6 @@ class LoginViewController: UIViewController {
         )
     }
     
-    /// Reset text field to normal state
     private func resetTextField(_ textField: UITextField) {
         textField.layer.borderColor = mainColor.cgColor
         textField.attributedPlaceholder = NSAttributedString(
@@ -184,50 +169,53 @@ class LoginViewController: UIViewController {
         )
     }
     
-    // MARK: - Navigation
-    private func handleSuccessfulLogin(email: String, password: String) {
-        if let token = UserDefaults.standard.string(forKey: "authToken") {
-            print("✅ Login Successful, Token: \(token)")
-            
-            // Get the selected role
-            let role = UserDefaults.standard.string(forKey: "userRole") ?? "seeker"
-            
-            // Navigate to the appropriate screen based on the role
-            if role == "seeker" {
-                navigateToBlindHome()
-            } else {
-                navigateToVolunteerHome()
-            }
-        } else {
-            print("✅ Login Successful, but no token received")
-        }
-    }
+ // MARK: - Navigation
+     private func handleSuccessfulLogin(email: String, password: String) {
+         if let token = UserDefaults.standard.string(forKey: "authToken") {
+             print("✅ Login Successful, Token: \(token)")
+             
+             // Get the selected role
+             let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper"
+             
+             // Navigate to the appropriate screen based on the role
+             let storyboard = UIStoryboard(name: "Main", bundle: nil)
+             
+             if role == "seeker" {
+                 // Navigate to BlindHomeViewController
+                 if let blindHomeVC = storyboard.instantiateViewController(withIdentifier: "BlindHomeViewController") as? BlindHomeViewController {
+                     blindHomeVC.modalPresentationStyle = .fullScreen
+                     self.present(blindHomeVC, animated: true, completion: nil)
+                 }
+             } else {
+                 // Navigate to VolunteerHomeViewController
+                 if let volunteerHomeVC = storyboard.instantiateViewController(withIdentifier: "VolunteerHomeViewController") as? VolunteerHomeViewController {
+                     volunteerHomeVC.modalPresentationStyle = .fullScreen
+                     self.present(volunteerHomeVC, animated: true, completion: nil)
+                 }
+             }
+         } else {
+             print("✅ Login Successful, but no token received")
+         }
+     }
     
-    /// Navigate to Blind home screen
     private func navigateToBlindHome() {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "BlindHomeViewController") else {
             showViewControllerError()
             return
         }
-        presentFullScreen(vc)
+        vc.modalPresentationStyle = .fullScreen //full screen
+        present(vc, animated: true)
     }
     
-    /// Navigate to Volunteer home screen
     private func navigateToVolunteerHome() {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "VolunteerHomeViewController") else {
             showViewControllerError()
             return
         }
-        presentFullScreen(vc)
+        vc.modalPresentationStyle = .fullScreen //full screen
+        present(vc, animated: true)
     }
     
-    /// Present view controller in full screen mode
-    private func presentFullScreen(_ viewController: UIViewController) {
-        viewController.modalPresentationStyle = .fullScreen
-        present(viewController, animated: true)
-    }
-    
-    // MARK: - Error Handling
     private func showViewControllerError() {
         let alert = UIAlertController(
             title: "Error",
@@ -238,13 +226,11 @@ class LoginViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    // MARK: - Utilities
     private func setupGestureRecognizers() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
     
-    /// Handle login process
     private func handleLogin() {
         dismissKeyboard()
         
@@ -256,21 +242,21 @@ class LoginViewController: UIViewController {
         
         if isEmailValid && isPasswordValid {
             errorLabel.isHidden = true
-            activityIndicator.isHidden = false // Show loading indicator
+            activityIndicator.isHidden = false
             activityIndicator.startAnimating()
-            loginButton.isEnabled = false // Disable login button
+            loginButton.isEnabled = false
 
             LoginService.shared.loginUser(email: email, password: password) { result in
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating() // Stop loading indicator
-                    self.activityIndicator.isHidden = true // Hide loading indicator
-                    self.loginButton.isEnabled = true // Enable login button
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.loginButton.isEnabled = true
 
                     switch result {
                     case .success(let response):
-                        if let token = response.token { // Success case (status 200)
+                        if let token = response.token {
                             self.handleSuccessfulLogin(email: email, password: password)
-                        } else if let errorMessage = response.message { // Error case (status 400 or 401)
+                        } else if let errorMessage = response.message {
                             print("🔴 Error: \(errorMessage)")
                             self.errorLabel.text = errorMessage
                             self.errorLabel.isHidden = false
@@ -288,7 +274,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    /// Dismiss keyboard
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }

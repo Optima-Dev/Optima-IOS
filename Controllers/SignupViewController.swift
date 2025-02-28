@@ -223,11 +223,13 @@ class SignupViewController: UIViewController {
             if role == "helper" {
                 // Navigate to VolunteerHomeViewController
                 if let volunteerHomeVC = storyboard.instantiateViewController(withIdentifier: "VolunteerHomeViewController") as? VolunteerHomeViewController {
+                    volunteerHomeVC.modalPresentationStyle = .fullScreen
                     self.present(volunteerHomeVC, animated: true, completion: nil)
                 }
             } else if role == "seeker" {
                 // Navigate to BlindHomeViewController
                 if let blindHomeVC = storyboard.instantiateViewController(withIdentifier: "BlindHomeViewController") as? BlindHomeViewController {
+                    blindHomeVC.modalPresentationStyle = .fullScreen
                     self.present(blindHomeVC, animated: true, completion: nil)
                 }
             }
@@ -235,7 +237,6 @@ class SignupViewController: UIViewController {
             print("✅ Signup Successful, but no token received")
         }
     }
-
     private func handleValidationErrors(firstNameError: String?,
                                         lastNameError: String?,
                                         emailError: String?,

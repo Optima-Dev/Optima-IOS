@@ -19,12 +19,44 @@ struct SignupResponse: Codable {
 struct LoginRequest: Codable {
     let email: String
     let password: String
+    let role: String
 }
 
 // MARK: - Login Response
 struct LoginResponse: Codable {
     let token: String? //success (status 200)
     let message: String? // fail (status 400,401)
+}
+// MARK: - Send Code Request
+struct SendCodeRequest: Codable {
+    let email: String
+}
+
+// MARK: - Send Code Response
+struct SendCodeResponse: Codable {
+    let message: String?
+}
+
+// MARK: - Verify Code Request
+struct VerifyCodeRequest: Codable {
+    let email: String
+    let code: String
+}
+
+// MARK: - Verify Code Response
+struct VerifyCodeResponse: Codable {
+    let message: String?
+}
+
+// MARK: - Reset Password Request
+struct ResetPasswordRequest: Codable {
+    let email: String
+    let newPassword: String
+}
+
+// MARK: - Reset Password Response
+struct ResetPasswordResponse: Codable {
+    let message: String?
 }
 // MARK: - Network Error
 enum NetworkError: Error {

@@ -5,6 +5,8 @@ class ResetPasswordViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var sendCodeButton: UIButton!
+    @IBOutlet weak var errorLabel: UILabel! // إضافة label لعرض الأخطاء
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! // إضافة activity indicator
     
     // MARK: - Properties
     private let mainColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
@@ -21,6 +23,8 @@ class ResetPasswordViewController: UIViewController {
         setBackgroundImage()
         setupEmailTextField()
         setupSendCodeButton()
+        errorLabel.isHidden = true // إخفاء label الأخطاء في البداية
+        activityIndicator.isHidden = true // إخفاء activity indicator في البداية
     }
     
     private func setBackgroundImage() {
@@ -54,6 +58,7 @@ class ResetPasswordViewController: UIViewController {
             ]
         )
     }
+    
     private func setupSendCodeButton() {
         sendCodeButton.layer.cornerRadius = 20
         sendCodeButton.backgroundColor = mainColor
@@ -62,6 +67,7 @@ class ResetPasswordViewController: UIViewController {
         // Set font size to 28 and weight to semi-bold
         sendCodeButton.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
     }
+    
     // MARK: - Actions
     @IBAction func sendCodeButtonTapped(_ sender: UIButton) {
         guard let email = emailTextField.text else { return }
@@ -87,24 +93,13 @@ class ResetPasswordViewController: UIViewController {
     }
     
     private func showError(message: String) {
-        emailTextField.attributedPlaceholder = NSAttributedString(
-            string: message,
-            attributes: [
-                .foregroundColor: UIColor.red,
-                .font: UIFont.systemFont(ofSize: 16)
-            ]
-        )
+        errorLabel.text = message
+        errorLabel.isHidden = false
         emailTextField.layer.borderColor = UIColor.red.cgColor
     }
     
     private func resetFieldAppearance() {
-        emailTextField.attributedPlaceholder = NSAttributedString(
-            string: originalPlaceholder,
-            attributes: [
-                .foregroundColor: UIColor(red: 138/255, green: 138/255, blue: 138/255, alpha: 1),
-                .font: UIFont.systemFont(ofSize: 16)
-            ]
-        )
+        errorLabel.isHidden = true
         emailTextField.layer.borderColor = mainColor.cgColor
     }
     
@@ -116,8 +111,29 @@ class ResetPasswordViewController: UIViewController {
             return
         }
         
-        print("✅ Valid email: \(email)")
-        performSegue(withIdentifier: "goToEnterCode", sender: email)
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        sendCodeButton.isEnabled = false
+        
+        ResetPasswordService.shared.sendCode(to: email) { result in
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.sendCodeButton.isEnabled = true
+                
+                switch result {
+                case .success(let response):
+                    if response.message == "Code sent successfully" {
+                        print("✅ Code sent successfully")
+                        self.performSegue(withIdentifier: "goToEnterCode", sender: email)
+                    } else {
+                        self.showError(message: response.message ?? "Unknown error")
+                    }
+                case .failure(let error):
+                    self.showError(message: error.localizedDescription)
+                }
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -125,6 +141,7 @@ class ResetPasswordViewController: UIViewController {
            let destinationVC = segue.destination as? EnterCodeViewController,
            let email = sender as? String {
             destinationVC.userEmail = email
+            print("Email passed to EnterCodeViewController: \(email)") // Debugging
         }
     }
 }

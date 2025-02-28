@@ -3,4 +3,7 @@ struct APIEndpoints {
 
     static let signup = "\(baseURL)/signup"
     static let login = "\(baseURL)/login"
+    static let sendCode = "\(baseURL)/send-code"
+    static let verifyCode = "\(baseURL)/verify-code"
+    static let resetPassword = "\(baseURL)/reset-password"
 }

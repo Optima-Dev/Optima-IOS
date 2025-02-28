@@ -10,6 +10,8 @@
 		1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */; };
 		1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */; };
 		1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */; };
+		1E74D3992D71E5B500F3978E /* ResetPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74D3982D71E5B500F3978E /* ResetPasswordService.swift */; };
+		1E74D39B2D71FDAF00F3978E /* SupportSeekerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */; };
 		1E8E7C972D6694F900400B02 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E7C962D6694F900400B02 /* SignupViewController.swift */; };
 		1EA866962D6FF13400B44BDE /* BlindHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */; };
 		1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */; };
@@ -56,6 +58,8 @@
 		1E4351272D62AB5E008872C8 /* Optima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Optima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E43513D2D62AB60008872C8 /* OptimaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4351472D62AB60008872C8 /* OptimaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E74D3982D71E5B500F3978E /* ResetPasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordService.swift; sourceTree = "<group>"; };
+		1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSeekerViewController.swift; sourceTree = "<group>"; };
 		1E8E7C962D6694F900400B02 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindHomeViewController.swift; sourceTree = "<group>"; };
 		1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingForBlindViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 				1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */,
 				1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */,
 				1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */,
+				1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				1EA8669D2D7004D700B44BDE /* APIEndpoints.swift */,
 				1EA866A12D70204C00B44BDE /* Models.swift */,
 				1EA866A52D70295F00B44BDE /* LoginService.swift */,
+				1E74D3982D71E5B500F3978E /* ResetPasswordService.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -369,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E74D39B2D71FDAF00F3978E /* SupportSeekerViewController.swift in Sources */,
 				1EEE64BA2D64123C00C43761 /* OnboardingThirdViewController.swift in Sources */,
 				1EEE64BC2D6420BB00C43761 /* ChooseRoleViewController.swift in Sources */,
 				1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */,
@@ -391,6 +398,7 @@
 				1EFA95D82D6D12CE00139613 /* AuthService.swift in Sources */,
 				1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */,
 				1EA866A62D70295F00B44BDE /* LoginService.swift in Sources */,
+				1E74D3992D71E5B500F3978E /* ResetPasswordService.swift in Sources */,
 				1EA8669A2D6FF66100B44BDE /* AccountSettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
