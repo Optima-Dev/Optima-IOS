@@ -1,4 +1,5 @@
 import UIKit
+import GoogleSignIn
 
 class SignupViewController: UIViewController {
     
@@ -10,7 +11,7 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! // Added for loading indicator
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Properties
     private let mainColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
@@ -21,10 +22,7 @@ class SignupViewController: UIViewController {
         configureUI()
         setupGestureRecognizers()
         setupTextFields()
-        
-        // Print the initial role for debugging
-        let role = getSelectedRole()
-        print("🔹 Initial role: \(role)")
+        print("🔹 Initial role: \(getSelectedRole())")
     }
     
     // MARK: - UI Configuration
@@ -32,7 +30,7 @@ class SignupViewController: UIViewController {
         setBackgroundImage()
         setupButtons()
         errorLabel.isHidden = true
-        activityIndicator.isHidden = true // Hide loading indicator initially
+        activityIndicator.isHidden = true
     }
     
     private func setBackgroundImage() {
@@ -112,6 +110,33 @@ class SignupViewController: UIViewController {
         handleSignup()
     }
     
+    // في SignupViewController.swift
+    @IBAction func googleLoginButtonTapped(_ sender: UIButton) {
+        GoogleAuthService.shared.signIn(with: self) { [weak self] result in
+            switch result {
+            case .success(let user):
+                GoogleAuthService.shared.sendUserDataToAPI(user: user) { apiResult in
+                    DispatchQueue.main.async {
+                        switch apiResult {
+                        case .success(let response):
+                            if let token = response.token {
+                                UserDefaults.standard.set(token, forKey: "authToken")
+                                let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper"
+                                self?.handleSuccessfulSignup(role: role)
+                            } else {
+                                self?.showError(message: response.message ?? "Unknown error")
+                            }
+                        case .failure(let error):
+                            self?.showError(message: error.localizedDescription)
+                        }
+                    }
+                }
+            case .failure(let error):
+                self?.showError(message: "Failed to sign in with Google: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     @objc private func togglePasswordVisibility(_ sender: UIButton) {
         isPasswordVisible.toggle()
         sender.isSelected = isPasswordVisible
@@ -140,23 +165,17 @@ class SignupViewController: UIViewController {
     
     // MARK: - Role Handling
     private func getSelectedRole() -> String {
-        let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper"
-        print("🔹 User selected role: \(role)")
-        return role
+        UserDefaults.standard.string(forKey: "userRole") ?? "helper"
     }
     
     // MARK: - Validation & Signup
     private func handleSignup() {
         dismissKeyboard()
 
-        print("🔹 Signup button tapped")
-
         guard let firstName = firstNameTextField.text,
               let lastName = lastNameTextField.text,
               let email = emailTextField.text,
               let password = passwordTextField.text else { return }
-
-        print("🔹 Validating user input")
 
         let firstNameValidation = validateName(firstName)
         let lastNameValidation = validateName(lastName)
@@ -169,39 +188,31 @@ class SignupViewController: UIViewController {
             passwordValidation.isValid {
 
             errorLabel.isHidden = true
-            activityIndicator.isHidden = false // Show loading indicator
+            activityIndicator.isHidden = false
             activityIndicator.startAnimating()
-            signUpButton.isEnabled = false // Disable signup button
+            signUpButton.isEnabled = false
 
             let role = getSelectedRole()
-            print("🔹 Proceeding with signup for role: \(role)")
 
             AuthService.shared.signUpUser(firstName: firstName, lastName: lastName, email: email, password: password, role: role) { result in
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating() // Stop loading indicator
-                    self.activityIndicator.isHidden = true // Hide loading indicator
-                    self.signUpButton.isEnabled = true // Enable signup button
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.signUpButton.isEnabled = true
 
                     switch result {
                     case .success(let response):
-                        if let token = response.token { // Success case (status 200)
-                            self.handleSuccessfulSignup()
-                        } else if let errorMessage = response.message { // Error case (status 400)
-                            print("🔴 Error: \(errorMessage)")
-                            self.errorLabel.text = errorMessage
-                            self.errorLabel.isHidden = false
+                        if let token = response.token {
+                            self.handleSuccessfulSignup(role: role)
+                        } else if let errorMessage = response.message {
+                            self.showError(message: errorMessage)
                         }
                     case .failure(let error):
-                        let errorMessage = error.localizedDescription
-                        print("🔴 Error: \(errorMessage)")
-                        self.errorLabel.text = errorMessage
-                        self.errorLabel.isHidden = false
+                        self.showError(message: error.localizedDescription)
                     }
                 }
             }
-
         } else {
-            print("🔴 Validation failed")
             handleValidationErrors(
                 firstNameError: firstNameValidation.error,
                 lastNameError: lastNameValidation.error,
@@ -210,33 +221,31 @@ class SignupViewController: UIViewController {
             )
         }
     }
-    private func handleSuccessfulSignup() {
-        if let token = UserDefaults.standard.string(forKey: "authToken") {
-            print("✅ Signup Successful, Token: \(token)")
-            
-            // Get the selected role
-            let role = getSelectedRole()
-            
-            // Navigate to the appropriate screen based on the role
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            if role == "helper" {
-                // Navigate to VolunteerHomeViewController
-                if let volunteerHomeVC = storyboard.instantiateViewController(withIdentifier: "VolunteerHomeViewController") as? VolunteerHomeViewController {
-                    volunteerHomeVC.modalPresentationStyle = .fullScreen
-                    self.present(volunteerHomeVC, animated: true, completion: nil)
-                }
-            } else if role == "seeker" {
-                // Navigate to BlindHomeViewController
-                if let blindHomeVC = storyboard.instantiateViewController(withIdentifier: "BlindHomeViewController") as? BlindHomeViewController {
-                    blindHomeVC.modalPresentationStyle = .fullScreen
-                    self.present(blindHomeVC, animated: true, completion: nil)
-                }
+    
+    private func handleSuccessfulSignup(role: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if role == "helper" {
+            if let volunteerHomeVC = storyboard.instantiateViewController(withIdentifier: "VolunteerHomeViewController") as? VolunteerHomeViewController {
+                volunteerHomeVC.modalPresentationStyle = .fullScreen
+                self.present(volunteerHomeVC, animated: true)
             }
-        } else {
-            print("✅ Signup Successful, but no token received")
+        } else if role == "seeker" {
+            if let blindHomeVC = storyboard.instantiateViewController(withIdentifier: "BlindHomeViewController") as? BlindHomeViewController {
+                blindHomeVC.modalPresentationStyle = .fullScreen
+                self.present(blindHomeVC, animated: true)
+            }
         }
     }
+    
+    private func showError(message: String) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.errorLabel.isHidden = true
+        }
+    }
+    
     private func handleValidationErrors(firstNameError: String?,
                                         lastNameError: String?,
                                         emailError: String?,

@@ -1,4 +1,5 @@
 import UIKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
     
@@ -29,6 +30,11 @@ class LoginViewController: UIViewController {
         setupButtons()
         errorLabel.isHidden = true
         activityIndicator.isHidden = true
+    }
+    
+    private func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
     
     private func setupTextFieldsDelegates() {
@@ -109,6 +115,32 @@ class LoginViewController: UIViewController {
         handleLogin()
     }
     
+    @IBAction func googleLoginButtonTapped(_ sender: UIButton) {
+        GoogleAuthService.shared.signIn(with: self) { [weak self] result in
+            switch result {
+            case .success(let user):
+                GoogleAuthService.shared.sendUserDataToAPI(user: user) { apiResult in
+                    DispatchQueue.main.async {
+                        switch apiResult {
+                        case .success(let response):
+                            if let token = response.token {
+                                UserDefaults.standard.set(token, forKey: "authToken")
+                                let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper"
+                                self?.handleSuccessfulLogin(email: "", password: "", role: role)
+                            } else {
+                                self?.showError(message: response.message ?? "Unknown error")
+                            }
+                        case .failure(let error):
+                            self?.showError(message: error.localizedDescription)
+                        }
+                    }
+                }
+            case .failure(let error):
+                self?.showError(message: "Failed to sign in with Google")
+            }
+        }
+    }
+    
     @objc private func togglePasswordVisibility(_ sender: UIButton) {
         isPasswordVisible.toggle()
         sender.isSelected = isPasswordVisible
@@ -169,66 +201,29 @@ class LoginViewController: UIViewController {
         )
     }
     
- // MARK: - Navigation
-     private func handleSuccessfulLogin(email: String, password: String) {
-         if let token = UserDefaults.standard.string(forKey: "authToken") {
-             print("✅ Login Successful, Token: \(token)")
-             
-             // Get the selected role
-             let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper"
-             
-             // Navigate to the appropriate screen based on the role
-             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-             
-             if role == "seeker" {
-                 // Navigate to BlindHomeViewController
-                 if let blindHomeVC = storyboard.instantiateViewController(withIdentifier: "BlindHomeViewController") as? BlindHomeViewController {
-                     blindHomeVC.modalPresentationStyle = .fullScreen
-                     self.present(blindHomeVC, animated: true, completion: nil)
-                 }
-             } else {
-                 // Navigate to VolunteerHomeViewController
-                 if let volunteerHomeVC = storyboard.instantiateViewController(withIdentifier: "VolunteerHomeViewController") as? VolunteerHomeViewController {
-                     volunteerHomeVC.modalPresentationStyle = .fullScreen
-                     self.present(volunteerHomeVC, animated: true, completion: nil)
-                 }
-             }
-         } else {
-             print("✅ Login Successful, but no token received")
-         }
-     }
-    
-    private func navigateToBlindHome() {
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "BlindHomeViewController") else {
-            showViewControllerError()
-            return
+    // MARK: - Navigation
+    private func handleSuccessfulLogin(email: String, password: String, role: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if role == "seeker" {
+            if let blindHomeVC = storyboard.instantiateViewController(withIdentifier: "BlindHomeViewController") as? BlindHomeViewController {
+                blindHomeVC.modalPresentationStyle = .fullScreen
+                self.present(blindHomeVC, animated: true)
+            }
+        } else {
+            if let volunteerHomeVC = storyboard.instantiateViewController(withIdentifier: "VolunteerHomeViewController") as? VolunteerHomeViewController {
+                volunteerHomeVC.modalPresentationStyle = .fullScreen
+                self.present(volunteerHomeVC, animated: true)
+            }
         }
-        vc.modalPresentationStyle = .fullScreen //full screen
-        present(vc, animated: true)
     }
     
-    private func navigateToVolunteerHome() {
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "VolunteerHomeViewController") else {
-            showViewControllerError()
-            return
+    private func showError(message: String) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.errorLabel.isHidden = true
         }
-        vc.modalPresentationStyle = .fullScreen //full screen
-        present(vc, animated: true)
-    }
-    
-    private func showViewControllerError() {
-        let alert = UIAlertController(
-            title: "Error",
-            message: "Failed to load view controller",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
-    private func setupGestureRecognizers() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
     }
     
     private func handleLogin() {
@@ -255,7 +250,7 @@ class LoginViewController: UIViewController {
                     switch result {
                     case .success(let response):
                         if let token = response.token {
-                            self.handleSuccessfulLogin(email: email, password: password)
+                            self.handleSuccessfulLogin(email: email, password: password, role: "helper")
                         } else if let errorMessage = response.message {
                             print("🔴 Error: \(errorMessage)")
                             self.errorLabel.text = errorMessage

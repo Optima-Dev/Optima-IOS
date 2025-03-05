@@ -846,6 +846,7 @@ BACK, FRIEND!</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="googleLoginButtonTapped:" destination="508-ny-viI" eventType="touchUpInside" id="aS1-Ao-QxO"/>
                                     <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kt8-NP-MTe"/>
                                 </connections>
                             </button>
@@ -1025,6 +1026,7 @@ experience with us!</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="googleLoginButtonTapped:" destination="dD2-dN-6mM" eventType="touchUpInside" id="fKv-cA-cQK"/>
                                     <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lko-Sf-FvM"/>
                                 </connections>
                             </button>
@@ -2364,10 +2366,10 @@ our app in the most efficient way.</string>
         <segue reference="Lsd-Fa-GD1"/>
         <segue reference="DMp-B2-0Cy"/>
         <segue reference="Xnr-5b-rxX"/>
-        <segue reference="MOl-ie-AcF"/>
+        <segue reference="8KN-Dp-g41"/>
         <segue reference="jR0-fY-aXW"/>
         <segue reference="XGb-aY-RNu"/>
-        <segue reference="eKI-1l-H7D"/>
+        <segue reference="OJa-df-kt1"/>
         <segue reference="Rsv-1V-HX1"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -6,7 +6,7 @@ class LoginService {
     private init() {}
 
     func loginUser(email: String, password: String, completion: @escaping (Result<LoginResponse, AuthError>) -> Void) {
-        let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper" 
+        let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper"
         let requestBody = LoginRequest(email: email, password: password, role: role)
         
         APIManager.shared.performRequest(
@@ -16,19 +16,15 @@ class LoginService {
         ) { (result: Result<LoginResponse, NetworkError>) in
             switch result {
             case .success(let response):
-                if let token = response.token { // Success case (status 200)
-                    print("✅ Login Successful, Token: \(token)")
+                if let token = response.token {
                     UserDefaults.standard.set(token, forKey: "authToken")
                     completion(.success(response))
-                } else if let errorMessage = response.message { // Error case (status 400 or 401)
-                    print("🔴 Error: \(errorMessage)")
+                } else if let errorMessage = response.message {
                     completion(.failure(.failed(errorMessage)))
                 } else {
-                    print("🔴 Unknown Error")
                     completion(.failure(.failed("Unknown error occurred")))
                 }
             case .failure(let error):
-                print("🔴 Network Error: \(error.localizedDescription)")
                 completion(.failure(.failed(error.localizedDescription)))
             }
         }
