@@ -58,6 +58,13 @@ struct ResetPasswordRequest: Codable {
 struct ResetPasswordResponse: Codable {
     let message: String?
 }
+// MARK: - Users
+struct User: Codable {
+    let _id: String
+    let firstName: String
+    let lastName: String
+    let email: String
+}
 // MARK: - Network Error
 enum NetworkError: Error {
     case invalidURL

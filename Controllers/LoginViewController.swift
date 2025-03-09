@@ -13,7 +13,9 @@ class LoginViewController: UIViewController {
     
     // MARK: - Properties
     private let mainColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1)
+    private let errorColor = UIColor.red
     private var isPasswordVisible = false
+    private var shouldValidateOnEndEditing = false
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -65,6 +67,7 @@ class LoginViewController: UIViewController {
         configureTextField(emailTextField, icon: "mail", placeholder: "example@gmail.com")
         emailTextField.keyboardType = .emailAddress
         emailTextField.autocorrectionType = .no
+        emailTextField.textContentType = .none // تعطيل الإكمال التلقائي
     }
     
     private func configurePasswordTextField() {
@@ -72,6 +75,7 @@ class LoginViewController: UIViewController {
         passwordTextField.isSecureTextEntry = true
         addPasswordToggleButton()
         passwordTextField.returnKeyType = .go
+        passwordTextField.textContentType = .none // تعطيل الإكمال التلقائي
     }
     
     private func configureTextField(_ textField: UITextField, icon: String, placeholder: String) {
@@ -126,7 +130,7 @@ class LoginViewController: UIViewController {
                             if let token = response.token {
                                 UserDefaults.standard.set(token, forKey: "authToken")
                                 let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper"
-                                self?.handleSuccessfulLogin(email: "", password: "", role: role)
+                                self?.handleSuccessfulLogin(role: role) // استخدام القيمة المحفوظة
                             } else {
                                 self?.showError(message: response.message ?? "Unknown error")
                             }
@@ -168,11 +172,11 @@ class LoginViewController: UIViewController {
     
     private func showEmailError() {
         emailTextField.text = ""
-        emailTextField.layer.borderColor = UIColor.red.cgColor
+        emailTextField.layer.borderColor = errorColor.cgColor
         emailTextField.attributedPlaceholder = NSAttributedString(
             string: "Invalid email should contain @",
             attributes: [
-                .foregroundColor: UIColor.red,
+                .foregroundColor: errorColor,
                 .font: UIFont.systemFont(ofSize: 16)
             ]
         )
@@ -180,11 +184,11 @@ class LoginViewController: UIViewController {
     
     private func showPasswordError() {
         passwordTextField.text = ""
-        passwordTextField.layer.borderColor = UIColor.red.cgColor
+        passwordTextField.layer.borderColor = errorColor.cgColor
         passwordTextField.attributedPlaceholder = NSAttributedString(
             string: "Invalid password",
             attributes: [
-                .foregroundColor: UIColor.red,
+                .foregroundColor: errorColor,
                 .font: UIFont.systemFont(ofSize: 16)
             ]
         )
@@ -202,18 +206,18 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Navigation
-    private func handleSuccessfulLogin(email: String, password: String, role: String) {
+    private func handleSuccessfulLogin(role: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        if role == "seeker" {
-            if let blindHomeVC = storyboard.instantiateViewController(withIdentifier: "BlindHomeViewController") as? BlindHomeViewController {
-                blindHomeVC.modalPresentationStyle = .fullScreen
-                self.present(blindHomeVC, animated: true)
-            }
-        } else {
+        if role == "helper" {
             if let volunteerHomeVC = storyboard.instantiateViewController(withIdentifier: "VolunteerHomeViewController") as? VolunteerHomeViewController {
                 volunteerHomeVC.modalPresentationStyle = .fullScreen
                 self.present(volunteerHomeVC, animated: true)
+            }
+        } else if role == "seeker" {
+            if let blindHomeVC = storyboard.instantiateViewController(withIdentifier: "BlindHomeViewController") as? BlindHomeViewController {
+                blindHomeVC.modalPresentationStyle = .fullScreen
+                self.present(blindHomeVC, animated: true)
             }
         }
     }
@@ -250,7 +254,8 @@ class LoginViewController: UIViewController {
                     switch result {
                     case .success(let response):
                         if let token = response.token {
-                            self.handleSuccessfulLogin(email: email, password: password, role: "helper")
+                            let role = UserDefaults.standard.string(forKey: "userRole") ?? "helper"
+                            self.handleSuccessfulLogin(role: role)
                         } else if let errorMessage = response.message {
                             print("🔴 Error: \(errorMessage)")
                             self.errorLabel.text = errorMessage
@@ -282,11 +287,12 @@ extension LoginViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        guard shouldValidateOnEndEditing else { return }
         let isValid = textField == emailTextField ?
             validateEmail(textField.text ?? "") :
             validatePassword(textField.text ?? "")
         
-        textField.layer.borderColor = isValid ? mainColor.cgColor : UIColor.red.cgColor
+        textField.layer.borderColor = isValid ? mainColor.cgColor : errorColor.cgColor
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -294,6 +300,7 @@ extension LoginViewController: UITextFieldDelegate {
         case emailTextField:
             passwordTextField.becomeFirstResponder()
         case passwordTextField:
+            dismissKeyboard()
             handleLogin()
         default:
             break

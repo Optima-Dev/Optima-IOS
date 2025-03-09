@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */; };
 		1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */; };
+		1E257E1C2D7D63BC00397A33 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */; };
 		1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */; };
 		1E74D3992D71E5B500F3978E /* ResetPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74D3982D71E5B500F3978E /* ResetPasswordService.swift */; };
 		1E74D39B2D71FDAF00F3978E /* SupportSeekerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyTermsViewController.swift; sourceTree = "<group>"; };
 		1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		1E4351272D62AB5E008872C8 /* Optima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Optima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E43513D2D62AB60008872C8 /* OptimaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				1EEE64A82D63D2ED00C43761 /* Resources */,
-				1EEE64A72D63D2DC00C43761 /* Helpers */,
 				1EEE64A62D63D2D000C43761 /* Managers */,
 				1EEE64A52D63D2C400C43761 /* Models */,
 				1EEE64A42D63D2B800C43761 /* Views */,
@@ -188,6 +189,7 @@
 				1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */,
 				1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */,
 				1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */,
+				1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -220,13 +222,6 @@
 				1EF7E5702D756CFD00B3151E /* GoogleAuthService.swift */,
 			);
 			path = Managers;
-			sourceTree = "<group>";
-		};
-		1EEE64A72D63D2DC00C43761 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		1EEE64A82D63D2ED00C43761 /* Resources */ = {
@@ -397,6 +392,7 @@
 				1EA866962D6FF13400B44BDE /* BlindHomeViewController.swift in Sources */,
 				1EA8669E2D7004D700B44BDE /* APIEndpoints.swift in Sources */,
 				1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */,
+				1E257E1C2D7D63BC00397A33 /* ProfileEditViewController.swift in Sources */,
 				1EA866A22D70204D00B44BDE /* Models.swift in Sources */,
 				1EFA96482D6D63DB00139613 /* ConfirmPasswordViewController.swift in Sources */,
 				1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */,

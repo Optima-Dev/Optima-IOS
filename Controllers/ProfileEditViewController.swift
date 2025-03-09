@@ -1,23 +1,18 @@
 //
-//  SettingForBlindViewController.swift
+//  ProfileViewController.swift
 //  Optima
 //
-//  Created by Ghada Abdelrahman on 27/02/2025.
+//  Created by Ghada Abdelrahman on 09/03/2025.
 //
 
 import UIKit
 
-class SettingForBlindViewController: UIViewController {
+class ProfileEditViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //set background
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "Background")
-        backgroundImage.contentMode = .scaleAspectFill
-        
-        //make background at layer 0
-        view.insertSubview(backgroundImage, at: 0)
+
+        // Do any additional setup after loading the view.
     }
     
 
@@ -32,4 +27,3 @@ class SettingForBlindViewController: UIViewController {
     */
 
 }
-
