@@ -14,7 +14,7 @@ class ConfirmPasswordViewController: UIViewController {
 
     // MARK: - Properties
     private var isPasswordVisible = false
-    var userEmail: String? //  EnterCodeViewController for email
+    var userEmail: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
