@@ -12,8 +12,7 @@ class SplashScreenViewController: UIViewController {
     
     func handleNavigation() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        // التحقق إذا كان المستخدم مسجل دخول
+
         if let userRole = getUserRole() {
             let tabBarVC: UITabBarController
             
@@ -25,7 +24,6 @@ class SplashScreenViewController: UIViewController {
             
             switchToRootViewController(tabBarVC)
         } else {
-            // المستخدم مش مسجل دخول → نعرض له الـ Onboarding
             let onboardingVC = storyboard.instantiateViewController(withIdentifier: "OnboardingPageViewController") as! OnboardingPageViewController
             switchToRootViewController(onboardingVC)
         }

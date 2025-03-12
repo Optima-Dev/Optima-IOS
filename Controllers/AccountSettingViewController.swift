@@ -7,15 +7,16 @@ class AccountSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //set background
+        setupBackground()
+        setupTextFields()
+        loadUserData()
+    }
+    
+    private func setupBackground() {
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
-        
-        //make background at layer 0
         view.insertSubview(backgroundImage, at: 0)
-        setupTextFields()
-        loadUserData()
     }
     
     private func setupTextFields() {
@@ -38,29 +39,22 @@ class AccountSettingViewController: UIViewController {
         
         textField.leftView = containerView
         textField.leftViewMode = .always
-        textField.layer.borderColor = UIColor.systemBlue.cgColor
+        textField.layer.borderColor = UIColor(hex: "#2727C4").cgColor
         textField.layer.borderWidth = 2
         textField.layer.cornerRadius = 20
-        textField.attributedPlaceholder = NSAttributedString(
-            string: placeholder,
-            attributes: [
-                .foregroundColor: UIColor(red: 138/255, green: 138/255, blue: 138/255, alpha: 1),
-                .font: UIFont.systemFont(ofSize: 16)
-            ]
-        )
     }
     
     private func loadUserData() {
         UserManager.shared.fetchCurrentUser { [weak self] result in
-            switch result {
-            case .success(let user):
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
                     self?.firstNameTextField.text = user.firstName
                     self?.lastNameTextField.text = user.lastName
                     self?.emailTextField.text = user.email
+                case .failure(let error):
+                    self?.showAlert(message: "Error: \(error.localizedDescription)")
                 }
-            case .failure(let error):
-                self?.showAlert(message: "Error: \(error.localizedDescription)")
             }
         }
     }

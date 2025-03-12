@@ -16,7 +16,7 @@ class AuthService {
             switch result {
             case .success(let response):
                 if let token = response.token {
-                    UserDefaults.standard.set(token, forKey: "authToken")
+                    AuthManager.shared.authToken = token
                     completion(.success(response))
                 } else if let errorMessage = response.message {
                     completion(.failure(.failed(errorMessage)))

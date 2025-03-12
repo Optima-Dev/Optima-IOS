@@ -58,12 +58,24 @@ struct ResetPasswordRequest: Codable {
 struct ResetPasswordResponse: Codable {
     let message: String?
 }
-// MARK: - Users
+// MARK: - UserResponse 
+struct UserResponse: Codable {
+    let user: User
+}
+
+// MARK: - User Model
 struct User: Codable {
-    let _id: String
+    let id: String
     let firstName: String
     let lastName: String
     let email: String
+
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case firstName
+        case lastName
+        case email
+    }
 }
 // MARK: - Network Error
 enum NetworkError: Error {

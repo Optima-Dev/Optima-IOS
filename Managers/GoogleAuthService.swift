@@ -22,7 +22,6 @@ class GoogleAuthService {
         }
     }
     
-    // في GoogleAuthService.swift
     func sendUserDataToAPI(user: GIDGoogleUser, completion: @escaping (Result<LoginResponse, AuthError>) -> Void) {
         guard let googleId = user.userID,
               let email = user.profile?.email,
@@ -48,7 +47,15 @@ class GoogleAuthService {
         ) { (result: Result<LoginResponse, NetworkError>) in
             switch result {
             case .success(let response):
-                completion(.success(response))
+                if let token = response.token {
+                    print("🟢 Received Token: \(token)") // ✅ شوفي هل التوكين بيتسلم
+                    AuthManager.shared.authToken = token // ✅ خزنيه في Keychain
+                    print("🟢 Token saved in Keychain!") // ✅ تأكيد الحفظ
+                    
+                    completion(.success(response))
+                } else {
+                    completion(.failure(.failed("No token in response.")))
+                }
             case .failure(let error):
                 completion(.failure(.failed(error.localizedDescription)))
             }

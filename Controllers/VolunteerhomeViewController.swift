@@ -8,8 +8,15 @@
 import UIKit
 
 class VolunteerHomeViewController: UIViewController {
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set the scroll view content size
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentView.frame.height)
         
         //set background
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
