@@ -3,10 +3,8 @@ import UIKit
 extension UIViewController {
     func showAlert(title: String = "Error", message: String, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
-            guard self.viewIfLoaded?.window != nil else {
-                print("⚠️ Warning: Attempted to show alert while view is not in hierarchy")
-                return
-            }
+            // ✅ Ensure that no alert is already presented
+            if self.presentedViewController is UIAlertController { return }
             
             let alert = UIAlertController(
                 title: title,

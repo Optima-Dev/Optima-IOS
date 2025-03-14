@@ -7,7 +7,11 @@ class SettingForBlindViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
-        loadUserData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadUserData() 
     }
     
     private func setupBackground() {
@@ -22,6 +26,7 @@ class SettingForBlindViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let user):
+                    print("🟢 User Data Loaded: \(user.firstName) \(user.lastName), \(user.email)") 
                     self?.userNameLabel.text = "\(user.firstName) \(user.lastName)"
                     self?.emailLabel.text = user.email
                 case .failure(let error):

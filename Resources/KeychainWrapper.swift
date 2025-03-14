@@ -1,7 +1,7 @@
 import Foundation
 import Security
 
-// MARK: - KeychainWrapper 
+// MARK: - KeychainWrapper
 struct KeychainWrapper {
     static func save(key: String, data: Data) -> Bool {
         let query: [String: Any] = [

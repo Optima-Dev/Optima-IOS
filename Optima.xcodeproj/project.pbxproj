@@ -13,6 +13,7 @@
 		1E257E342D7D6AAD00397A33 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E332D7D6AAD00397A33 /* UserManager.swift */; };
 		1E257E362D7D70A000397A33 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */; };
 		1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */; };
+		1E424B6D2D83BE4F0034CC49 /* PickUpCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424B6C2D83BE4F0034CC49 /* PickUpCallViewController.swift */; };
 		1E74D3992D71E5B500F3978E /* ResetPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74D3982D71E5B500F3978E /* ResetPasswordService.swift */; };
 		1E74D39B2D71FDAF00F3978E /* SupportSeekerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */; };
 		1E8BA2F62D7FC7D4001EC87C /* HelperSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */; };
@@ -66,6 +67,7 @@
 		1E257E332D7D6AAD00397A33 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
+		1E424B6C2D83BE4F0034CC49 /* PickUpCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpCallViewController.swift; sourceTree = "<group>"; };
 		1E4351272D62AB5E008872C8 /* Optima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Optima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E43513D2D62AB60008872C8 /* OptimaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4351472D62AB60008872C8 /* OptimaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,10 +199,11 @@
 				1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */,
 				1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */,
 				1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */,
+				1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */,
 				1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */,
 				1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */,
 				1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */,
-				1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */,
+				1E424B6C2D83BE4F0034CC49 /* PickUpCallViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 		1EEE64A42D63D2B800C43761 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */,
 				1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */,
 				1EFA96452D6D5DB200139613 /* WarningPopupView.swift */,
 			);
@@ -217,7 +221,6 @@
 		1EEE64A52D63D2C400C43761 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */,
 				1EA866A62D70295F00B44BDE /* LoginService.swift in Sources */,
 				1E9BEAA22D7EBB0500976BFF /* KeychainWrapper.swift in Sources */,
+				1E424B6D2D83BE4F0034CC49 /* PickUpCallViewController.swift in Sources */,
 				1E74D3992D71E5B500F3978E /* ResetPasswordService.swift in Sources */,
 				1EA8669A2D6FF66100B44BDE /* AccountSettingViewController.swift in Sources */,
 			);
