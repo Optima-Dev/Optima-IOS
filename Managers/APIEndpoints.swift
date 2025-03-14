@@ -13,4 +13,10 @@ struct APIEndpoints {
     static let fetchUser = "\(baseURL)/users/me"
     static let updateUser = "\(baseURL)/users/me"
     static let deleteUser = "\(baseURL)/users/me"
+
+    // Friends
+    static let fetchFriends = "\(baseURL)/friends/all"
+    static let addFriend = "\(baseURL)/friends/send"
+    static let removeFriend = "\(baseURL)/friends/remove"
+    static let editFriend = "\(baseURL)/friends/edit"
 }

@@ -77,6 +77,18 @@ struct User: Codable {
         case email
     }
 }
+// MARK: - Friends
+struct Friend: Decodable {
+    let id: String
+    let firstName: String
+    let lastName: String
+    let email: String
+
+}
+// MARK: - Friends Response Model
+struct FriendsResponse: Decodable {
+    let friends: [Friend]
+}
 // MARK: - Network Error
 enum NetworkError: Error {
     case invalidURL

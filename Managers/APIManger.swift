@@ -3,7 +3,27 @@ import Foundation
 class APIManager {
     static let shared = APIManager()
     private init() {}
+    
+    // Fetch Friends with Authorization Token
+    func fetchFriends(completion: @escaping (Result<[Friend], NetworkError>) -> Void) {
+        guard let token = AuthManager.shared.authToken else {
+            completion(.failure(.requestFailed("Unauthorized: No Token Found")))
+            return
+        }
 
+        let headers = ["Authorization": "Bearer \(token)"]
+        
+        performRequest(url: APIEndpoints.fetchFriends, method: "GET", headers: headers) { (result: Result<FriendsResponse, NetworkError>) in
+            switch result {
+            case .success(let response):
+                completion(.success(response.friends))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    // General function to perform API requests
     func performRequest<T: Decodable>(
         url: String,
         method: String,
@@ -30,8 +50,7 @@ class APIManager {
         }
 
         print("🔹 Requesting: \(method) \(url)")
-        print("🔹 Headers: \(headers ?? [:])")
-        if let body = body { print("🔹 Body: \(body)") }
+        print("🔹 Headers: \(request.allHTTPHeaderFields ?? [:])")
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -49,6 +68,12 @@ class APIManager {
             print("🟢 Response Code: \(httpResponse.statusCode)")
             if let jsonString = String(data: data, encoding: .utf8) {
                 print("🟢 Raw Response: \(jsonString)")
+            }
+
+            if httpResponse.statusCode == 401 {
+                print("🔴 Unauthorized! Redirecting to Login Screen...")
+                completion(.failure(.requestFailed("Unauthorized Access")))
+                return
             }
 
             do {
