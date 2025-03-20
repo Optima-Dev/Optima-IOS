@@ -11,7 +11,7 @@ class PickUpCallViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
-    // Connect your UIViews here
+
     @IBOutlet weak var myView1: UIView!
     @IBOutlet weak var myView2: UIView!
     @IBOutlet weak var myView3: UIView!

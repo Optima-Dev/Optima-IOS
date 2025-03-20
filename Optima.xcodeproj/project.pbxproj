@@ -12,6 +12,10 @@
 		1E257E1C2D7D63BC00397A33 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */; };
 		1E257E342D7D6AAD00397A33 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E332D7D6AAD00397A33 /* UserManager.swift */; };
 		1E257E362D7D70A000397A33 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */; };
+		1E2FC4BB2D8B4ABF006A0683 /* FriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4BA2D8B4ABF006A0683 /* FriendRequestCell.swift */; };
+		1E2FC4BF2D8B4CB5006A0683 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4BE2D8B4CB5006A0683 /* NotificationsViewController.swift */; };
+		1E2FC4C32D8B8C32006A0683 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4C22D8B8C19006A0683 /* UIColor+Extensions.swift */; };
+		1E2FC4C52D8BA1AA006A0683 /* FriendListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4C42D8BA1AA006A0683 /* FriendListCell.swift */; };
 		1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */; };
 		1E424B6D2D83BE4F0034CC49 /* PickUpCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424B6C2D83BE4F0034CC49 /* PickUpCallViewController.swift */; };
 		1E424B712D83F1930034CC49 /* MyPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424B702D83F1930034CC49 /* MyPeopleViewController.swift */; };
@@ -69,6 +73,10 @@
 		1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		1E257E332D7D6AAD00397A33 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		1E2FC4BA2D8B4ABF006A0683 /* FriendRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestCell.swift; sourceTree = "<group>"; };
+		1E2FC4BE2D8B4CB5006A0683 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		1E2FC4C22D8B8C19006A0683 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		1E2FC4C42D8BA1AA006A0683 /* FriendListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListCell.swift; sourceTree = "<group>"; };
 		1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		1E424B6C2D83BE4F0034CC49 /* PickUpCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpCallViewController.swift; sourceTree = "<group>"; };
 		1E424B702D83F1930034CC49 /* MyPeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeopleViewController.swift; sourceTree = "<group>"; };
@@ -162,16 +170,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E2FC4BC2D8B4BAB006A0683 /* Controllers helper */ = {
+			isa = PBXGroup;
+			children = (
+				1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */,
+				1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */,
+				1E424B6C2D83BE4F0034CC49 /* PickUpCallViewController.swift */,
+				1E2FC4BE2D8B4CB5006A0683 /* NotificationsViewController.swift */,
+			);
+			path = "Controllers helper";
+			sourceTree = "<group>";
+		};
+		1E2FC4BD2D8B4BEA006A0683 /* Controllers seeker */ = {
+			isa = PBXGroup;
+			children = (
+				1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */,
+				1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */,
+				1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */,
+				1E424B702D83F1930034CC49 /* MyPeopleViewController.swift */,
+				1E424B722D83F1B00034CC49 /* AddMemberViewController.swift */,
+			);
+			path = "Controllers seeker";
+			sourceTree = "<group>";
+		};
 		1E43511E2D62AB5E008872C8 = {
 			isa = PBXGroup;
 			children = (
-				1EEE64A82D63D2ED00C43761 /* Resources */,
+				1EEE64A32D63D2A000C43761 /* Controllers general */,
+				1E2FC4BD2D8B4BEA006A0683 /* Controllers seeker */,
+				1E2FC4BC2D8B4BAB006A0683 /* Controllers helper */,
+				1EEE64A82D63D2ED00C43761 /* Security */,
 				1EEE64A62D63D2D000C43761 /* Managers */,
 				1EEE64A52D63D2C400C43761 /* Models */,
 				1EEE64A42D63D2B800C43761 /* Views */,
-				1EEE64A32D63D2A000C43761 /* Controllers */,
-				1E4351292D62AB5E008872C8 /* Optima */,
 				1E4351402D62AB60008872C8 /* OptimaTests */,
+				1E4351292D62AB5E008872C8 /* Optima */,
 				1E43514A2D62AB60008872C8 /* OptimaUITests */,
 				1E4351282D62AB5E008872C8 /* Products */,
 			);
@@ -187,7 +220,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1EEE64A32D63D2A000C43761 /* Controllers */ = {
+		1EEE64A32D63D2A000C43761 /* Controllers general */ = {
 			isa = PBXGroup;
 			children = (
 				1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */,
@@ -202,27 +235,22 @@
 				1EFA95D92D6D17DA00139613 /* ResetPasswordViewController.swift */,
 				1EFA96432D6D54C600139613 /* EnterCodeViewController.swift */,
 				1EFA96472D6D63DB00139613 /* ConfirmPasswordViewController.swift */,
-				1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */,
-				1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */,
-				1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */,
-				1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */,
-				1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */,
 				1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */,
 				1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */,
-				1E424B6C2D83BE4F0034CC49 /* PickUpCallViewController.swift */,
-				1E424B702D83F1930034CC49 /* MyPeopleViewController.swift */,
-				1E424B722D83F1B00034CC49 /* AddMemberViewController.swift */,
 			);
-			path = Controllers;
+			path = "Controllers general";
 			sourceTree = "<group>";
 		};
 		1EEE64A42D63D2B800C43761 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1E2FC4C22D8B8C19006A0683 /* UIColor+Extensions.swift */,
 				1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */,
 				1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */,
 				1EFA96452D6D5DB200139613 /* WarningPopupView.swift */,
 				1E424B742D83FD4E0034CC49 /* FriendCell.swift */,
+				1E2FC4BA2D8B4ABF006A0683 /* FriendRequestCell.swift */,
+				1E2FC4C42D8BA1AA006A0683 /* FriendListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -250,12 +278,12 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		1EEE64A82D63D2ED00C43761 /* Resources */ = {
+		1EEE64A82D63D2ED00C43761 /* Security */ = {
 			isa = PBXGroup;
 			children = (
 				1E9BEAA12D7EBB0400976BFF /* KeychainWrapper.swift */,
 			);
-			path = Resources;
+			path = Security;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,9 +447,11 @@
 				1EFA96442D6D54C600139613 /* EnterCodeViewController.swift in Sources */,
 				1EFA96462D6D5DB200139613 /* WarningPopupView.swift in Sources */,
 				1EA866A42D7026EA00B44BDE /* VolunteerhomeViewController.swift in Sources */,
+				1E2FC4BF2D8B4CB5006A0683 /* NotificationsViewController.swift in Sources */,
 				1E8BA2F62D7FC7D4001EC87C /* HelperSettingViewController.swift in Sources */,
 				1EA866962D6FF13400B44BDE /* BlindHomeViewController.swift in Sources */,
 				1EA8669E2D7004D700B44BDE /* APIEndpoints.swift in Sources */,
+				1E2FC4C52D8BA1AA006A0683 /* FriendListCell.swift in Sources */,
 				1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */,
 				1E257E1C2D7D63BC00397A33 /* ProfileEditViewController.swift in Sources */,
 				1EA866A22D70204D00B44BDE /* Models.swift in Sources */,
@@ -435,11 +465,13 @@
 				1EFA95DA2D6D17DA00139613 /* ResetPasswordViewController.swift in Sources */,
 				1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */,
 				1EFA95D82D6D12CE00139613 /* AuthService.swift in Sources */,
+				1E2FC4BB2D8B4ABF006A0683 /* FriendRequestCell.swift in Sources */,
 				1E424B712D83F1930034CC49 /* MyPeopleViewController.swift in Sources */,
 				1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */,
 				1EA866A62D70295F00B44BDE /* LoginService.swift in Sources */,
 				1E9BEAA22D7EBB0500976BFF /* KeychainWrapper.swift in Sources */,
 				1E424B6D2D83BE4F0034CC49 /* PickUpCallViewController.swift in Sources */,
+				1E2FC4C32D8B8C32006A0683 /* UIColor+Extensions.swift in Sources */,
 				1E74D3992D71E5B500F3978E /* ResetPasswordService.swift in Sources */,
 				1EA8669A2D6FF66100B44BDE /* AccountSettingViewController.swift in Sources */,
 			);

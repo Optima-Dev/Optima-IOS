@@ -1,6 +1,9 @@
 import Foundation
 
-// MARK: - Signup Request
+// MARK: - Authentication Models
+// -----------------------------
+
+/// Model for Signup Request
 struct SignupRequest: Codable {
     let firstName: String
     let lastName: String
@@ -9,94 +12,112 @@ struct SignupRequest: Codable {
     let role: String
 }
 
-// MARK: - Signup Response
+/// Model for Signup Response (Success: 200, Fail: 400)
 struct SignupResponse: Codable {
-    let token: String? //success (status 200)
-    let message: String? // fail (status 400)
+    let token: String?      // Success case
+    let message: String?    // Fail case
 }
 
-// MARK: - Login Request
+/// Model for Login Request
 struct LoginRequest: Codable {
     let email: String
     let password: String
     let role: String
 }
 
-// MARK: - Login Response
+/// Model for Login Response (Success: 200, Fail: 400/401)
 struct LoginResponse: Codable {
-    let token: String? //success (status 200)
-    let message: String? // fail (status 400,401)
-  //  let role: String?
+    let token: String?      // Success case
+    let message: String?    // Fail case
 }
-// MARK: - Send Code Request
+
+// MARK: - Password Reset Models
+// -----------------------------
+
+/// Model for Send Code Request
 struct SendCodeRequest: Codable {
     let email: String
 }
 
-// MARK: - Send Code Response
+/// Model for Send Code Response
 struct SendCodeResponse: Codable {
     let message: String?
 }
 
-// MARK: - Verify Code Request
+/// Model for Verify Code Request
 struct VerifyCodeRequest: Codable {
     let email: String
     let code: String
 }
 
-// MARK: - Verify Code Response
+/// Model for Verify Code Response
 struct VerifyCodeResponse: Codable {
     let message: String?
 }
 
-// MARK: - Reset Password Request
+/// Model for Reset Password Request
 struct ResetPasswordRequest: Codable {
     let email: String
     let newPassword: String
 }
-// MARK: - Reset Password Response
+
+/// Model for Reset Password Response
 struct ResetPasswordResponse: Codable {
     let message: String?
 }
-// MARK: - UserResponse 
+
+// MARK: - User & Friends Models
+// -----------------------------
+
+/// Model for User Response (GET /users/me)
 struct UserResponse: Codable {
     let user: User
 }
 
-// MARK: - User Model
+/// Model for User Data
 struct User: Codable {
     let id: String
     let firstName: String
     let lastName: String
     let email: String
-
+    
     enum CodingKeys: String, CodingKey {
-        case id = "_id"
+        case id = "_id"  // Map API's "_id" to "id"
         case firstName
         case lastName
         case email
     }
 }
-// MARK: - Friends
+
+// Model for Friend Data
 struct Friend: Decodable {
     let id: String
     let firstName: String
     let lastName: String
     let email: String
-
+    var isAdded: Bool? 
 }
-// MARK: - Friends Response Model
+
+// Model for Friends List Response (GET /friends)
 struct FriendsResponse: Decodable {
     let friends: [Friend]
 }
-// MARK: - Network Error
+
+// MARK: - Empty Response (For 204 No Content)
+// -------------------------------------------
+struct EmptyResponse: Decodable {}
+
+// MARK: - Error Handling
+// ----------------------
 enum NetworkError: Error {
     case invalidURL
     case requestFailed(String)
     case decodingError
+    case unauthorized    // 401
+    case notFound        // 404
 }
 
-// MARK: - Auth Error
 enum AuthError: Error {
     case failed(String)
 }
+

@@ -6,7 +6,7 @@ class UserManager {
     // MARK: - Fetch Current User
     func fetchCurrentUser(completion: @escaping (Result<User, NetworkError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
-            completion(.failure(.requestFailed("Unauthorized: No Token Found")))
+            completion(.failure(.unauthorized))
             return
         }
 
@@ -29,7 +29,7 @@ class UserManager {
     // MARK: - Update User
     func updateUser(firstName: String?, lastName: String?, email: String?, completion: @escaping (Result<User, NetworkError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
-            completion(.failure(.requestFailed("Unauthorized: No Token Found")))
+            completion(.failure(.unauthorized))
             return
         }
 
@@ -54,10 +54,10 @@ class UserManager {
         )
     }
 
-    // MARK: - Delete User
-    func deleteUser(completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    // MARK: - Delete User (التعديل هنا)
+    func deleteUser(completion: @escaping (Result<Void, NetworkError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
-            completion(.failure(.requestFailed("Unauthorized: No Token Found")))
+            completion(.failure(.unauthorized))
             return
         }
 
@@ -70,13 +70,11 @@ class UserManager {
         ) { (result: Result<EmptyResponse, NetworkError>) in
             switch result {
             case .success:
-                completion(.success(true))
+                AuthManager.shared.clearAuthData()
+                completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
 }
-
-// MARK: - Empty Response for DELETE
-struct EmptyResponse: Decodable {}
