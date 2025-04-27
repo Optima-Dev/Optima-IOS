@@ -1,29 +1,10 @@
+// APIManager.swift
 import Foundation
 
 class APIManager {
     static let shared = APIManager()
     private init() {}
     
-    // MARK: - Fetch Friends
-    func fetchFriends(completion: @escaping (Result<[Friend], NetworkError>) -> Void) {
-        guard let token = AuthManager.shared.authToken else {
-            completion(.failure(.unauthorized))
-            return
-        }
-
-        let headers = ["Authorization": "Bearer \(token)"]
-        
-        performRequest(url: APIEndpoints.fetchFriends, method: "GET", headers: headers) {
-            (result: Result<FriendsResponse, NetworkError>) in
-            switch result {
-            case .success(let response):
-                completion(.success(response.friends))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-
     // MARK: - Generic Request Handler
     func performRequest<T: Decodable>(
         url: String,
@@ -89,7 +70,7 @@ class APIManager {
                 break
             }
 
-            // 8. Handle Empty Data (204 No Content)
+            // 8. Handle Empty Data
             guard let data = data, !data.isEmpty else {
                 completion(.failure(.decodingError))
                 return
@@ -109,5 +90,28 @@ class APIManager {
                 completion(.failure(.decodingError))
             }
         }.resume()
+    }
+    
+    // MARK: - Fetch Friends (Optional)
+    func fetchFriends(completion: @escaping (Result<[Friend], NetworkError>) -> Void) {
+        guard let token = AuthManager.shared.authToken else {
+            completion(.failure(.unauthorized))
+            return
+        }
+
+        let headers = ["Authorization": "Bearer \(token)"]
+        
+        performRequest(
+            url: APIEndpoints.fetchFriends,
+            method: "GET",
+            headers: headers
+        ) { (result: Result<FriendsResponse, NetworkError>) in
+            switch result {
+            case .success(let response):
+                completion(.success(response.friends))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }

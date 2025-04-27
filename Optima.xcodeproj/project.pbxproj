@@ -21,6 +21,7 @@
 		1E424B712D83F1930034CC49 /* MyPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424B702D83F1930034CC49 /* MyPeopleViewController.swift */; };
 		1E424B732D83F1B00034CC49 /* AddMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424B722D83F1B00034CC49 /* AddMemberViewController.swift */; };
 		1E424B752D83FD4E0034CC49 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424B742D83FD4E0034CC49 /* FriendCell.swift */; };
+		1E5DED2A2DA17ABE0073160D /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DED292DA17ABE0073160D /* FriendService.swift */; };
 		1E74D3992D71E5B500F3978E /* ResetPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74D3982D71E5B500F3978E /* ResetPasswordService.swift */; };
 		1E74D39B2D71FDAF00F3978E /* SupportSeekerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */; };
 		1E8BA2F62D7FC7D4001EC87C /* HelperSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */; };
@@ -35,6 +36,9 @@
 		1EA866A22D70204D00B44BDE /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866A12D70204C00B44BDE /* Models.swift */; };
 		1EA866A42D7026EA00B44BDE /* VolunteerhomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */; };
 		1EA866A62D70295F00B44BDE /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866A52D70295F00B44BDE /* LoginService.swift */; };
+		1ED0D88D2DBDB03000C461AC /* FriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED0D88C2DBDB01500C461AC /* FriendRequest.swift */; };
+		1ED0D88F2DBDB49500C461AC /* HelperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED0D88E2DBDB48800C461AC /* HelperService.swift */; };
+		1ED0D8912DBDDC4200C461AC /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED0D8902DBDDC3500C461AC /* UserService.swift */; };
 		1EEE64AE2D63D3A500C43761 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */; };
 		1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */; };
 		1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B72D64122B00C43761 /* OnboardingSecViewController.swift */; };
@@ -85,6 +89,7 @@
 		1E4351272D62AB5E008872C8 /* Optima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Optima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E43513D2D62AB60008872C8 /* OptimaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4351472D62AB60008872C8 /* OptimaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OptimaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E5DED292DA17ABE0073160D /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
 		1E74D3982D71E5B500F3978E /* ResetPasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordService.swift; sourceTree = "<group>"; };
 		1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSeekerViewController.swift; sourceTree = "<group>"; };
 		1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperSettingViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +104,9 @@
 		1EA866A12D70204C00B44BDE /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerhomeViewController.swift; sourceTree = "<group>"; };
 		1EA866A52D70295F00B44BDE /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		1ED0D88C2DBDB01500C461AC /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
+		1ED0D88E2DBDB48800C461AC /* HelperService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperService.swift; sourceTree = "<group>"; };
+		1ED0D8902DBDDC3500C461AC /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstViewController.swift; sourceTree = "<group>"; };
 		1EEE64B72D64122B00C43761 /* OnboardingSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +273,9 @@
 		1EEE64A62D63D2D000C43761 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				1ED0D8902DBDDC3500C461AC /* UserService.swift */,
+				1ED0D88E2DBDB48800C461AC /* HelperService.swift */,
+				1ED0D88C2DBDB01500C461AC /* FriendRequest.swift */,
 				1EFA95D72D6D12CE00139613 /* AuthService.swift */,
 				1EA8669F2D7012F800B44BDE /* APIManger.swift */,
 				1EA8669D2D7004D700B44BDE /* APIEndpoints.swift */,
@@ -274,6 +285,7 @@
 				1EF7E5702D756CFD00B3151E /* GoogleAuthService.swift */,
 				1E257E332D7D6AAD00397A33 /* UserManager.swift */,
 				1E9BEAA32D7EBB2A00976BFF /* AuthManager.swift */,
+				1E5DED292DA17ABE0073160D /* FriendService.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -450,22 +462,26 @@
 				1E2FC4BF2D8B4CB5006A0683 /* NotificationsViewController.swift in Sources */,
 				1E8BA2F62D7FC7D4001EC87C /* HelperSettingViewController.swift in Sources */,
 				1EA866962D6FF13400B44BDE /* BlindHomeViewController.swift in Sources */,
+				1ED0D88F2DBDB49500C461AC /* HelperService.swift in Sources */,
 				1EA8669E2D7004D700B44BDE /* APIEndpoints.swift in Sources */,
 				1E2FC4C52D8BA1AA006A0683 /* FriendListCell.swift in Sources */,
 				1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */,
 				1E257E1C2D7D63BC00397A33 /* ProfileEditViewController.swift in Sources */,
 				1EA866A22D70204D00B44BDE /* Models.swift in Sources */,
+				1E5DED2A2DA17ABE0073160D /* FriendService.swift in Sources */,
 				1EFA96482D6D63DB00139613 /* ConfirmPasswordViewController.swift in Sources */,
 				1E9BEAA42D7EBB2A00976BFF /* AuthManager.swift in Sources */,
 				1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */,
 				1EF7E5712D756CFD00B3151E /* GoogleAuthService.swift in Sources */,
 				1E257E342D7D6AAD00397A33 /* UserManager.swift in Sources */,
+				1ED0D8912DBDDC4200C461AC /* UserService.swift in Sources */,
 				1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */,
 				1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */,
 				1EFA95DA2D6D17DA00139613 /* ResetPasswordViewController.swift in Sources */,
 				1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */,
 				1EFA95D82D6D12CE00139613 /* AuthService.swift in Sources */,
 				1E2FC4BB2D8B4ABF006A0683 /* FriendRequestCell.swift in Sources */,
+				1ED0D88D2DBDB03000C461AC /* FriendRequest.swift in Sources */,
 				1E424B712D83F1930034CC49 /* MyPeopleViewController.swift in Sources */,
 				1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */,
 				1EA866A62D70295F00B44BDE /* LoginService.swift in Sources */,

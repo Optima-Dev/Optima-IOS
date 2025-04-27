@@ -1,36 +1,37 @@
+// MARK: - FriendListCell.swift
 import UIKit
 
 class FriendListCell: UITableViewCell {
-
+    
+    // MARK: - Outlets
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var addButton: UIButton!
-
-    var isAdded = false
-
+    @IBOutlet weak var statusButton: UIButton!
+    
+    // MARK: - Properties
+    var removeAction: (() -> Void)?
+    
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
-        if let button = addButton {
-            button.layer.cornerRadius = 10
-        } else {
-            print("❌ addButton is nil!")
-        }
-        
-      
-        self.backgroundColor = .clear
+        configureButton()
     }
-
-    func updateButtonState(isAdded: Bool) {
-        self.isAdded = isAdded
-        addButton.setTitle(isAdded ? "Added" : "Add", for: .normal)
-        addButton.backgroundColor = isAdded ? .blue : .clear
-        addButton.layer.borderColor = UIColor.blue.cgColor
-        addButton.layer.borderWidth = isAdded ? 0 : 1
+    
+    // MARK: - Configuration
+    private func configureButton() {
+        statusButton.layer.cornerRadius = 8
+        statusButton.layer.borderWidth = 1
+        statusButton.layer.borderColor = UIColor(hex: "#2727C4").cgColor
     }
-
-    @IBAction func addButtonTapped(_ sender: UIButton) {
-        isAdded.toggle()
-        updateButtonState(isAdded: isAdded)
+    
+    func configure(with friend: Friend) {
+        nameLabel.text = "\(friend.firstName) \(friend.lastName)"
+        statusButton.setTitle("Added", for: .normal)
+        statusButton.backgroundColor = .clear
+        statusButton.setTitleColor(UIColor(hex: "#2727C4"), for: .normal)
+    }
+    
+    // MARK: - Button Action
+    @IBAction func removeTapped(_ sender: UIButton) {
+        removeAction?()
     }
 }

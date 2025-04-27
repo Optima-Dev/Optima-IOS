@@ -4,122 +4,142 @@ class MyPeopleViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editView: UIView!
-    @IBOutlet weak var addNewMemberButton: UIButton!
-    @IBOutlet weak var editFirstNameTextField: UITextField!
-    @IBOutlet weak var editLastNameTextField: UITextField!
-    @IBOutlet weak var editEmailTextField: UITextField!
-
+    @IBOutlet weak var editFirstNameField: UITextField!
+    @IBOutlet weak var editLastNameField: UITextField!
+    @IBOutlet weak var removeButton: UIButton!
+    
     var friends: [Friend] = []
-
+    var selectedFriend: Friend?
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        fetchFriendsList()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        adjustTableViewFrame()
-    }
-
-    private func setupUI() {
         setupTableView()
         setupEditView()
         setupBackground()
-        setupGestures()
+        setupKeyboardDismiss()
+        fetchFriends()
     }
-
-    private func adjustTableViewFrame() {
-        let buttonBottomY = addNewMemberButton.frame.maxY
-        tableView.frame = CGRect(
-            x: 0,
-            y: buttonBottomY + 10,
-            width: view.frame.width,
-            height: view.frame.height - buttonBottomY - 10
-        )
-    }
-
+    
+    // MARK: - Setup Methods
     private func setupTableView() {
-        tableView.backgroundColor = .clear
-        tableView.separatorColor = .clear
-        tableView.layer.masksToBounds = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isHidden = false
+        tableView.register(UINib(nibName: "FriendCell", bundle: nil), forCellReuseIdentifier: "FriendCell")
     }
-
+    
     private func setupEditView() {
         editView.isHidden = true
-        editView.layer.cornerRadius = 15
-        editView.layer.shadowColor = UIColor.black.cgColor
-        editView.layer.shadowOpacity = 0.2
-        editView.layer.shadowOffset = CGSize(width: 0, height: 5)
-        editView.layer.shadowRadius = 10
+        editView.layer.cornerRadius = 16
+        editView.layer.shadowOpacity = 0.1
+        removeButton.tintColor = .systemRed
     }
-
+    
     private func setupBackground() {
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        let backgroundImage = UIImageView(frame: view.bounds)
         backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
     }
-
-    private func setupGestures() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideEditView))
+    
+    private func setupKeyboardDismiss() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
-
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-        editView.addGestureRecognizer(panGesture)
     }
-
-    // MARK: - API Call
-    func fetchFriendsList() {
-        APIManager.shared.fetchFriends { [weak self] result in
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // MARK: - Data Operations
+    private func fetchFriends() {
+        FriendService.shared.fetchFriends { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let friends):
-                    self?.updateFriendsList(with: friends)
-                case .failure:
-                    self?.loadMockData()
+                    self?.friends = friends
+                    self?.tableView.reloadData()
+                case .failure(let error):
+                    self?.showAlert(message: error.localizedDescription)
                 }
             }
         }
     }
-
-    private func updateFriendsList(with friends: [Friend]) {
-        self.friends = friends
-        if friends.isEmpty {
-            tableView.setEmptyMessage("No friends found.")
-        } else {
-            tableView.restore()
+    
+    // MARK: - Actions
+    @IBAction func saveChangesTapped(_ sender: UIButton) {
+        guard let friend = selectedFriend,
+              let firstName = editFirstNameField.text?.trimmingCharacters(in: .whitespaces),
+              let lastName = editLastNameField.text?.trimmingCharacters(in: .whitespaces),
+              !firstName.isEmpty, !lastName.isEmpty else {
+            showAlert(message: "Please enter valid names")
+            return
         }
-        tableView.reloadData()
+        
+        FriendService.shared.updateFriend(
+            friendId: friend.id,
+            firstName: firstName,
+            lastName: lastName
+        ) { [weak self] _ in
+            self?.fetchFriends()
+            self?.editView.isHidden = true
+        }
     }
-
-    private func loadMockData() {
-        friends = [
-            Friend(id: "1", firstName: "John", lastName: "Doe", email: "john.doe@example.com"),
-            Friend(id: "2", firstName: "Jane", lastName: "Smith", email: "jane.smith@example.com")
-        ]
-        tableView.restore()
-        tableView.reloadData()
+    
+    @IBAction func removeFriendTapped(_ sender: UIButton) {
+        guard let friend = selectedFriend else { return }
+        confirmDelete(friend: friend)
+    }
+    
+    // MARK: - Helper Methods
+    private func confirmDelete(friend: Friend) {
+        let alert = UIAlertController(
+            title: "Remove Friend",
+            message: "Are you sure you want to remove \(friend.firstName)?",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Remove", style: .destructive) { [weak self] _ in
+            self?.deleteFriend(friend.id)
+        })
+        
+        present(alert, animated: true)
+    }
+    
+    private func deleteFriend(_ id: String) {
+        FriendService.shared.removeFriend(friendId: id) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.fetchFriends()
+                    self?.editView.isHidden = true
+                case .failure(let error):
+                    self?.showAlert(message: error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }
 
-// MARK: - UITableView Methods
+// MARK: - TableView Delegates
 extension MyPeopleViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as? FriendCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell") as? FriendCell else {
             return UITableViewCell()
         }
-        let friend = friends[indexPath.row]
-        cell.configure(with: friend)
+        cell.configure(with: friends[indexPath.row])
         cell.delegate = self
         return cell
     }
@@ -128,47 +148,9 @@ extension MyPeopleViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - FriendCell Delegate
 extension MyPeopleViewController: FriendCellDelegate {
     func didTapEditButton(for friend: Friend) {
-        editFirstNameTextField.text = friend.firstName
-        editLastNameTextField.text = friend.lastName
-        editEmailTextField.text = friend.email
+        selectedFriend = friend
+        editFirstNameField.text = friend.firstName
+        editLastNameField.text = friend.lastName
         editView.isHidden = false
-    }
-}
-
-// MARK: - Edit View Handling
-extension MyPeopleViewController {
-    
-    @objc private func hideEditView(_ sender: UITapGestureRecognizer) {
-        let touchLocation = sender.location(in: view)
-        if !editView.frame.contains(touchLocation) {
-            editView.isHidden = true
-        }
-    }
-
-    @objc private func handlePanGesture(_ sender: UIPanGestureRecognizer) {
-        let translation = sender.translation(in: editView)
-        if translation.y > 100 {
-            editView.isHidden = true
-        }
-    }
-}
-
-// MARK: - UITableView Extension
-extension UITableView {
-    func setEmptyMessage(_ message: String) {
-        let messageLabel = UILabel()
-        messageLabel.text = message
-        messageLabel.textColor = .gray
-        messageLabel.textAlignment = .center
-        messageLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        messageLabel.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height)
-
-        self.backgroundView = messageLabel
-        self.separatorStyle = .none
-    }
-
-    func restore() {
-        self.backgroundView = nil
-        self.separatorStyle = .singleLine
     }
 }

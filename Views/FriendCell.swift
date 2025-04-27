@@ -5,57 +5,42 @@ protocol FriendCellDelegate: AnyObject {
 }
 
 class FriendCell: UITableViewCell {
-    @IBOutlet weak var firstLetterLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var initialsBadge: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var cellView: UIView!
-
+    
     weak var delegate: FriendCellDelegate?
-    private var friend: Friend?
-
+    private var currentFriend: Friend?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupUI()
+    }
+    
     func configure(with friend: Friend) {
-        self.friend = friend
-
-        firstLetterLabel.text = String(friend.firstName.prefix(1)).uppercased()
+        currentFriend = friend
         nameLabel.text = "\(friend.firstName) \(friend.lastName)"
-
-        setupFirstLetterLabel()
-        setupCellView()
+        initialsBadge.text = String(friend.firstName.prefix(1)).uppercased()
     }
-
-    private func setupFirstLetterLabel() {
-        firstLetterLabel.layer.cornerRadius = 8
-        firstLetterLabel.layer.masksToBounds = true
-        firstLetterLabel.textColor = .white
-        firstLetterLabel.textAlignment = .center
-        firstLetterLabel.font = UIFont.boldSystemFont(ofSize: 18)
+    
+    private func setupUI() {
+        containerView.layer.cornerRadius = 12
+        containerView.layer.borderWidth = 1.5
+        containerView.layer.borderColor = UIColor(hex: "#2727C4").cgColor
+        
+        initialsBadge.layer.cornerRadius = 20
+        initialsBadge.clipsToBounds = true
+        initialsBadge.backgroundColor = UIColor(hex: "#2727C4")
+        initialsBadge.textColor = .white
+        initialsBadge.font = .boldSystemFont(ofSize: 18)
+        
+        editButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        editButton.tintColor = UIColor(hex: "#2727C4")
     }
-
-    private func setupCellView() {
-        cellView.layer.borderColor = UIColor(hex: "#2727C4").cgColor
-        cellView.layer.borderWidth = 1
-        cellView.layer.cornerRadius = 8
-    }
-
+    
     @IBAction func editButtonTapped(_ sender: UIButton) {
-        if let friend = friend {
-            delegate?.didTapEditButton(for: friend)
-        }
-    }
-}
-
-extension UIColor {
-    convenience init(hexCode: String, alpha: CGFloat = 1.0) {
-        var hexSanitized = hexCode.trimmingCharacters(in: .whitespacesAndNewlines)
-        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
-
-        var rgb: UInt64 = 0
-        Scanner(string: hexSanitized).scanHexInt64(&rgb)
-
-        let r = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
-        let g = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
-        let b = CGFloat(rgb & 0x0000FF) / 255.0
-
-        self.init(red: r, green: g, blue: b, alpha: alpha)
+        guard let friend = currentFriend else { return }
+        delegate?.didTapEditButton(for: friend)
     }
 }

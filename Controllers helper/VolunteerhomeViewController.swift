@@ -2,75 +2,125 @@ import UIKit
 
 class VolunteerHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    // MARK: - Outlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var tableView: UITableView!
-
-    var friends: [Friend] = [
-        Friend(id: "1", firstName: "Anwar", lastName: "Jacobi", email: "anwar@example.com", isAdded: true),
-        Friend(id: "2", firstName: "Sabrina", lastName: "Donnelly", email: "sabrina@example.com", isAdded: false),
-        Friend(id: "3", firstName: "Ayman", lastName: "Salah", email: "ayman@example.com", isAdded: true),
-        Friend(id: "4", firstName: "Nour", lastName: "Hassan", email: "nour@example.com", isAdded: false)
-    ]
-
+    @IBOutlet weak var waitingCountLabel: UILabel!
+    
+    // MARK: - Properties
+    var friends: [Friend] = []
+    private let refreshControl = UIRefreshControl()
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // ✅ Set tableView delegate and dataSource
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        // ✅ Hide tableView separators to match the design
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
-        
-        // ✅ Set background image
+        setupBackground()
+        configureTableView()
+        loadData()
+    }
+    // MARK: - background Setup
+    private func setupBackground() {
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
+    }
+    // MARK: - Table Configuration
+    private func configureTableView() {
+        tableView.register(UINib(nibName: "FriendListCell", bundle: nil), forCellReuseIdentifier: "FriendListCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.rowHeight = 80
         
-        // ✅ Reload tableView and update contentView height after loading data
-        tableView.reloadData()
-        updateContentViewHeight()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        updateContentViewHeight()
+    // MARK: - Data Loading
+    @objc private func refreshData() {
+        loadData()
     }
-
-    // ✅ Dynamically adjust contentView height based on tableView content size
-    func updateContentViewHeight() {
-        contentView.frame.size.height = tableView.contentSize.height + 40 // Extra padding for spacing
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentView.frame.height)
+    
+    private func loadData() {
+        let group = DispatchGroup()
+        
+        // Load friends
+        group.enter()
+        FriendService.shared.fetchFriends { [weak self] (result: Result<[Friend], AuthError>) in
+            defer { group.leave() }
+            switch result {
+            case .success(let friends):
+                self?.friends = friends.sorted { $0.firstName < $1.firstName }
+            case .failure(let error):
+                print("Error loading friends: \(error.localizedDescription)")
+            }
+        }
+        
+        // Load waiting count (optional)
+        group.enter()
+        HelperService.shared.getWaitingCount { [weak self] (result: Result<Int, NetworkError>) in
+            defer { group.leave() }
+            if case .success(let count) = result {
+                self?.waitingCountLabel.text = "\(count)"
+            }
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.refreshControl.endRefreshing()
+            self?.tableView.reloadData()
+            self?.updateContentViewHeight()
+        }
     }
-
-    // ✅ Return the number of rows in tableView
+    
+    // MARK: - Layout Updates
+    private func updateContentViewHeight() {
+        let tableViewHeight = tableView.contentSize.height
+        contentView.frame.size.height = tableViewHeight + 100 // Add padding
+        scrollView.contentSize = contentView.frame.size
+    }
+    
+    // MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends.count
     }
-
-    // ✅ Configure tableView cell
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendListCell") as? FriendListCell else {
-            fatalError("Error: Could not dequeue FriendListCell")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendListCell", for: indexPath) as? FriendListCell else {
+            fatalError("Could not dequeue FriendListCell")
         }
         
         let friend = friends[indexPath.row]
-        cell.nameLabel.text = "\(friend.firstName) \(friend.lastName)"
-        cell.updateButtonState(isAdded: friend.isAdded ?? false)
-
+        cell.configure(with: friend)
+        
+        cell.removeAction = { [weak self] in
+            self?.handleRemoveFriend(friendId: friend.id, indexPath: indexPath)
+        }
+        
         return cell
     }
-
-    // ✅ Set cell height
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80 // Adjust cell height as needed
+    
+    // MARK: - Friend Removal
+    private func handleRemoveFriend(friendId: String, indexPath: IndexPath) {
+        FriendService.shared.removeFriend(friendId: friendId) { [weak self] (result: Result<Void, AuthError>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.friends.remove(at: indexPath.row)
+                    self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    self?.updateContentViewHeight()
+                case .failure(let error):
+                    self?.showAlert(message: "Error removing friend: \(error.localizedDescription)")
+                }
+            }
+        }
     }
-
-    // ✅ Add spacing between tableView cells
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 20 // Space between cells
+    
+    // MARK: - Alert Helper
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }

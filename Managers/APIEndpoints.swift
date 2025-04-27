@@ -1,6 +1,6 @@
 struct APIEndpoints {
     static let baseURL = "https://optima-api.onrender.com/api"
-
+    
     // Authentication
     static let signup = "\(baseURL)/auth/signup"
     static let login = "\(baseURL)/auth/login"
@@ -19,4 +19,9 @@ struct APIEndpoints {
     static let addFriend = "\(baseURL)/friends/send"
     static let removeFriend = "\(baseURL)/friends/remove"
     static let editFriend = "\(baseURL)/friends/edit"
+    
+    // Friend Requests 
+    static let fetchFriendRequests = "\(baseURL)/friends/requests"
+    static let acceptFriendRequest = "\(baseURL)/friends/accept"
+    static let declineFriendRequest = "\(baseURL)/friends/reject"
 }
