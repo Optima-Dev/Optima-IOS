@@ -3,10 +3,10 @@ import Foundation
 class FriendService {
     static let shared = FriendService()
     
-    // MARK: - Existing Friend Management
+    // MARK: - Send Friend Request
     func sendFriendRequest(customFirstName: String, customLastName: String, helperEmail: String, completion: @escaping (Result<String, AuthError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
-            return completion(.failure(.failed("Unauthorized")))
+            return completion(.failure(.unauthorized))
         }
         
         let body: [String: Any] = [
@@ -25,34 +25,36 @@ class FriendService {
             case .success:
                 completion(.success("Request sent"))
             case .failure(let error):
-                completion(.failure(.failed(error.localizedDescription)))
+                completion(.failure(.networkError(error)))
             }
         }
     }
     
-    // MARK: - New Friend Request Handling
+    // MARK: - Fetch Friend Requests
     func fetchFriendRequests(completion: @escaping (Result<[FriendRequest], AuthError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
-            return completion(.failure(.failed("Unauthorized")))
+            return completion(.failure(.unauthorized))
         }
         
         APIManager.shared.performRequest(
             url: APIEndpoints.fetchFriendRequests,
             method: "GET",
             headers: ["Authorization": "Bearer \(token)"]
-        ) { (result: Result<[FriendRequest], NetworkError>) in
+        ) { (result: Result<[String: [FriendRequest]], NetworkError>) in
             switch result {
-            case .success(let requests):
+            case .success(let response):
+                let requests = response["friendRequests"] ?? []
                 completion(.success(requests))
             case .failure(let error):
-                completion(.failure(.failed(error.localizedDescription)))
+                completion(.failure(.networkError(error)))
             }
         }
     }
     
+    // MARK: - Accept Friend Request
     func acceptFriendRequest(requestId: String, completion: @escaping (Result<String, AuthError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
-            return completion(.failure(.failed("Unauthorized")))
+            return completion(.failure(.unauthorized))
         }
         
         APIManager.shared.performRequest(
@@ -65,14 +67,15 @@ class FriendService {
             case .success:
                 completion(.success("Request accepted"))
             case .failure(let error):
-                completion(.failure(.failed(error.localizedDescription)))
+                completion(.failure(.networkError(error)))
             }
         }
     }
     
+    // MARK: - Decline Friend Request
     func declineFriendRequest(requestId: String, completion: @escaping (Result<String, AuthError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
-            return completion(.failure(.failed("Unauthorized")))
+            return completion(.failure(.unauthorized))
         }
         
         APIManager.shared.performRequest(
@@ -85,34 +88,35 @@ class FriendService {
             case .success:
                 completion(.success("Request declined"))
             case .failure(let error):
-                completion(.failure(.failed(error.localizedDescription)))
+                completion(.failure(.networkError(error)))
             }
         }
     }
     
-    // MARK: - Added Missing Functions
+    // MARK: - Fetch Friends
     func fetchFriends(completion: @escaping (Result<[Friend], AuthError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
-            return completion(.failure(.failed("Unauthorized")))
+            return completion(.failure(.unauthorized))
         }
         
         APIManager.shared.performRequest(
             url: APIEndpoints.fetchFriends,
             method: "GET",
             headers: ["Authorization": "Bearer \(token)"]
-        ) { (result: Result<[Friend], NetworkError>) in
+        ) { (result: Result<FriendsResponse, NetworkError>) in
             switch result {
-            case .success(let friends):
-                completion(.success(friends))
+            case .success(let response):
+                completion(.success(response.friends)) // استخراج المصفوفة
             case .failure(let error):
-                completion(.failure(.failed(error.localizedDescription)))
+                completion(.failure(.networkError(error)))
             }
         }
     }
     
+    // MARK: - Remove Friend
     func removeFriend(friendId: String, completion: @escaping (Result<Void, AuthError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
-            return completion(.failure(.failed("Unauthorized")))
+            return completion(.failure(.unauthorized))
         }
         
         APIManager.shared.performRequest(
@@ -125,14 +129,15 @@ class FriendService {
             case .success:
                 completion(.success(()))
             case .failure(let error):
-                completion(.failure(.failed(error.localizedDescription)))
+                completion(.failure(.networkError(error)))
             }
         }
     }
-
+    
+    // MARK: - Update Friend
     func updateFriend(friendId: String, firstName: String, lastName: String, completion: @escaping (Result<Void, AuthError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
-            return completion(.failure(.failed("Unauthorized")))
+            return completion(.failure(.unauthorized))
         }
         
         let parameters: [String: Any] = [
@@ -151,7 +156,7 @@ class FriendService {
             case .success:
                 completion(.success(()))
             case .failure(let error):
-                completion(.failure(.failed(error.localizedDescription)))
+                completion(.failure(.networkError(error)))
             }
         }
     }

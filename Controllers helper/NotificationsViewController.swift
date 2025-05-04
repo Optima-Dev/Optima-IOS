@@ -1,39 +1,33 @@
 import UIKit
 
 class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
-    
-    // MARK: - Properties
     private var friendRequests: [FriendRequest] = []
     private let refreshControl = UIRefreshControl()
     
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
         setupTableView()
         loadFriendRequests()
     }
-    // MARK: - background Setup
+    
     private func setupBackground() {
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
     }
-    // MARK: - TableView Setup
+    
     private func setupTableView() {
-        tableView.register(UINib(nibName: "FriendRequestCell", bundle: nil), forCellReuseIdentifier: "FriendRequestCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 100
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         tableView.refreshControl = refreshControl
+        tableView.separatorStyle = .none // لإخفاء الفاصل بين الـ cells
     }
     
-    // MARK: - Data Loading
     @objc private func refreshData() {
         loadFriendRequests()
     }
@@ -53,7 +47,6 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    // MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friendRequests.count
     }
@@ -61,6 +54,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRequestCell", for: indexPath) as! FriendRequestCell
         let request = friendRequests[indexPath.row]
+        
+        print(request) // طباعة بيانات الطلب
+        
         cell.configure(with: request)
         
         cell.acceptAction = { [weak self] in
@@ -74,7 +70,12 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         return cell
     }
     
-    // MARK: - Request Handling
+    // المسافات الجانبية بين الـ cell وحدود الجدول
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let inset: CGFloat = 20
+        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset))
+    }
+    
     private func handleAcceptRequest(requestId: String) {
         FriendService.shared.acceptFriendRequest(requestId: requestId) { [weak self] result in
             DispatchQueue.main.async {
@@ -101,7 +102,6 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    // MARK: - Alert Helper
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Notice", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))

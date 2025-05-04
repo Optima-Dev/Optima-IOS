@@ -36,9 +36,9 @@
 		1EA866A22D70204D00B44BDE /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866A12D70204C00B44BDE /* Models.swift */; };
 		1EA866A42D7026EA00B44BDE /* VolunteerhomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */; };
 		1EA866A62D70295F00B44BDE /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866A52D70295F00B44BDE /* LoginService.swift */; };
-		1ED0D88D2DBDB03000C461AC /* FriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED0D88C2DBDB01500C461AC /* FriendRequest.swift */; };
 		1ED0D88F2DBDB49500C461AC /* HelperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED0D88E2DBDB48800C461AC /* HelperService.swift */; };
 		1ED0D8912DBDDC4200C461AC /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED0D8902DBDDC3500C461AC /* UserService.swift */; };
+		1EE028B02DC81966009C3A4B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE028AF2DC81966009C3A4B /* UIColor+Hex.swift */; };
 		1EEE64AE2D63D3A500C43761 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */; };
 		1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */; };
 		1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B72D64122B00C43761 /* OnboardingSecViewController.swift */; };
@@ -104,9 +104,9 @@
 		1EA866A12D70204C00B44BDE /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerhomeViewController.swift; sourceTree = "<group>"; };
 		1EA866A52D70295F00B44BDE /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
-		1ED0D88C2DBDB01500C461AC /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		1ED0D88E2DBDB48800C461AC /* HelperService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperService.swift; sourceTree = "<group>"; };
 		1ED0D8902DBDDC3500C461AC /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		1EE028AF2DC81966009C3A4B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstViewController.swift; sourceTree = "<group>"; };
 		1EEE64B72D64122B00C43761 /* OnboardingSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecViewController.swift; sourceTree = "<group>"; };
@@ -253,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				1E2FC4C22D8B8C19006A0683 /* UIColor+Extensions.swift */,
+				1EE028AF2DC81966009C3A4B /* UIColor+Hex.swift */,
 				1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */,
 				1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */,
 				1EFA96452D6D5DB200139613 /* WarningPopupView.swift */,
@@ -275,7 +276,6 @@
 			children = (
 				1ED0D8902DBDDC3500C461AC /* UserService.swift */,
 				1ED0D88E2DBDB48800C461AC /* HelperService.swift */,
-				1ED0D88C2DBDB01500C461AC /* FriendRequest.swift */,
 				1EFA95D72D6D12CE00139613 /* AuthService.swift */,
 				1EA8669F2D7012F800B44BDE /* APIManger.swift */,
 				1EA8669D2D7004D700B44BDE /* APIEndpoints.swift */,
@@ -471,6 +471,7 @@
 				1E5DED2A2DA17ABE0073160D /* FriendService.swift in Sources */,
 				1EFA96482D6D63DB00139613 /* ConfirmPasswordViewController.swift in Sources */,
 				1E9BEAA42D7EBB2A00976BFF /* AuthManager.swift in Sources */,
+				1EE028B02DC81966009C3A4B /* UIColor+Hex.swift in Sources */,
 				1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */,
 				1EF7E5712D756CFD00B3151E /* GoogleAuthService.swift in Sources */,
 				1E257E342D7D6AAD00397A33 /* UserManager.swift in Sources */,
@@ -481,7 +482,6 @@
 				1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */,
 				1EFA95D82D6D12CE00139613 /* AuthService.swift in Sources */,
 				1E2FC4BB2D8B4ABF006A0683 /* FriendRequestCell.swift in Sources */,
-				1ED0D88D2DBDB03000C461AC /* FriendRequest.swift in Sources */,
 				1E424B712D83F1930034CC49 /* MyPeopleViewController.swift in Sources */,
 				1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */,
 				1EA866A62D70295F00B44BDE /* LoginService.swift in Sources */,

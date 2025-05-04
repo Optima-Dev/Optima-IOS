@@ -1,4 +1,4 @@
-/*import UIKit
+import UIKit
 
 extension UIColor {
     convenience init(hex: String) {
@@ -15,4 +15,3 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: 1.0)
     }
 }
-*/

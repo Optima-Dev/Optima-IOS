@@ -1,4 +1,4 @@
-/*import Foundation
+import Foundation
 
 class UserService {
     static let shared = UserService()
@@ -22,4 +22,3 @@ class UserService {
         }
     }
 }
-*/

@@ -82,8 +82,27 @@ struct Friend: Codable {
 struct FriendsResponse: Codable {
     let friends: [Friend]
 }
+
+// MARK: - Friend Request Models
+struct FriendRequest: Codable {
+    let id: String
+    let seekerId: String
+    let firstName: String
+    let lastName: String
+    let email: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case seekerId
+        case firstName
+        case lastName
+        case email
+    }
+}
+
 // MARK: - Empty Response
 struct EmptyResponse: Decodable {}
+
 // MARK: - Error Handling
 enum NetworkError: Error {
     case invalidURL
@@ -94,5 +113,7 @@ enum NetworkError: Error {
 }
 
 enum AuthError: Error {
+    case unauthorized
+    case networkError(NetworkError)
     case failed(String)
 }
