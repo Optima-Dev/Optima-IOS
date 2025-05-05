@@ -14,7 +14,6 @@
 		1E257E362D7D70A000397A33 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */; };
 		1E2FC4BB2D8B4ABF006A0683 /* FriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4BA2D8B4ABF006A0683 /* FriendRequestCell.swift */; };
 		1E2FC4BF2D8B4CB5006A0683 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4BE2D8B4CB5006A0683 /* NotificationsViewController.swift */; };
-		1E2FC4C32D8B8C32006A0683 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4C22D8B8C19006A0683 /* UIColor+Extensions.swift */; };
 		1E2FC4C52D8BA1AA006A0683 /* FriendListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4C42D8BA1AA006A0683 /* FriendListCell.swift */; };
 		1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */; };
 		1E424B6D2D83BE4F0034CC49 /* PickUpCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424B6C2D83BE4F0034CC49 /* PickUpCallViewController.swift */; };
@@ -45,6 +44,7 @@
 		1EEE64BA2D64123C00C43761 /* OnboardingThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B92D64123C00C43761 /* OnboardingThirdViewController.swift */; };
 		1EEE64BC2D6420BB00C43761 /* ChooseRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64BB2D6420BB00C43761 /* ChooseRoleViewController.swift */; };
 		1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */; };
+		1EF359242DC96DBB004FF411 /* FriendWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF359232DC96DAC004FF411 /* FriendWrapper.swift */; };
 		1EF7E56F2D75675100B3151E /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 1EF7E56E2D75675100B3151E /* GoogleSignIn */; };
 		1EF7E5712D756CFD00B3151E /* GoogleAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF7E5702D756CFD00B3151E /* GoogleAuthService.swift */; };
 		1EFA95D82D6D12CE00139613 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFA95D72D6D12CE00139613 /* AuthService.swift */; };
@@ -79,7 +79,6 @@
 		1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		1E2FC4BA2D8B4ABF006A0683 /* FriendRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestCell.swift; sourceTree = "<group>"; };
 		1E2FC4BE2D8B4CB5006A0683 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
-		1E2FC4C22D8B8C19006A0683 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		1E2FC4C42D8BA1AA006A0683 /* FriendListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListCell.swift; sourceTree = "<group>"; };
 		1E39D73A2D66B2F9004C9089 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		1E424B6C2D83BE4F0034CC49 /* PickUpCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpCallViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +112,7 @@
 		1EEE64B92D64123C00C43761 /* OnboardingThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdViewController.swift; sourceTree = "<group>"; };
 		1EEE64BB2D6420BB00C43761 /* ChooseRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoleViewController.swift; sourceTree = "<group>"; };
 		1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Style.swift"; sourceTree = "<group>"; };
+		1EF359232DC96DAC004FF411 /* FriendWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendWrapper.swift; sourceTree = "<group>"; };
 		1EF7E5702D756CFD00B3151E /* GoogleAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthService.swift; sourceTree = "<group>"; };
 		1EFA95D72D6D12CE00139613 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1EFA95D92D6D17DA00139613 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
@@ -252,7 +252,6 @@
 		1EEE64A42D63D2B800C43761 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1E2FC4C22D8B8C19006A0683 /* UIColor+Extensions.swift */,
 				1EE028AF2DC81966009C3A4B /* UIColor+Hex.swift */,
 				1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */,
 				1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */,
@@ -274,6 +273,7 @@
 		1EEE64A62D63D2D000C43761 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				1EF359232DC96DAC004FF411 /* FriendWrapper.swift */,
 				1ED0D8902DBDDC3500C461AC /* UserService.swift */,
 				1ED0D88E2DBDB48800C461AC /* HelperService.swift */,
 				1EFA95D72D6D12CE00139613 /* AuthService.swift */,
@@ -481,13 +481,13 @@
 				1EFA95DA2D6D17DA00139613 /* ResetPasswordViewController.swift in Sources */,
 				1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */,
 				1EFA95D82D6D12CE00139613 /* AuthService.swift in Sources */,
+				1EF359242DC96DBB004FF411 /* FriendWrapper.swift in Sources */,
 				1E2FC4BB2D8B4ABF006A0683 /* FriendRequestCell.swift in Sources */,
 				1E424B712D83F1930034CC49 /* MyPeopleViewController.swift in Sources */,
 				1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */,
 				1EA866A62D70295F00B44BDE /* LoginService.swift in Sources */,
 				1E9BEAA22D7EBB0500976BFF /* KeychainWrapper.swift in Sources */,
 				1E424B6D2D83BE4F0034CC49 /* PickUpCallViewController.swift in Sources */,
-				1E2FC4C32D8B8C32006A0683 /* UIColor+Extensions.swift in Sources */,
 				1E74D3992D71E5B500F3978E /* ResetPasswordService.swift in Sources */,
 				1EA8669A2D6FF66100B44BDE /* AccountSettingViewController.swift in Sources */,
 			);

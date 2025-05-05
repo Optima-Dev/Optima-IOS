@@ -1,36 +1,42 @@
-// MARK: - FriendListCell.swift
 import UIKit
 
 class FriendListCell: UITableViewCell {
-    
-    // MARK: - Outlets
+
+    @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusButton: UIButton!
-    
-    // MARK: - Properties
+
     var removeAction: (() -> Void)?
-    
-    // MARK: - Lifecycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        configureButton()
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        setupAvatar()
+        setupButtonAppearance()
     }
-    
-    // MARK: - Configuration
-    private func configureButton() {
-        statusButton.layer.cornerRadius = 8
-        statusButton.layer.borderWidth = 1
-        statusButton.layer.borderColor = UIColor(hex: "#2727C4").cgColor
+
+    private func setupAvatar() {
+        avatarImageView.image = UIImage(named: "friend")
+        avatarImageView.contentMode = .scaleAspectFill
     }
-    
+
+    private func setupButtonAppearance() {
+        statusButton.layer.cornerRadius = 12
+        statusButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        statusButton.setTitleColor(.white, for: .normal)
+        statusButton.backgroundColor = UIColor(hex: "#2727C4")
+        statusButton.layer.borderWidth = 0
+    }
+
     func configure(with friend: Friend) {
         nameLabel.text = "\(friend.firstName) \(friend.lastName)"
         statusButton.setTitle("Added", for: .normal)
-        statusButton.backgroundColor = .clear
-        statusButton.setTitleColor(UIColor(hex: "#2727C4"), for: .normal)
+        statusButton.backgroundColor = UIColor(hex: "#2727C4")
+        statusButton.setTitleColor(.white, for: .normal)
+        statusButton.layer.borderWidth = 0
     }
-    
-    // MARK: - Button Action
+
     @IBAction func removeTapped(_ sender: UIButton) {
         removeAction?()
     }
