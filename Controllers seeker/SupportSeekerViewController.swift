@@ -1,35 +1,22 @@
-//
-//  SupportSeekerViewController.swift
-//  Optima
-//
-//  Created by Ghada Abdelrahman on 28/02/2025.
-//
-
 import UIKit
 
 class SupportSeekerViewController: UIViewController {
 
+    @IBOutlet weak var myPeople: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //set background
+        // Background setup
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
-        
-        //make background at layer 0
         view.insertSubview(backgroundImage, at: 0)
+        
+        // Apply border and corner
+        myPeople.layer.borderWidth = 3 
+        myPeople.layer.borderColor = UIColor(hex: "#2727C4").cgColor
+        myPeople.layer.cornerRadius = 22
+        myPeople.clipsToBounds = true
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
