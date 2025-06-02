@@ -25,7 +25,10 @@ class MyPeopleViewController: UIViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "FriendCell", bundle: nil), forCellReuseIdentifier: "FriendCell")
+        
+        //  Fix cell size 
+        tableView.rowHeight = 65
+        tableView.estimatedRowHeight = 65
     }
     
     private func setupEditView() {

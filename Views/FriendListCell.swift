@@ -23,7 +23,7 @@ class FriendListCell: UITableViewCell {
 
     private func setupButtonAppearance() {
         statusButton.layer.cornerRadius = 12
-        statusButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        statusButton.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         statusButton.setTitleColor(.white, for: .normal)
         statusButton.backgroundColor = UIColor(hex: "#2727C4")
         statusButton.layer.borderWidth = 0
