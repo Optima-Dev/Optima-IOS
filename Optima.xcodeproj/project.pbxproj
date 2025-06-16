@@ -27,6 +27,7 @@
 		1E80C6762DED154F00BDF766 /* OverlayMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E80C6752DED154F00BDF766 /* OverlayMaskView.swift */; };
 		1E8BA2F62D7FC7D4001EC87C /* HelperSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */; };
 		1E8E7C972D6694F900400B02 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E7C962D6694F900400B02 /* SignupViewController.swift */; };
+		1E96FF5C2DFF93AC00F170EC /* VisionGeminiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96FF5B2DFF93AC00F170EC /* VisionGeminiService.swift */; };
 		1E9BEAA22D7EBB0500976BFF /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BEAA12D7EBB0400976BFF /* KeychainWrapper.swift */; };
 		1E9BEAA42D7EBB2A00976BFF /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BEAA32D7EBB2A00976BFF /* AuthManager.swift */; };
 		1EA866962D6FF13400B44BDE /* BlindHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */; };
@@ -97,6 +98,7 @@
 		1E80C6752DED154F00BDF766 /* OverlayMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayMaskView.swift; sourceTree = "<group>"; };
 		1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperSettingViewController.swift; sourceTree = "<group>"; };
 		1E8E7C962D6694F900400B02 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		1E96FF5B2DFF93AC00F170EC /* VisionGeminiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionGeminiService.swift; sourceTree = "<group>"; };
 		1E9BEAA12D7EBB0400976BFF /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		1E9BEAA32D7EBB2A00976BFF /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindHomeViewController.swift; sourceTree = "<group>"; };
@@ -216,7 +218,6 @@
 				1EEE64A62D63D2D000C43761 /* Managers */,
 				1EEE64A52D63D2C400C43761 /* Models */,
 				1EEE64A42D63D2B800C43761 /* Views */,
-				1E4351402D62AB60008872C8 /* OptimaTests */,
 				1E4351292D62AB5E008872C8 /* Optima */,
 				1E43514A2D62AB60008872C8 /* OptimaUITests */,
 				1E4351282D62AB5E008872C8 /* Products */,
@@ -288,10 +289,12 @@
 				1EA866A12D70204C00B44BDE /* Models.swift */,
 				1EA866A52D70295F00B44BDE /* LoginService.swift */,
 				1E74D3982D71E5B500F3978E /* ResetPasswordService.swift */,
+				1E4351402D62AB60008872C8 /* OptimaTests */,
 				1EF7E5702D756CFD00B3151E /* GoogleAuthService.swift */,
 				1E257E332D7D6AAD00397A33 /* UserManager.swift */,
 				1E9BEAA32D7EBB2A00976BFF /* AuthManager.swift */,
 				1E5DED292DA17ABE0073160D /* FriendService.swift */,
+				1E96FF5B2DFF93AC00F170EC /* VisionGeminiService.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				1EFA95DA2D6D17DA00139613 /* ResetPasswordViewController.swift in Sources */,
 				1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */,
 				1EFA95D82D6D12CE00139613 /* AuthService.swift in Sources */,
+				1E96FF5C2DFF93AC00F170EC /* VisionGeminiService.swift in Sources */,
 				1EF359242DC96DBB004FF411 /* FriendWrapper.swift in Sources */,
 				1E2FC4BB2D8B4ABF006A0683 /* FriendRequestCell.swift in Sources */,
 				1E80C6762DED154F00BDF766 /* OverlayMaskView.swift in Sources */,
