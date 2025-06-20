@@ -12,6 +12,7 @@
 		1E257E1C2D7D63BC00397A33 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */; };
 		1E257E342D7D6AAD00397A33 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E332D7D6AAD00397A33 /* UserManager.swift */; };
 		1E257E362D7D70A000397A33 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */; };
+		1E2BE7032E061C87009E566A /* SeekerVideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */; };
 		1E2FC4BB2D8B4ABF006A0683 /* FriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4BA2D8B4ABF006A0683 /* FriendRequestCell.swift */; };
 		1E2FC4BF2D8B4CB5006A0683 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4BE2D8B4CB5006A0683 /* NotificationsViewController.swift */; };
 		1E2FC4C52D8BA1AA006A0683 /* FriendListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4C42D8BA1AA006A0683 /* FriendListCell.swift */; };
@@ -80,6 +81,7 @@
 		1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		1E257E332D7D6AAD00397A33 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekerVideoCallViewController.swift; sourceTree = "<group>"; };
 		1E2FC4BA2D8B4ABF006A0683 /* FriendRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestCell.swift; sourceTree = "<group>"; };
 		1E2FC4BE2D8B4CB5006A0683 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		1E2FC4C42D8BA1AA006A0683 /* FriendListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListCell.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				1E424B702D83F1930034CC49 /* MyPeopleViewController.swift */,
 				1E424B722D83F1B00034CC49 /* AddMemberViewController.swift */,
 				1E80C6702DED0AA200BDF766 /* MyVisionViewController.swift */,
+				1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */,
 			);
 			path = "Controllers seeker";
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				1E424B6D2D83BE4F0034CC49 /* PickUpCallViewController.swift in Sources */,
 				1E74D3992D71E5B500F3978E /* ResetPasswordService.swift in Sources */,
 				1EA8669A2D6FF66100B44BDE /* AccountSettingViewController.swift in Sources */,
+				1E2BE7032E061C87009E566A /* SeekerVideoCallViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
