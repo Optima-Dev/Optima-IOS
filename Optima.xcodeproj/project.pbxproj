@@ -13,6 +13,7 @@
 		1E257E342D7D6AAD00397A33 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E332D7D6AAD00397A33 /* UserManager.swift */; };
 		1E257E362D7D70A000397A33 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */; };
 		1E2BE7032E061C87009E566A /* SeekerVideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */; };
+		1E2BE7072E0624E1009E566A /* TwilioVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 1E2BE7062E0624E1009E566A /* TwilioVideo */; };
 		1E2FC4BB2D8B4ABF006A0683 /* FriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4BA2D8B4ABF006A0683 /* FriendRequestCell.swift */; };
 		1E2FC4BF2D8B4CB5006A0683 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4BE2D8B4CB5006A0683 /* NotificationsViewController.swift */; };
 		1E2FC4C52D8BA1AA006A0683 /* FriendListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FC4C42D8BA1AA006A0683 /* FriendListCell.swift */; };
@@ -140,6 +141,16 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		1E2BE7092E062592009E566A /* VideoCall */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = VideoCall;
+			sourceTree = "<group>";
+		};
+		1E2BE7102E062C51009E566A /* New Folder */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "New Folder";
+			sourceTree = "<group>";
+		};
 		1E4351292D62AB5E008872C8 /* Optima */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -165,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E2BE7072E0624E1009E566A /* TwilioVideo in Frameworks */,
 				1EF7E56F2D75675100B3151E /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +198,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E2BE7052E0624E1009E566A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1E2FC4BC2D8B4BAB006A0683 /* Controllers helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +242,8 @@
 				1EEE64A42D63D2B800C43761 /* Views */,
 				1E4351292D62AB5E008872C8 /* Optima */,
 				1E43514A2D62AB60008872C8 /* OptimaUITests */,
+				1E4351402D62AB60008872C8 /* OptimaTests */,
+				1E2BE7052E0624E1009E566A /* Frameworks */,
 				1E4351282D62AB5E008872C8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -283,6 +304,8 @@
 		1EEE64A62D63D2D000C43761 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				1E2BE7102E062C51009E566A /* New Folder */,
+				1E2BE7092E062592009E566A /* VideoCall */,
 				1EF359232DC96DAC004FF411 /* FriendWrapper.swift */,
 				1ED0D8902DBDDC3500C461AC /* UserService.swift */,
 				1ED0D88E2DBDB48800C461AC /* HelperService.swift */,
@@ -292,7 +315,6 @@
 				1EA866A12D70204C00B44BDE /* Models.swift */,
 				1EA866A52D70295F00B44BDE /* LoginService.swift */,
 				1E74D3982D71E5B500F3978E /* ResetPasswordService.swift */,
-				1E4351402D62AB60008872C8 /* OptimaTests */,
 				1EF7E5702D756CFD00B3151E /* GoogleAuthService.swift */,
 				1E257E332D7D6AAD00397A33 /* UserManager.swift */,
 				1E9BEAA32D7EBB2A00976BFF /* AuthManager.swift */,
@@ -326,11 +348,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				1E2BE7092E062592009E566A /* VideoCall */,
+				1E2BE7102E062C51009E566A /* New Folder */,
 				1E4351292D62AB5E008872C8 /* Optima */,
 			);
 			name = Optima;
 			packageProductDependencies = (
 				1EF7E56E2D75675100B3151E /* GoogleSignIn */,
+				1E2BE7062E0624E1009E566A /* TwilioVideo */,
 			);
 			productName = Optima;
 			productReference = 1E4351272D62AB5E008872C8 /* Optima.app */;
@@ -416,6 +441,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1EF7E56D2D75675100B3151E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				1E2BE7042E062417009E566A /* XCRemoteSwiftPackageReference "twilio-video-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1E4351282D62AB5E008872C8 /* Products */;
@@ -830,6 +856,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1E2BE7042E062417009E566A /* XCRemoteSwiftPackageReference "twilio-video-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/twilio-video-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.0;
+			};
+		};
 		1EF7E56D2D75675100B3151E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
@@ -841,6 +875,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1E2BE7062E0624E1009E566A /* TwilioVideo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E2BE7042E062417009E566A /* XCRemoteSwiftPackageReference "twilio-video-ios" */;
+			productName = TwilioVideo;
+		};
 		1EF7E56E2D75675100B3151E /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1EF7E56D2D75675100B3151E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;

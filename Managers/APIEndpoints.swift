@@ -24,4 +24,10 @@ struct APIEndpoints {
     static let fetchFriendRequests = "\(baseURL)/friends/requests"
     static let acceptFriendRequest = "\(baseURL)/friends/accept"
     static let declineFriendRequest = "\(baseURL)/friends/reject"
+    
+    // Meetings
+    static let createMeeting = "\(baseURL)/meetings"
+    static let generateToken = "\(baseURL)/meetings/token"
+    static let endMeeting = "\(baseURL)/meetings/end"
+    static let getMeetingDetails = "\(baseURL)/meetings"
 }
