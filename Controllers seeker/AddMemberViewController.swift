@@ -1,4 +1,3 @@
-// AddMemberViewController.swift
 import UIKit
 
 class AddMemberViewController: UIViewController {
@@ -17,8 +16,9 @@ class AddMemberViewController: UIViewController {
     // MARK: - Setup Methods
     private func setupBackground() {
         let backgroundImage = UIImageView(frame: view.bounds)
-        backgroundImage.image = UIImage(named: "Background")
+        backgroundImage.image = UIImage(named: "MyPeople")
         backgroundImage.contentMode = .scaleAspectFill
+        backgroundImage.clipsToBounds = true
         view.insertSubview(backgroundImage, at: 0)
     }
     
@@ -32,6 +32,33 @@ class AddMemberViewController: UIViewController {
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
         emailTextField.delegate = self
+        
+        configureTextField(firstNameTextField, icon: "personIcon", placeholder: "First Name")
+        configureTextField(lastNameTextField, icon: "personIcon", placeholder: "Last Name")
+        configureTextField(emailTextField, icon: "mail", placeholder: "example@gmail.com")
+    }
+
+    private func configureTextField(_ textField: UITextField, icon: String, placeholder: String) {
+        let iconView = UIImageView(image: UIImage(named: icon))
+        iconView.contentMode = .scaleAspectFit
+        iconView.frame = CGRect(x: 12, y: 0, width: 24, height: 24)
+        
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 24))
+        containerView.addSubview(iconView)
+        
+        textField.leftView = containerView
+        textField.leftViewMode = .always
+        textField.layer.borderColor = UIColor(hex: "#2727C4").cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 20
+        textField.backgroundColor = UIColor(hex: "#F3F3F3").withAlphaComponent(0.8)
+        textField.attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: [
+                .foregroundColor: UIColor(red: 138/255, green: 138/255, blue: 138/255, alpha: 1),
+                .font: UIFont.systemFont(ofSize: 16)
+            ]
+        )
     }
     
     @objc private func dismissKeyboard() {

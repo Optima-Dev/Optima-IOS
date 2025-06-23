@@ -37,7 +37,6 @@ class VolunteerHomeViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     private func loadUserData() {
-        // تم استبدال UserService بـ UserManager لأن عنده decoding مضبوط
         UserManager.shared.fetchCurrentUser { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -124,8 +123,8 @@ class VolunteerHomeViewController: UIViewController, UITableViewDelegate, UITabl
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self?.friends[indexPath.row].isAdded = false
-                    self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    self?.friends.remove(at: indexPath.row)
+                    self?.tableView.deleteRows(at: [indexPath], with: .automatic)
                 case .failure(let error):
                     self?.showAlert(message: "Error removing friend: \(error.localizedDescription)")
                 }

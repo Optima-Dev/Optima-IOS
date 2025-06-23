@@ -3,9 +3,11 @@ import UIKit
 class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+
     private var friendRequests: [FriendRequest] = []
     private var acceptedRequestIds: Set<String> = []
     private var declinedRequestIds: Set<String> = []
+
     private let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
@@ -32,8 +34,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     @objc private func refreshData() {
-        acceptedRequestIds.removeAll()
-        declinedRequestIds.removeAll()
+        // Don't reset accepted/declined IDs to preserve state
         loadFriendRequests()
     }
 
@@ -41,15 +42,41 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         FriendService.shared.fetchFriendRequests { [weak self] result in
             DispatchQueue.main.async {
                 self?.refreshControl.endRefreshing()
+
                 switch result {
                 case .success(let requests):
                     self?.friendRequests = requests
+
+                    // Merge existing accepted/declined requests that no longer come from server
+                    for id in self?.acceptedRequestIds ?? [] {
+                        if !(self?.friendRequests.contains { $0.id == id } ?? false) {
+                            if let request = self?.createFakeRequest(for: id) {
+                                self?.friendRequests.append(request)
+                            }
+                        }
+                    }
+
+                    for id in self?.declinedRequestIds ?? [] {
+                        if !(self?.friendRequests.contains { $0.id == id } ?? false) {
+                            if let request = self?.createFakeRequest(for: id) {
+                                self?.friendRequests.append(request)
+                            }
+                        }
+                    }
+
                     self?.tableView.reloadData()
+
                 case .failure(let error):
                     self?.showAlert(message: "Error: \(error.localizedDescription)")
                 }
             }
         }
+    }
+
+    // This creates a dummy request if the server removes it (to keep showing its status)
+    private func createFakeRequest(for id: String) -> FriendRequest? {
+        // Dummy data (can be improved if needed)
+        return FriendRequest(id: id, seekerId: "local", firstName: "Saved", lastName: "Request", email: "local@dummy.com")
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -67,6 +94,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
 
         cell.acceptAction = { [weak self] in
             guard let self = self else { return }
+
             FriendService.shared.acceptFriendRequest(requestId: request.id) { result in
                 DispatchQueue.main.async {
                     switch result {
@@ -82,6 +110,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
 
         cell.declineAction = { [weak self] in
             guard let self = self else { return }
+
             FriendService.shared.declineFriendRequest(requestId: request.id) { result in
                 DispatchQueue.main.async {
                     switch result {

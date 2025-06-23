@@ -40,7 +40,7 @@ class AccountSettingViewController: UIViewController {
 
     private func setupEditButton() {
         editButton.layer.borderColor = UIColor(hex: "#2727C4").cgColor
-        editButton.layer.borderWidth = 2
+        editButton.layer.borderWidth = 4
         editButton.layer.cornerRadius = 20
     }
 

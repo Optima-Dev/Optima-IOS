@@ -210,9 +210,9 @@ class LoginViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if role == "helper" {
-            if let volunteerHomeVC = storyboard.instantiateViewController(withIdentifier: "VolunteerHomeViewController") as? VolunteerHomeViewController {
-                volunteerHomeVC.modalPresentationStyle = .fullScreen
-                self.present(volunteerHomeVC, animated: true)
+            if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "HelperTabBarController") as? UITabBarController {
+                tabBarVC.modalPresentationStyle = .fullScreen
+                self.present(tabBarVC, animated: true)
             }
         } else if role == "seeker" {
             if let blindHomeVC = storyboard.instantiateViewController(withIdentifier: "BlindHomeViewController") as? BlindHomeViewController {

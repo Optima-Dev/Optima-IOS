@@ -8,19 +8,29 @@ class FriendRequestCell: UITableViewCell {
 
     var acceptAction: (() -> Void)?
     var declineAction: (() -> Void)?
+    
+    // Flag to prevent repeated clicks
+    private var alreadyHandled = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         self.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
         self.layer.cornerRadius = 25
         self.layer.masksToBounds = true
-
         styleDeclineButton()
+
+        // Allow multiline message to appear properly
+        nameLabel.numberOfLines = 0
+        nameLabel.lineBreakMode = .byWordWrapping
     }
 
     func configure(with request: FriendRequest, isAccepted: Bool, isRejected: Bool) {
-        let fullName = "\(request.firstName) \(request.lastName)"
+        alreadyHandled = isAccepted || isRejected
+
+        //  Fix invalid/missing names fallback
+        let firstName = request.firstName.isEmpty ? "Unknown" : request.firstName
+        let lastName = request.lastName.isEmpty ? "" : request.lastName
+        let fullName = "\(firstName) \(lastName)"
         let message = " added you as a friend."
 
         let attributedText = NSMutableAttributedString(
@@ -62,7 +72,7 @@ class FriendRequestCell: UITableViewCell {
 
     private func showDefaultStyle() {
         acceptButton.setTitle("Accept", for: .normal)
-        acceptButton.backgroundColor = UIColor.systemGreen
+        acceptButton.backgroundColor = UIColor(hex: "#2727C4")
         acceptButton.setTitleColor(.white, for: .normal)
         acceptButton.isEnabled = true
         acceptButton.isHidden = false
@@ -82,10 +92,16 @@ class FriendRequestCell: UITableViewCell {
     }
 
     @IBAction func acceptTapped(_ sender: UIButton) {
+        guard !alreadyHandled else { return }
+        alreadyHandled = true
+        acceptButton.isEnabled = false
         acceptAction?()
     }
 
     @IBAction func declineTapped(_ sender: UIButton) {
+        guard !alreadyHandled else { return }
+        alreadyHandled = true
+        declineButton.isEnabled = false
         declineAction?()
     }
 }

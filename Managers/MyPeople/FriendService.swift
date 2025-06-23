@@ -60,7 +60,7 @@ class FriendService {
         APIManager.shared.performRequest(
             url: APIEndpoints.acceptFriendRequest,
             method: "POST",
-            body: ["requestId": requestId],
+            body: ["friendRequestId": requestId] ,
             headers: ["Authorization": "Bearer \(token)"]
         ) { (result: Result<EmptyResponse, NetworkError>) in
             switch result {
