@@ -36,3 +36,7 @@ struct TokenData: Codable {
     let roomName: String
     let identity: String
 }
+
+struct PendingRequestResponse: Codable {
+    let hasPending: Bool
+}

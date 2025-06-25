@@ -212,7 +212,7 @@ to reset your password. </string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="example@gmail.com" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="1BC-9C-9gL">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="example@gmail.com" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="1BC-9C-9gL">
                                 <rect key="frame" x="13" y="300" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="0.7985306291390728" colorSpace="calibratedRGB"/>
@@ -794,7 +794,7 @@ BACK, FRIEND!</string>
                                     <segue destination="dD2-dN-6mM" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="fSX-a7-of1"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="           ******" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="yoP-S8-uD8">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="           ******" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="yoP-S8-uD8">
                                 <rect key="frame" x="16" y="500" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
@@ -857,7 +857,7 @@ BACK, FRIEND!</string>
                                     <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Omh-I8-tBU"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="         example@gmail.com" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="81u-Lg-1gw">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         example@gmail.com" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="81u-Lg-1gw">
                                 <rect key="frame" x="16" y="419" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
@@ -933,13 +933,6 @@ experience with us!</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or continue with" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAF-mS-qyp">
-                                <rect key="frame" x="145" y="742" width="135" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Do you have an account?" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6p-3J-Ost">
                                 <rect key="frame" x="89" y="857" width="202" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -978,7 +971,7 @@ experience with us!</string>
                                     <action selector="signUpButtonTapped:" destination="dD2-dN-6mM" eventType="touchUpInside" id="Uth-Cf-mCV"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="         First Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="uwT-AG-6JF">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         First Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="uwT-AG-6JF">
                                 <rect key="frame" x="13" y="378" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
@@ -986,7 +979,7 @@ experience with us!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="        Last Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="Afe-y0-aWU">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="        Last Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="Afe-y0-aWU">
                                 <rect key="frame" x="13" y="445" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
@@ -994,7 +987,7 @@ experience with us!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="family-name"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="         example@gmail.com" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="Y2q-Se-dsR">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         example@gmail.com" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="Y2q-Se-dsR">
                                 <rect key="frame" x="13" y="512" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
@@ -1002,7 +995,7 @@ experience with us!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="           ******" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="IBk-1I-MZx">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="           ******" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="IBk-1I-MZx">
                                 <rect key="frame" x="13" y="579" width="388" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
@@ -1047,6 +1040,13 @@ At least one Number and one symbol.</string>
                                     <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lko-Sf-FvM"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or continue with" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAF-mS-qyp">
+                                <rect key="frame" x="143" y="756" width="135" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Nxl-XM-FZx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1174,10 +1174,10 @@ At least one Number and one symbol.</string>
             </objects>
             <point key="canvasLocation" x="5325" y="-477"/>
         </scene>
-        <!--Seeker Video Call View Controller-->
+        <!--SeekerVideoCallViewController-->
         <scene sceneID="bXg-iQ-gfX">
             <objects>
-                <viewController id="L0h-xF-sHI" customClass="SeekerVideoCallViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SeekerVideoCallViewController" title="SeekerVideoCallViewController" id="L0h-xF-sHI" customClass="SeekerVideoCallViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Ih-Pr-27z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1236,7 +1236,6 @@ At least one Number and one symbol.</string>
                                         <connections>
                                             <action selector="endCallTapped:" destination="L0h-xF-sHI" eventType="touchUpInside" id="doX-DY-6aQ"/>
                                             <action selector="secondaryTakePictureTapped:" destination="p5A-56-OnS" eventType="touchUpInside" id="1cO-0u-aXB"/>
-                                            <segue destination="8o1-dS-mPN" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="jSw-3I-0Hq"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1255,7 +1254,7 @@ At least one Number and one symbol.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUK-eO-x7A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5324.6376811594209" y="176.78571428571428"/>
+            <point key="canvasLocation" x="5325" y="250"/>
         </scene>
         <!--My Vision-->
         <scene sceneID="ZtG-Dv-39n">
@@ -3162,7 +3161,7 @@ pick-up a call :</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M5I-Wr-xNL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3626" y="3707"/>
+            <point key="canvasLocation" x="4613" y="3169"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="aK5-Hr-ULM">
@@ -3178,9 +3177,9 @@ pick-up a call :</string>
                     </tabBar>
                     <connections>
                         <segue destination="zen-qu-Jdt" kind="relationship" relationship="viewControllers" id="cGr-oX-nkb"/>
-                        <segue destination="NOo-oj-WJq" kind="relationship" relationship="viewControllers" id="23I-gM-vIp"/>
-                        <segue destination="bRr-dE-lgs" kind="relationship" relationship="viewControllers" id="1oD-oA-nnB"/>
-                        <segue destination="rZd-iP-m4Y" kind="relationship" relationship="viewControllers" id="bNP-Yf-zax"/>
+                        <segue destination="FQa-U8-uOa" kind="relationship" relationship="viewControllers" id="Qd2-Pz-V5s"/>
+                        <segue destination="bRr-dE-lgs" kind="relationship" relationship="viewControllers" id="MJT-X2-hwT"/>
+                        <segue destination="rZd-iP-m4Y" kind="relationship" relationship="viewControllers" id="aEs-hi-lJv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iH9-AS-h4Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3407,12 +3406,12 @@ pick-up a call :</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3h-3O-pR8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8397.1014492753638" y="2420.7589285714284"/>
+            <point key="canvasLocation" x="8590" y="2421"/>
         </scene>
-        <!--Notifications-->
+        <!--NotificationsViewController-->
         <scene sceneID="6ra-57-81U">
             <objects>
-                <viewController id="NOo-oj-WJq" customClass="NotificationsViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationsViewController" title="NotificationsViewController" id="NOo-oj-WJq" customClass="NotificationsViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DF6-aZ-bSf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3424,36 +3423,8 @@ pick-up a call :</string>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SnU-bL-rzl">
-                                <rect key="frame" x="61" y="119" width="144" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.81960784310000001" blue="0.81960784310000001" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Help Requests">
-                                    <color key="baseForegroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeF-J3-dMc">
-                                <rect key="frame" x="189" y="119" width="161" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.1529411765" green="0.1529411765" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Friend Requests">
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cDo-90-Dbk">
-                                <rect key="frame" x="0.0" y="154" width="414" height="708"/>
+                                <rect key="frame" x="0.0" y="203" width="414" height="708"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="708" id="luW-u2-4EO"/>
@@ -3489,6 +3460,7 @@ pick-up a call :</string>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="acceptTapped:" destination="fr0-PJ-3Wh" eventType="touchUpInside" id="0Ad-ta-Pvc"/>
+                                                        <action selector="acceptTapped:" destination="7nq-Um-M3N" eventType="touchUpInside" id="GL4-ds-weO"/>
                                                         <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D7s-gC-Z7E"/>
                                                         <action selector="verifyButtonTapped:" destination="B0J-A8-qMH" eventType="touchUpInside" id="trM-B2-zaU"/>
                                                     </connections>
@@ -3507,6 +3479,7 @@ pick-up a call :</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
+                                                        <action selector="declineTapped:" destination="7nq-Um-M3N" eventType="touchUpInside" id="4c8-P5-axD"/>
                                                         <action selector="declineTapped:" destination="fr0-PJ-3Wh" eventType="touchUpInside" id="F6L-fm-sH4"/>
                                                         <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="irK-YQ-hdZ"/>
                                                         <action selector="verifyButtonTapped:" destination="B0J-A8-qMH" eventType="touchUpInside" id="tXL-qa-5h3"/>
@@ -3517,6 +3490,11 @@ pick-up a call :</string>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
+                                            <connections>
+                                                <outlet property="acceptButton" destination="jDR-jB-jNl" id="s1O-MB-dix"/>
+                                                <outlet property="declineButton" destination="Yvy-2h-SNb" id="xO5-22-wid"/>
+                                                <outlet property="nameLabel" destination="JDV-TW-Xk7" id="Q86-gi-oJB"/>
+                                            </connections>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="acceptButton" destination="jDR-jB-jNl" id="qok-X1-JSD"/>
@@ -3526,6 +3504,40 @@ pick-up a call :</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syj-Xe-LvD">
+                                <rect key="frame" x="20" y="119" width="194" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.81960784310000001" green="0.81960784310000001" blue="0.81960784310000001" alpha="0.80445467719999997" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Help Requests">
+                                    <color key="baseForegroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToHelpRequest:" destination="NOo-oj-WJq" eventType="touchUpInside" id="3d5-p0-qsW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vC2-lY-X7X">
+                                <rect key="frame" x="183" y="118" width="194" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.1529411765" green="0.1529411765" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Friend Requests">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToNotifications:" destination="mhX-Bx-Flr" eventType="touchUpInside" id="zRp-Do-sOK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VNb-Kw-Tz5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3539,12 +3551,14 @@ pick-up a call :</string>
                         <color key="badgeColor" systemColor="systemRedColor"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="helpRequestButton" destination="syj-Xe-LvD" id="BOX-Qw-WnN"/>
+                        <outlet property="notificationsButton" destination="vC2-lY-X7X" id="Gb0-XS-Ieo"/>
                         <outlet property="tableView" destination="cDo-90-Dbk" id="6cR-dp-zGd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Hk-IC-9oL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5540.579710144928" y="2420.7589285714284"/>
+            <point key="canvasLocation" x="6351" y="3169"/>
         </scene>
         <!--community-->
         <scene sceneID="rAa-Es-pcS">
@@ -3560,7 +3574,7 @@ pick-up a call :</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dq-vy-DSc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6342" y="2421"/>
+            <point key="canvasLocation" x="6352" y="2421"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ify-dj-jja">
@@ -3623,7 +3637,7 @@ pick-up a call :</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ryf-11-ax8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7623.188405797102" y="2421.4285714285711"/>
+            <point key="canvasLocation" x="7245" y="2421"/>
         </scene>
         <!--My People-->
         <scene sceneID="REe-cQ-7RR">
@@ -3806,6 +3820,9 @@ pick-up a call :</string>
                                                 <integer key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="callButtonTapped:" destination="jkl-nX-fmL" eventType="touchUpInside" id="cJj-HJ-O0n"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZGv-lp-m1p">
                                         <rect key="frame" x="27" y="388" width="388" height="60"/>
@@ -3869,6 +3886,7 @@ family and friends.</string>
                     </view>
                     <navigationItem key="navigationItem" id="3xU-kw-AEb"/>
                     <connections>
+                        <outlet property="callButton" destination="RGH-cx-0bQ" id="6go-62-Bl0"/>
                         <outlet property="editEmailField" destination="1cX-G1-DNC" id="oRC-t4-5Mi"/>
                         <outlet property="editFirstNameField" destination="ogk-nR-eir" id="uyF-7L-zQQ"/>
                         <outlet property="editLastNameField" destination="qOF-lN-xYx" id="ut3-Ul-Y1j"/>
@@ -3966,20 +3984,183 @@ connection.</string>
             </objects>
             <point key="canvasLocation" x="6877" y="909"/>
         </scene>
+        <!--Notifications-->
+        <scene sceneID="eRI-UT-cAe">
+            <objects>
+                <viewController storyboardIdentifier="HelpRequestViewController" id="mhX-Bx-Flr" customClass="HelpRequestViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xz1-wx-VFh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1h-vI-ucU">
+                                <rect key="frame" x="113" y="44" width="188" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="31"/>
+                                <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXo-pZ-yaP">
+                                <rect key="frame" x="184" y="119" width="194" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.81960784310000001" green="0.81960784310000001" blue="0.81960784310000001" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Friend Requests">
+                                    <color key="baseForegroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToNotifications:" destination="mhX-Bx-Flr" eventType="touchUpInside" id="JHy-Mw-Qcg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="yGM-s6-cNn">
+                                <rect key="frame" x="43" y="710" width="343" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.1529411765" green="0.1529411765" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Accept The Call">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="22"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="acceptButtonTapped:" destination="mhX-Bx-Flr" eventType="touchUpInside" id="CIw-bF-BHv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPx-vT-3aF">
+                                <rect key="frame" x="20" y="118" width="194" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.1529411765" green="0.1529411765" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Help Requests">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7mz-i4-N4X"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="notification1" badgeValue="1" selectedImage="notification2" id="b53-H7-Twd">
+                        <color key="badgeColor" systemColor="systemRedColor"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="fqm-E4-6Wc"/>
+                    <connections>
+                        <outlet property="acceptButton" destination="yGM-s6-cNn" id="Y1i-eq-TJ5"/>
+                        <outlet property="helpRequestButton" destination="BPx-vT-3aF" id="eut-IF-EpG"/>
+                        <outlet property="notificationButton" destination="NXo-pZ-yaP" id="mBf-rF-2q5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UIC-Q3-8Pq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5470" y="3169"/>
+        </scene>
+        <!--SeekerVideoCallViewController-->
+        <scene sceneID="fY6-Vl-n7I">
+            <objects>
+                <viewController storyboardIdentifier="HelperVideoCallViewController" title="SeekerVideoCallViewController" id="EZ5-Hn-xXT" customClass="HelperVideoCallViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EeN-RG-iE8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7e-zr-SUe" userLabel="videoContainerView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="729"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wait till we assign you to the call .." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2g-s6-HW1">
+                                <rect key="frame" x="49" y="362" width="331" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <color key="textColor" red="0.91764706370000004" green="0.91764706370000004" blue="0.91764706370000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="scR-HG-DOM" userLabel="buttonView">
+                                <rect key="frame" x="0.0" y="724" width="414" height="172"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="luc-49-EbL">
+                                        <rect key="frame" x="38" y="36" width="356" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="End Call">
+                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="24"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="endCallTapped:" destination="EZ5-Hn-xXT" eventType="touchUpInside" id="21v-Y0-775"/>
+                                            <action selector="secondaryTakePictureTapped:" destination="p5A-56-OnS" eventType="touchUpInside" id="ndv-gR-zhV"/>
+                                            <segue destination="mhX-Bx-Flr" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="CGP-FR-SoJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BuL-rH-UoV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="endCallButton" destination="luc-49-EbL" id="YlT-pl-s7B"/>
+                        <outlet property="statusLabel" destination="v2g-s6-HW1" id="ZEe-zq-yju"/>
+                        <outlet property="videoContainerView" destination="q7e-zr-SUe" id="jQV-Cp-7GO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lBg-jW-5BQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5470" y="3882"/>
+        </scene>
+        <!--Notifications-->
+        <scene sceneID="HSb-Lc-hUu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FQa-U8-uOa" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Notifications" image="notification1" selectedImage="notification2" id="g7C-EF-KjF"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="XGn-Qp-xwK"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="R06-H2-5yB">
+                        <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mhX-Bx-Flr" kind="relationship" relationship="rootViewController" id="qpr-zv-MoI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vbB-lr-ETr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5470" y="2421"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="CGP-FR-SoJ"/>
         <segue reference="yAe-AY-4BD"/>
         <segue reference="Sdc-6h-O6i"/>
         <segue reference="jaX-R7-LBr"/>
         <segue reference="jgd-Yn-haz"/>
         <segue reference="cGr-oX-nkb"/>
-        <segue reference="DMp-B2-0Cy"/>
+        <segue reference="uUN-N6-zYT"/>
         <segue reference="Y5a-Ip-Fes"/>
-        <segue reference="jSw-3I-0Hq"/>
-        <segue reference="8KN-Dp-g41"/>
+        <segue reference="d5q-6q-Qa3"/>
         <segue reference="pce-Px-7h4"/>
         <segue reference="fkH-OL-KSi"/>
-        <segue reference="NlY-gD-reb"/>
+        <segue reference="OJa-df-kt1"/>
         <segue reference="Rsv-1V-HX1"/>
     </inferredMetricsTieBreakers>
     <resources>

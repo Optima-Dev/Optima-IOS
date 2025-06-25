@@ -23,6 +23,8 @@
 		1E80C6762DED154F00BDF766 /* OverlayMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E80C6752DED154F00BDF766 /* OverlayMaskView.swift */; };
 		1E8BA2F62D7FC7D4001EC87C /* HelperSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */; };
 		1E8E7C972D6694F900400B02 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E7C962D6694F900400B02 /* SignupViewController.swift */; };
+		1E94F13E2E0B79090066D492 /* HelpRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94F13D2E0B79090066D492 /* HelpRequestViewController.swift */; };
+		1E94F1422E0B7BFD0066D492 /* HelperVideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94F1412E0B7BFD0066D492 /* HelperVideoCallViewController.swift */; };
 		1E9BEAA22D7EBB0500976BFF /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BEAA12D7EBB0400976BFF /* KeychainWrapper.swift */; };
 		1EA866962D6FF13400B44BDE /* BlindHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */; };
 		1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */; };
@@ -78,6 +80,8 @@
 		1E80C6752DED154F00BDF766 /* OverlayMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayMaskView.swift; sourceTree = "<group>"; };
 		1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperSettingViewController.swift; sourceTree = "<group>"; };
 		1E8E7C962D6694F900400B02 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		1E94F13D2E0B79090066D492 /* HelpRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpRequestViewController.swift; sourceTree = "<group>"; };
+		1E94F1412E0B7BFD0066D492 /* HelperVideoCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperVideoCallViewController.swift; sourceTree = "<group>"; };
 		1E9BEAA12D7EBB0400976BFF /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindHomeViewController.swift; sourceTree = "<group>"; };
 		1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingForBlindViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +202,8 @@
 				1E8BA2F52D7FC7D4001EC87C /* HelperSettingViewController.swift */,
 				1E424B6C2D83BE4F0034CC49 /* PickUpCallViewController.swift */,
 				1E2FC4BE2D8B4CB5006A0683 /* NotificationsViewController.swift */,
+				1E94F13D2E0B79090066D492 /* HelpRequestViewController.swift */,
+				1E94F1412E0B7BFD0066D492 /* HelperVideoCallViewController.swift */,
 			);
 			path = "Controllers helper";
 			sourceTree = "<group>";
@@ -467,11 +473,13 @@
 				1E80C6712DED0AA200BDF766 /* MyVisionViewController.swift in Sources */,
 				1EEE64BC2D6420BB00C43761 /* ChooseRoleViewController.swift in Sources */,
 				1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */,
+				1E94F1422E0B7BFD0066D492 /* HelperVideoCallViewController.swift in Sources */,
 				1EEE64AE2D63D3A500C43761 /* OnboardingPageViewController.swift in Sources */,
 				1E424B732D83F1B00034CC49 /* AddMemberViewController.swift in Sources */,
 				1E8E7C972D6694F900400B02 /* SignupViewController.swift in Sources */,
 				1EFA96442D6D54C600139613 /* EnterCodeViewController.swift in Sources */,
 				1EFA96462D6D5DB200139613 /* WarningPopupView.swift in Sources */,
+				1E94F13E2E0B79090066D492 /* HelpRequestViewController.swift in Sources */,
 				1EA866A42D7026EA00B44BDE /* VolunteerhomeViewController.swift in Sources */,
 				1E2FC4BF2D8B4CB5006A0683 /* NotificationsViewController.swift in Sources */,
 				1E8BA2F62D7FC7D4001EC87C /* HelperSettingViewController.swift in Sources */,

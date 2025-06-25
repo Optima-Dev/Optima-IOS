@@ -1,20 +1,11 @@
 import UIKit
 import TwilioVideo
 
-enum CallType {
-    case global
-    case friend
-}
-
-class SeekerVideoCallViewController: UIViewController {
+class HelperVideoCallViewController: UIViewController {
 
     @IBOutlet weak var videoContainerView: UIView!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var flipCameraButton: UIButton!
     @IBOutlet weak var endCallButton: UIButton!
-
-    var helperId: String?
-    var callType: CallType = .global
+    @IBOutlet weak var statusLabel: UILabel!
 
     private var accessToken: String?
     private var roomName: String?
@@ -24,13 +15,14 @@ class SeekerVideoCallViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         addBlurEffect()
-        print("🔵 SeekerVideoCallViewController loaded")
         startCallFlow()
     }
 
     private func setupUI() {
-        flipCameraButton.layer.cornerRadius = 8
         endCallButton.layer.cornerRadius = 8
+        statusLabel.text = "Waiting for the seeker..."
+        statusLabel.textColor = .white
+        statusLabel.isHidden = false
     }
 
     private func addBlurEffect() {
@@ -50,35 +42,26 @@ class SeekerVideoCallViewController: UIViewController {
         statusLabel.isHidden = true
     }
 
+    func setMeetingId(_ id: String) {
+        self.currentMeetingId = id
+    }
+
     private func startCallFlow() {
-        guard let helperId = helperId else {
-            print("❌ No helperId provided")
+        guard let meetingId = currentMeetingId else {
+            print("❌ No meetingId provided")
             return
         }
 
-        let meetingType = (callType == .friend) ? "specific" : "global"
-
-        MeetingService.shared.createMeeting(type: meetingType, helperId: helperId) { [weak self] result in
+        MeetingService.shared.generateToken(meetingId: meetingId) { [weak self] result in
             switch result {
-            case .success(let meetingResponse):
-                let meetingId = meetingResponse.data.meeting.id
-                self?.currentMeetingId = meetingId
-
-                MeetingService.shared.generateToken(meetingId: meetingId) { tokenResult in
-                    switch tokenResult {
-                    case .success(let tokenResponse):
-                        self?.accessToken = tokenResponse.data.token
-                        self?.roomName = tokenResponse.data.roomName
-                        DispatchQueue.main.async {
-                            self?.connectToRoom()
-                        }
-                    case .failure(let error):
-                        print("❌ Token generation failed: \(error)")
-                    }
+            case .success(let tokenResponse):
+                self?.accessToken = tokenResponse.data.token
+                self?.roomName = tokenResponse.data.roomName
+                DispatchQueue.main.async {
+                    self?.connectToRoom()
                 }
-
             case .failure(let error):
-                print("❌ Meeting creation failed: \(error)")
+                print("❌ Token generation failed: \(error)")
             }
         }
     }
@@ -89,22 +72,15 @@ class SeekerVideoCallViewController: UIViewController {
             return
         }
 
-        // 🔍 Debug Token & Room Name
-        print("💬 TOKEN RECEIVED FROM API:")
-        print(token)
-        print("💬 ROOM NAME:")
-        print(room)
+        print("💬 TOKEN RECEIVED FROM API:\n\(token)")
+        print("💬 ROOM NAME:\n\(room)")
 
         VideoCallManager.shared.connectToRoom(
             token: token,
             roomName: room,
-            enableVideo: true,
+            enableVideo: false, // Helper does not share video
             delegate: self
         )
-    }
-    
-    @IBAction func flipCameraTapped(_ sender: UIButton) {
-        VideoCallManager.shared.flipCamera()
     }
 
     @IBAction func endCallTapped(_ sender: UIButton) {
@@ -127,17 +103,23 @@ class SeekerVideoCallViewController: UIViewController {
     }
 }
 
-extension SeekerVideoCallViewController: RoomDelegate {
+extension HelperVideoCallViewController: RoomDelegate {
     func roomDidConnect(room: Room) {
         print("🟢 Connected to room: \(room.name)")
     }
 
     func roomDidDisconnect(room: Room, error: Error?) {
         print("🔴 Disconnected from room. Error: \(error?.localizedDescription ?? "none")")
+        DispatchQueue.main.async {
+            self.statusLabel.text = "Disconnected"
+        }
     }
 
     func roomDidFailToConnect(room: Room, error: Error) {
         print("❌ Connection failed: \(error.localizedDescription)")
+        DispatchQueue.main.async {
+            self.statusLabel.text = "Connection failed"
+        }
     }
 
     func participantDidConnect(room: Room, participant: RemoteParticipant) {
@@ -149,5 +131,8 @@ extension SeekerVideoCallViewController: RoomDelegate {
 
     func participantDidDisconnect(room: Room, participant: RemoteParticipant) {
         print("🔴 Participant left")
+        DispatchQueue.main.async {
+            self.statusLabel.text = "Participant left"
+        }
     }
 }

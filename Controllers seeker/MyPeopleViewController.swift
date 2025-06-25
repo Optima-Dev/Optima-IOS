@@ -12,7 +12,8 @@ class MyPeopleViewController: UIViewController {
     @IBOutlet weak var initialsView: UIView!
     @IBOutlet weak var initialsLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
-    
+    @IBOutlet weak var callButton: UIButton! 
+
     private var darkOverlayView: UIView?
 
     var friends: [Friend] = []
@@ -130,6 +131,17 @@ class MyPeopleViewController: UIViewController {
     @IBAction func removeFriendTapped(_ sender: UIButton) {
         guard let friend = selectedFriend else { return }
         confirmDelete(friend: friend)
+    }
+
+    @IBAction func callButtonTapped(_ sender: UIButton) {
+        guard let friend = selectedFriend else { return }
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "SeekerVideoCallViewController") as? SeekerVideoCallViewController {
+            vc.helperId = friend.id
+            vc.callType = .friend
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     private func confirmDelete(friend: Friend) {

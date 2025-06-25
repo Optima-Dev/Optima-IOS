@@ -3,6 +3,8 @@ import UIKit
 class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var notificationsButton: UIButton!
+    @IBOutlet weak var helpRequestButton: UIButton!
 
     private var friendRequests: [FriendRequest] = []
     private var acceptedRequestIds: Set<String> = []
@@ -34,7 +36,6 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     @objc private func refreshData() {
-        // Don't reset accepted/declined IDs to preserve state
         loadFriendRequests()
     }
 
@@ -47,25 +48,21 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 case .success(let requests):
                     self?.friendRequests = requests
 
-                    // Merge existing accepted/declined requests that no longer come from server
                     for id in self?.acceptedRequestIds ?? [] {
-                        if !(self?.friendRequests.contains { $0.id == id } ?? false) {
-                            if let request = self?.createFakeRequest(for: id) {
-                                self?.friendRequests.append(request)
-                            }
+                        if !(self?.friendRequests.contains { $0.id == id } ?? false),
+                           let request = self?.createFakeRequest(for: id) {
+                            self?.friendRequests.append(request)
                         }
                     }
 
                     for id in self?.declinedRequestIds ?? [] {
-                        if !(self?.friendRequests.contains { $0.id == id } ?? false) {
-                            if let request = self?.createFakeRequest(for: id) {
-                                self?.friendRequests.append(request)
-                            }
+                        if !(self?.friendRequests.contains { $0.id == id } ?? false),
+                           let request = self?.createFakeRequest(for: id) {
+                            self?.friendRequests.append(request)
                         }
                     }
 
                     self?.tableView.reloadData()
-
                 case .failure(let error):
                     self?.showAlert(message: "Error: \(error.localizedDescription)")
                 }
@@ -73,9 +70,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
 
-    // This creates a dummy request if the server removes it (to keep showing its status)
     private func createFakeRequest(for id: String) -> FriendRequest? {
-        // Dummy data (can be improved if needed)
         return FriendRequest(id: id, seekerId: "local", firstName: "Saved", lastName: "Request", email: "local@dummy.com")
     }
 
@@ -136,5 +131,18 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         let alert = UIAlertController(title: "Notice", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+
+    @IBAction func goToHelpRequest(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.notificationsButton.transform = CGAffineTransform(translationX: -170, y: 0)
+            self.notificationsButton.alpha = 0
+
+            self.helpRequestButton.transform = .identity
+            self.helpRequestButton.alpha = 1
+        }, completion: { _ in
+            guard let helpVC = self.storyboard?.instantiateViewController(withIdentifier: "HelpRequestViewController") else { return }
+            self.navigationController?.pushViewController(helpVC, animated: true)
+        })
     }
 }
