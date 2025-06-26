@@ -6,7 +6,7 @@ class SupportSeekerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Set background image
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: "Background")
@@ -15,9 +15,12 @@ class SupportSeekerViewController: UIViewController {
 
         // Style My People button
         myPeople.layer.borderWidth = 3
-        myPeople.layer.borderColor = UIColor(hex: "#2727C4").cgColor
+        myPeople.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 196/255, alpha: 1.0).cgColor
         myPeople.layer.cornerRadius = 22
         myPeople.clipsToBounds = true
+
+        //  Start voice command manager
+        VoiceCommandManager.shared.startListening(in: self)
     }
 
     @IBAction func callAVolunteerTapped(_ sender: UIButton) {
@@ -35,8 +38,7 @@ class SupportSeekerViewController: UIViewController {
                         vc.token = tokenData.token
                         vc.roomName = tokenData.roomName
                         vc.identity = tokenData.identity
-                        vc.meetingId = tokenData.identity // fallback لو مفيش meetingId بيرجع
-
+                        vc.meetingId = tokenData.identity 
                         self.navigationController?.pushViewController(vc, animated: true)
                     } else {
                         print("❌ Token data is nil")

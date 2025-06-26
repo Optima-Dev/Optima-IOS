@@ -130,6 +130,19 @@ class MyVisionViewController: UIViewController {
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         synthesizer.speak(utterance)
     }
+
+    // MARK: - Voice Command Actions
+
+    func captureImage() {
+        print("📸 Voice Command Triggered: Take A Picture")
+        takePicture()
+    }
+
+    func repeatResult() {
+        print("🔁 Voice Command Triggered: Repeat")
+        guard let text = currentResultText, !isSpeaking else { return }
+        speak(text: text)
+    }
 }
 
 // MARK: - AVCapture Delegate

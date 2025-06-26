@@ -1,5 +1,6 @@
 import UIKit
 import AVFoundation
+import Speech
 
 class PrivacyTermsViewController: UIViewController {
 
@@ -9,57 +10,42 @@ class PrivacyTermsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set the scroll view content size
+
         scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentView.frame.height)
-        
-        // Hide the warning popup initially
         warningPopupView.isHidden = true
-        
-        // Check if permissions were previously granted
+
         if arePermissionsGranted() {
-            // Permissions are already granted, navigate to login
             self.navigateToLogin()
         }
     }
 
     @IBAction func agreeButtonTapped(_ sender: UIButton) {
-        // Show permissions popup when "I Agree" is clicked
-        showPermissionsPopup()
+        showCameraPermissionAlert()
     }
 
-    // Display system permission request popup
-    func showPermissionsPopup() {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(
-                title: "Camera and Microphone",
-                message: "Allow Optima to access your camera and microphone.",
-                preferredStyle: .alert
-            )
+    // MARK: - Step 1: Ask for Camera Permission
+    func showCameraPermissionAlert() {
+        let alert = UIAlertController(
+            title: "Camera Access",
+            message: "Optima needs access to your **camera** to help you capture images .",
+            preferredStyle: .alert
+        )
 
-            let allowAction = UIAlertAction(title: "Allow", style: .default) { _ in
-                self.requestPermissions()
-            }
+        alert.addAction(UIAlertAction(title: "Allow", style: .default) { _ in
+            self.requestCameraPermission()
+        })
 
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
-            alert.addAction(cancelAction)
-            alert.addAction(allowAction)
-
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: nil)
     }
 
-    // Request camera and microphone permissions
-    func requestPermissions() {
-        // Request camera permission
+    func requestCameraPermission() {
         AVCaptureDevice.requestAccess(for: .video) { cameraGranted in
             DispatchQueue.main.async {
                 if cameraGranted {
-                    // Request microphone permission after camera
-                    self.requestMicrophonePermission()
+                    self.showMicrophonePermissionAlert()
                 } else {
-                    // Camera permission denied
                     print("Camera permission denied.")
                     self.showWarningPopup()
                 }
@@ -67,17 +53,30 @@ class PrivacyTermsViewController: UIViewController {
         }
     }
 
-    // Request microphone permission using AVAudioSession
+    // MARK: - Step 2: Ask for Microphone Permission
+    func showMicrophonePermissionAlert() {
+        let alert = UIAlertController(
+            title: "Microphone Access",
+            message: "Optima needs access to your **microphone** so you can talk during support video calls.",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Allow", style: .default) { _ in
+            self.requestMicrophonePermission()
+        })
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
     func requestMicrophonePermission() {
         let audioSession = AVAudioSession.sharedInstance()
         audioSession.requestRecordPermission { microphoneGranted in
             DispatchQueue.main.async {
                 if microphoneGranted {
-                    // Store granted permissions and navigate to login
-                    self.storePermissionsGranted()
-                    self.navigateToLogin()
+                    self.showSpeechRecognitionAlert()
                 } else {
-                    // Microphone permission denied
                     print("Microphone permission denied.")
                     self.showWarningPopup()
                 }
@@ -85,29 +84,57 @@ class PrivacyTermsViewController: UIViewController {
         }
     }
 
-    // Navigate to login screen
+    // MARK: - Step 3: Ask for Speech Recognition Permission
+    func showSpeechRecognitionAlert() {
+        let alert = UIAlertController(
+            title: "Voice Command Access",
+            message: "Optima needs access to **Speech Recognition** so you can control the app with your voice.",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Allow", style: .default) { _ in
+            self.requestSpeechPermission()
+        })
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func requestSpeechPermission() {
+        SFSpeechRecognizer.requestAuthorization { authStatus in
+            DispatchQueue.main.async {
+                if authStatus == .authorized {
+                    self.storePermissionsGranted()
+                    self.navigateToLogin()
+                } else {
+                    print("Speech recognition permission denied.")
+                    self.showWarningPopup()
+                }
+            }
+        }
+    }
+
+    // MARK: - Navigation
     func navigateToLogin() {
         DispatchQueue.main.async {
             if let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") {
                 loginVC.modalPresentationStyle = .fullScreen
                 self.present(loginVC, animated: true, completion: nil)
             } else {
-                print("Error: LoginViewController not found in storyboard.")
+                print("❌ LoginViewController not found in storyboard.")
             }
         }
     }
 
-    // Store permission status in UserDefaults
     func storePermissionsGranted() {
         UserDefaults.standard.set(true, forKey: "permissionsGranted")
     }
 
-    // Check if permissions were granted previously
     func arePermissionsGranted() -> Bool {
         return UserDefaults.standard.bool(forKey: "permissionsGranted")
     }
 
-    // Show the warning popup when permissions are denied
     func showWarningPopup() {
         DispatchQueue.main.async {
             self.warningPopupView.isHidden = false

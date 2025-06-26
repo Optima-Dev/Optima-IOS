@@ -1069,7 +1069,7 @@ At least one Number and one symbol.</string>
         <!--Support-->
         <scene sceneID="W80-zi-Ps8">
             <objects>
-                <viewController id="8o1-dS-mPN" customClass="SupportSeekerViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="SupportSeekerViewController" storyboardIdentifier="SupportSeekerViewController" id="8o1-dS-mPN" customClass="SupportSeekerViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MWH-qh-eeJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1260,7 +1260,7 @@ At least one Number and one symbol.</string>
         <!--My Vision-->
         <scene sceneID="ZtG-Dv-39n">
             <objects>
-                <viewController id="p5A-56-OnS" customClass="MyVisionViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MyVisionViewController" storyboardIdentifier="MyVisionViewController" id="p5A-56-OnS" customClass="MyVisionViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tdx-MH-Qr7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1914,7 +1914,7 @@ the world</string>
             <objects>
                 <viewController storyboardIdentifier="AccountSettingViewController" id="z02-la-raB" customClass="AccountSettingViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rJc-pf-gMG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMq-zm-e9d">
@@ -1965,7 +1965,7 @@ the world</string>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         First Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="jHg-7X-r6R">
-                                <rect key="frame" x="13" y="215" width="388" height="59"/>
+                                <rect key="frame" x="13" y="201" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1973,7 +1973,7 @@ the world</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="        Last Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="5wC-qN-Yg0">
-                                <rect key="frame" x="13" y="307" width="388" height="59"/>
+                                <rect key="frame" x="13" y="287" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1981,7 +1981,7 @@ the world</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="family-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         mail" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="WvO-Q3-Ua4">
-                                <rect key="frame" x="13" y="402" width="388" height="59"/>
+                                <rect key="frame" x="13" y="376" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2347,7 +2347,7 @@ our app in the most efficient way.</string>
         <!--Settings-->
         <scene sceneID="NRQ-71-HFn">
             <objects>
-                <viewController storyboardIdentifier="SettingForBlindViewController" id="hfA-wZ-Qpe" customClass="SettingForBlindViewController" customModule="Optima" sceneMemberID="viewController">
+                <viewController restorationIdentifier="SettingForBlindViewController" storyboardIdentifier="SettingForBlindViewController" id="hfA-wZ-Qpe" customClass="SettingForBlindViewController" customModule="Optima" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IMF-4s-qeG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2781,7 +2781,7 @@ native language as yours.  </string>
             <objects>
                 <viewController storyboardIdentifier="ProfileEditViewController" id="eIx-ve-RIr" customClass="ProfileEditViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9cM-xm-gLQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgr-pr-rhV">
@@ -2813,7 +2813,7 @@ native language as yours.  </string>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         First Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="nTx-ys-M3B">
-                                <rect key="frame" x="13" y="220" width="388" height="59"/>
+                                <rect key="frame" x="13" y="206" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2821,7 +2821,7 @@ native language as yours.  </string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="        Last Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="QPL-ao-F6m">
-                                <rect key="frame" x="13" y="311" width="388" height="59"/>
+                                <rect key="frame" x="13" y="291" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2829,7 +2829,7 @@ native language as yours.  </string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="family-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         mail" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="Ga6-pr-sIa">
-                                <rect key="frame" x="13" y="393" width="388" height="59"/>
+                                <rect key="frame" x="13" y="368" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -3593,7 +3593,7 @@ pick-up a call :</string>
         <!--Settings-->
         <scene sceneID="Dwo-V1-XCa">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HCE-sF-gBR" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="SettingForBlindViewController" automaticallyAdjustsScrollViewInsets="NO" id="HCE-sF-gBR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="Setting1" selectedImage="Setting2" id="nti-1P-uuD"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Im0-PO-BtE"/>
@@ -3633,7 +3633,7 @@ pick-up a call :</string>
         <!--My People-->
         <scene sceneID="REe-cQ-7RR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YXn-ix-JpC" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="MyPeopleViewController" automaticallyAdjustsScrollViewInsets="NO" id="YXn-ix-JpC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My People" image="MyPeople1" selectedImage="Mypeople2" id="KpC-R8-eSL"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jUi-fy-aOL">
@@ -3652,7 +3652,7 @@ pick-up a call :</string>
         <!--My People View Controller-->
         <scene sceneID="Twi-I7-Q9B">
             <objects>
-                <viewController id="jkl-nX-fmL" customClass="MyPeopleViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MyPeopleViewController" storyboardIdentifier="MyPeopleViewController" id="jkl-nX-fmL" customClass="MyPeopleViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fj1-zd-4gt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4147,11 +4147,11 @@ connection.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mEf-se-NXo">
-                                <rect key="frame" x="6" y="306" width="400" height="515"/>
+                                <rect key="frame" x="6" y="282" width="400" height="515"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YR5-wE-Tze" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="398" height="970"/>
+                                        <rect key="frame" x="0.0" y="1" width="398" height="970"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nav Bar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2m-dO-yfn">
@@ -4421,7 +4421,7 @@ connection.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Here is where you can find all the voice commands you can use to control the whole application." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OyP-2V-2w6">
-                                <rect key="frame" x="20" y="192" width="376" height="75"/>
+                                <rect key="frame" x="20" y="177" width="376" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <color key="textColor" red="0.31372549020000001" green="0.33333333329999998" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -4452,7 +4452,7 @@ connection.</string>
         <segue reference="CGP-FR-SoJ"/>
         <segue reference="yAe-AY-4BD"/>
         <segue reference="Sdc-6h-O6i"/>
-        <segue reference="jaX-R7-LBr"/>
+        <segue reference="ntR-lZ-3Lg"/>
         <segue reference="997-AR-GUO"/>
         <segue reference="cGr-oX-nkb"/>
         <segue reference="uUN-N6-zYT"/>

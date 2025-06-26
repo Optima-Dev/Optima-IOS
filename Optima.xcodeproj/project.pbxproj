@@ -10,6 +10,7 @@
 		1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */; };
 		1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */; };
 		1E13322D2E0CEBD5005F18F8 /* VoiceControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E13322C2E0CEBD5005F18F8 /* VoiceControlViewController.swift */; };
+		1E1332312E0CF4D0005F18F8 /* VoiceCommandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1332302E0CF4D0005F18F8 /* VoiceCommandManager.swift */; };
 		1E257E1C2D7D63BC00397A33 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */; };
 		1E257E362D7D70A000397A33 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */; };
 		1E2BE7032E061C87009E566A /* SeekerVideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */; };
@@ -66,6 +67,7 @@
 		1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyTermsViewController.swift; sourceTree = "<group>"; };
 		1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E13322C2E0CEBD5005F18F8 /* VoiceControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceControlViewController.swift; sourceTree = "<group>"; };
+		1E1332302E0CF4D0005F18F8 /* VoiceCommandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandManager.swift; sourceTree = "<group>"; };
 		1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekerVideoCallViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		1E13322F2E0CF4A6005F18F8 /* New Folder */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "New Folder";
+			sourceTree = "<group>";
+		};
 		1E2BE7092E062592009E566A /* VideoCall */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = VideoCall;
@@ -296,6 +303,8 @@
 		1EEE64A62D63D2D000C43761 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				1E1332302E0CF4D0005F18F8 /* VoiceCommandManager.swift */,
+				1E13322F2E0CF4A6005F18F8 /* New Folder */,
 				1EB61BA22E0906060026EDC6 /* UserInfo */,
 				1EB61BA12E0905DD0026EDC6 /* MyPeople */,
 				1EB61B9F2E0905B60026EDC6 /* MyVision */,
@@ -330,6 +339,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				1E13322F2E0CF4A6005F18F8 /* New Folder */,
 				1E2BE7092E062592009E566A /* VideoCall */,
 				1E4351292D62AB5E008872C8 /* Optima */,
 				1EB61B9D2E09055A0026EDC6 /* Auth */,
@@ -492,6 +502,7 @@
 				1EFA96482D6D63DB00139613 /* ConfirmPasswordViewController.swift in Sources */,
 				1EE028B02DC81966009C3A4B /* UIColor+Hex.swift in Sources */,
 				1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */,
+				1E1332312E0CF4D0005F18F8 /* VoiceCommandManager.swift in Sources */,
 				1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */,
 				1E13322D2E0CEBD5005F18F8 /* VoiceControlViewController.swift in Sources */,
 				1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */,

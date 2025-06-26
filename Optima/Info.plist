@@ -21,8 +21,8 @@
             </array>
         </dict>
     </dict>
-    
-    <!--  ADD URL Scheme  -->
+
+    <!-- Add URL Scheme -->
     <key>CFBundleURLTypes</key>
     <array>
         <dict>
@@ -32,5 +32,9 @@
             </array>
         </dict>
     </array>
+
+    <!--  Voice Command Permission -->
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string> Optima needs access to speech recognition to understand voice commands.</string>
 </dict>
 </plist>
