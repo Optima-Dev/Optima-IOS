@@ -14,6 +14,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         setupBackground()
         setupTableView()
         loadFriendRequests()
@@ -134,15 +137,18 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     @IBAction func goToHelpRequest(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.4, animations: {
+        // Instantly push the HelpRequest screen
+        if let helpVC = storyboard?.instantiateViewController(withIdentifier: "HelpRequestViewController") {
+            navigationController?.pushViewController(helpVC, animated: true)
+        }
+
+        // Button slide animation (executed after navigation)
+        UIView.animate(withDuration: 0.4) {
             self.notificationsButton.transform = CGAffineTransform(translationX: -170, y: 0)
             self.notificationsButton.alpha = 0
 
             self.helpRequestButton.transform = .identity
             self.helpRequestButton.alpha = 1
-        }, completion: { _ in
-            guard let helpVC = self.storyboard?.instantiateViewController(withIdentifier: "HelpRequestViewController") else { return }
-            self.navigationController?.pushViewController(helpVC, animated: true)
-        })
+        }
     }
 }

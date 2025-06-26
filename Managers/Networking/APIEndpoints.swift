@@ -27,7 +27,6 @@ struct APIEndpoints {
     
     // Meetings
     static let createMeeting = "\(baseURL)/meetings"
-    static let generateToken = "\(baseURL)/meetings/token"
     static let endMeeting = "\(baseURL)/meetings/end"
     static let getMeetingDetails = "\(baseURL)/meetings"
     

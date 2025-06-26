@@ -7,13 +7,13 @@ class HelpRequestViewController: UIViewController {
     @IBOutlet weak var notificationButton: UIButton!
 
     private var backgroundImageView: UIImageView!
-    private var currentMeetingId: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         setupBackground()
         checkHelpRequest()
-
     }
 
     private func setupBackground() {
@@ -62,9 +62,8 @@ class HelpRequestViewController: UIViewController {
         HelpRequestService.shared.acceptHelpRequest { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let response):
-                    let meetingId = response.data.meeting.id
-                    self?.navigateToCall(meetingId: meetingId)
+                case .success:
+                    self?.navigateToCall()
                 case .failure(let error):
                     self?.showError(error)
                     self?.acceptButton.isEnabled = true
@@ -73,9 +72,8 @@ class HelpRequestViewController: UIViewController {
         }
     }
 
-    private func navigateToCall(meetingId: String) {
+    private func navigateToCall() {
         let vc = HelperVideoCallViewController()
-        vc.setMeetingId(meetingId)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
@@ -87,15 +85,16 @@ class HelpRequestViewController: UIViewController {
     }
 
     @IBAction func goToNotifications(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.4, animations: {
+        if let notiVC = storyboard?.instantiateViewController(withIdentifier: "NotificationsViewController") {
+            navigationController?.pushViewController(notiVC, animated: true)
+        }
+
+        UIView.animate(withDuration: 0.4) {
             self.helpRequestButton.transform = CGAffineTransform(translationX: 170, y: 0)
             self.helpRequestButton.alpha = 0
 
             self.notificationButton.transform = .identity
             self.notificationButton.alpha = 1
-        }, completion: { _ in
-            guard let notiVC = self.storyboard?.instantiateViewController(withIdentifier: "NotificationsViewController") else { return }
-            self.navigationController?.pushViewController(notiVC, animated: true)
-        })
+        }
     }
 }

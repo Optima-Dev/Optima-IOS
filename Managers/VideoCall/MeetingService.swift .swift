@@ -5,39 +5,19 @@ class MeetingService {
     
     private init() {}
 
-    // Create a new meeting (used by seeker)
-    func createMeeting(type: String, helperId: String, completion: @escaping (Result<MeetingResponse, NetworkError>) -> Void) {
+    // ✅ Create a new meeting (Seeker side)
+    func createMeeting(type: String, helperId: String? = nil, completion: @escaping (Result<MeetingTokenResponse, NetworkError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
             return completion(.failure(.unauthorized))
         }
 
         let endpoint = APIEndpoints.createMeeting
-        let headers = ["Authorization": "Bearer \(token)"]
-        let body: [String: Any] = [
-            "type": type,
-            "helper": helperId
-        ]
-
-        APIManager.shared.performRequest(
-            url: endpoint,
-            method: "POST",
-            body: body,
-            headers: headers,
-            completion: completion
-        )
-    }
-
-    // Generate access token for joining a meeting
-    func generateToken(meetingId: String, completion: @escaping (Result<MeetingTokenResponse, NetworkError>) -> Void) {
-        guard let token = AuthManager.shared.authToken else {
-            return completion(.failure(.unauthorized))
+        var body: [String: Any] = ["type": type]
+        if let helperId = helperId {
+            body["helper"] = helperId
         }
 
-        let endpoint = APIEndpoints.generateToken
-        let headers = ["Authorization": "Bearer \(token)"]
-        let body: [String: Any] = [
-            "meetingId": meetingId
-        ]
+        let headers = ["Authorization": "Bearer \(token)", "Content-Type": "application/json"]
 
         APIManager.shared.performRequest(
             url: endpoint,
@@ -48,7 +28,7 @@ class MeetingService {
         )
     }
 
-    // End an ongoing meeting
+    // ✅ End meeting with meetingId (Seeker side)
     func endMeeting(meetingId: String, completion: @escaping (Result<MeetingResponse, NetworkError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
             return completion(.failure(.unauthorized))
@@ -56,9 +36,7 @@ class MeetingService {
 
         let endpoint = APIEndpoints.endMeeting
         let headers = ["Authorization": "Bearer \(token)"]
-        let body: [String: Any] = [
-            "meetingId": meetingId
-        ]
+        let body: [String: Any] = ["meetingId": meetingId]
 
         APIManager.shared.performRequest(
             url: endpoint,
@@ -69,7 +47,26 @@ class MeetingService {
         )
     }
 
-    // Optional: Get meeting details by ID
+    // ✅ End meeting for current user (Helper side)
+    func endMeetingForCurrentUser(completion: @escaping (Result<MeetingResponse, NetworkError>) -> Void) {
+        guard let token = AuthManager.shared.authToken else {
+            return completion(.failure(.unauthorized))
+        }
+
+        let endpoint = APIEndpoints.endMeeting
+        let headers = ["Authorization": "Bearer \(token)"]
+        let body: [String: Any] = [:]
+
+        APIManager.shared.performRequest(
+            url: endpoint,
+            method: "POST",
+            body: body,
+            headers: headers,
+            completion: completion
+        )
+    }
+
+    // ✅ Get meeting details
     func getMeetingDetails(meetingId: String, completion: @escaping (Result<MeetingResponse, NetworkError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
             return completion(.failure(.unauthorized))

@@ -9,7 +9,6 @@ class HelperVideoCallViewController: UIViewController {
 
     private var accessToken: String?
     private var roomName: String?
-    private var currentMeetingId: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,26 +41,21 @@ class HelperVideoCallViewController: UIViewController {
         statusLabel.isHidden = true
     }
 
-    func setMeetingId(_ id: String) {
-        self.currentMeetingId = id
-    }
-
     private func startCallFlow() {
-        guard let meetingId = currentMeetingId else {
-            print("❌ No meetingId provided")
-            return
-        }
-
-        MeetingService.shared.generateToken(meetingId: meetingId) { [weak self] result in
+        HelpRequestService.shared.acceptHelpRequest { [weak self] result in
             switch result {
-            case .success(let tokenResponse):
-                self?.accessToken = tokenResponse.data.token
-                self?.roomName = tokenResponse.data.roomName
-                DispatchQueue.main.async {
-                    self?.connectToRoom()
+            case .success(let response):
+                if let tokenData = response.data {
+                    self?.accessToken = tokenData.token
+                    self?.roomName = tokenData.roomName
+                    DispatchQueue.main.async {
+                        self?.connectToRoom()
+                    }
+                } else {
+                    print("❌ Token data is nil")
                 }
             case .failure(let error):
-                print("❌ Token generation failed: \(error)")
+                print("❌ Failed to fetch token: \(error)")
             }
         }
     }
@@ -86,17 +80,14 @@ class HelperVideoCallViewController: UIViewController {
     @IBAction func endCallTapped(_ sender: UIButton) {
         VideoCallManager.shared.disconnect()
 
-        if let meetingId = currentMeetingId {
-            MeetingService.shared.endMeeting(meetingId: meetingId) { result in
-                switch result {
-                case .success:
-                    print("✅ Meeting ended successfully")
-                case .failure(let error):
-                    print("❌ Failed to end meeting: \(error)")
-                }
+        // مش محتاجين meetingId لإن الـ backend بيربط الـ helper تلقائيًا
+        MeetingService.shared.endMeetingForCurrentUser { result in
+            switch result {
+            case .success:
+                print("✅ Meeting ended successfully")
+            case .failure(let error):
+                print("❌ Failed to end meeting: \(error)")
             }
-        } else {
-            print("⚠️ No meetingId to end")
         }
 
         dismiss(animated: true)

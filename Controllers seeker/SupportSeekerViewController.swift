@@ -6,17 +6,46 @@ class SupportSeekerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Background setup
+
+        // Set background image
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
-        
-        // Apply border and corner
-        myPeople.layer.borderWidth = 3 
+
+        // Style My People button
+        myPeople.layer.borderWidth = 3
         myPeople.layer.borderColor = UIColor(hex: "#2727C4").cgColor
         myPeople.layer.cornerRadius = 22
         myPeople.clipsToBounds = true
+    }
+
+    @IBAction func callAVolunteerTapped(_ sender: UIButton) {
+        // Global call: no helperId needed
+        MeetingService.shared.createMeeting(type: "global", helperId: nil) { result in
+            switch result {
+            case .success(let response):
+                let tokenData = response.data
+
+                DispatchQueue.main.async {
+                    if let tokenData = tokenData,
+                       let vc = self.storyboard?.instantiateViewController(withIdentifier: "SeekerVideoCallViewController") as? SeekerVideoCallViewController {
+
+                        vc.callType = .global
+                        vc.token = tokenData.token
+                        vc.roomName = tokenData.roomName
+                        vc.identity = tokenData.identity
+                        vc.meetingId = tokenData.identity // fallback لو مفيش meetingId بيرجع
+
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    } else {
+                        print("❌ Token data is nil")
+                    }
+                }
+
+            case .failure(let error):
+                print("❌ Failed to create meeting: \(error)")
+            }
+        }
     }
 }

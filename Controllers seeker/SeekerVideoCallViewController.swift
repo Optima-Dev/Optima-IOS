@@ -16,16 +16,17 @@ class SeekerVideoCallViewController: UIViewController {
     var helperId: String?
     var callType: CallType = .global
 
-    private var accessToken: String?
-    private var roomName: String?
-    private var currentMeetingId: String?
+    var token: String = ""
+    var roomName: String = ""
+    var identity: String = ""
+    var meetingId: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         addBlurEffect()
         print("🔵 SeekerVideoCallViewController loaded")
-        startCallFlow()
+        startMeeting()
     }
 
     private func setupUI() {
@@ -34,12 +35,20 @@ class SeekerVideoCallViewController: UIViewController {
     }
 
     private func addBlurEffect() {
+        let background = UIImageView(frame: videoContainerView.bounds)
+        background.image = UIImage(named: "videoCall")
+        background.contentMode = .scaleAspectFill
+        background.clipsToBounds = true
+        background.tag = 998
+        videoContainerView.addSubview(background)
+
         let blur = UIBlurEffect(style: .dark)
         let blurView = UIVisualEffectView(effect: blur)
         blurView.frame = videoContainerView.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurView.tag = 999
         videoContainerView.addSubview(blurView)
+
         videoContainerView.bringSubviewToFront(statusLabel)
     }
 
@@ -47,62 +56,48 @@ class SeekerVideoCallViewController: UIViewController {
         if let blur = videoContainerView.viewWithTag(999) {
             blur.removeFromSuperview()
         }
+        if let background = videoContainerView.viewWithTag(998) {
+            background.removeFromSuperview()
+        }
         statusLabel.isHidden = true
     }
 
-    private func startCallFlow() {
-        guard let helperId = helperId else {
-            print("❌ No helperId provided")
-            return
-        }
-
-        let meetingType = (callType == .friend) ? "specific" : "global"
-
-        MeetingService.shared.createMeeting(type: meetingType, helperId: helperId) { [weak self] result in
+    private func startMeeting() {
+        let type = callType == .friend ? "specific" : "global"
+        MeetingService.shared.createMeeting(type: type, helperId: helperId) { [weak self] result in
             switch result {
-            case .success(let meetingResponse):
-                let meetingId = meetingResponse.data.meeting.id
-                self?.currentMeetingId = meetingId
-
-                MeetingService.shared.generateToken(meetingId: meetingId) { tokenResult in
-                    switch tokenResult {
-                    case .success(let tokenResponse):
-                        self?.accessToken = tokenResponse.data.token
-                        self?.roomName = tokenResponse.data.roomName
-                        DispatchQueue.main.async {
-                            self?.connectToRoom()
-                        }
-                    case .failure(let error):
-                        print("❌ Token generation failed: \(error)")
-                    }
+            case .success(let response):
+                if response.status == 200, let data = response.data {
+                    self?.token = data.token
+                    self?.roomName = data.roomName
+                    self?.identity = data.identity
+                    self?.connectToRoom()
+                } else {
+                    print("❌ Server Error: \(response.message ?? "No message")")
                 }
-
             case .failure(let error):
-                print("❌ Meeting creation failed: \(error)")
+                print("❌ Failed to create meeting: \(error)")
             }
         }
     }
 
     private func connectToRoom() {
-        guard let token = accessToken, let room = roomName else {
+        guard !token.isEmpty, !roomName.isEmpty else {
             print("❌ Missing token or room name")
             return
         }
 
-        // 🔍 Debug Token & Room Name
-        print("💬 TOKEN RECEIVED FROM API:")
-        print(token)
-        print("💬 ROOM NAME:")
-        print(room)
+        print("💬 TOKEN RECEIVED FROM API:\n\(token)")
+        print("💬 ROOM NAME:\n\(roomName)")
 
         VideoCallManager.shared.connectToRoom(
             token: token,
-            roomName: room,
+            roomName: roomName,
             enableVideo: true,
             delegate: self
         )
     }
-    
+
     @IBAction func flipCameraTapped(_ sender: UIButton) {
         VideoCallManager.shared.flipCamera()
     }
@@ -110,7 +105,7 @@ class SeekerVideoCallViewController: UIViewController {
     @IBAction func endCallTapped(_ sender: UIButton) {
         VideoCallManager.shared.disconnect()
 
-        if let meetingId = currentMeetingId {
+        if !meetingId.isEmpty {
             MeetingService.shared.endMeeting(meetingId: meetingId) { result in
                 switch result {
                 case .success:
@@ -126,6 +121,8 @@ class SeekerVideoCallViewController: UIViewController {
         dismiss(animated: true)
     }
 }
+
+// MARK: - RoomDelegate
 
 extension SeekerVideoCallViewController: RoomDelegate {
     func roomDidConnect(room: Room) {
