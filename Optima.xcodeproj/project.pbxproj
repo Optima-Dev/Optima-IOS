@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */; };
 		1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */; };
+		1E13322D2E0CEBD5005F18F8 /* VoiceControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E13322C2E0CEBD5005F18F8 /* VoiceControlViewController.swift */; };
 		1E257E1C2D7D63BC00397A33 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */; };
 		1E257E362D7D70A000397A33 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */; };
 		1E2BE7032E061C87009E566A /* SeekerVideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */; };
@@ -64,6 +65,7 @@
 /* Begin PBXFileReference section */
 		1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyTermsViewController.swift; sourceTree = "<group>"; };
 		1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1E13322C2E0CEBD5005F18F8 /* VoiceControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceControlViewController.swift; sourceTree = "<group>"; };
 		1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekerVideoCallViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				1E424B722D83F1B00034CC49 /* AddMemberViewController.swift */,
 				1E80C6702DED0AA200BDF766 /* MyVisionViewController.swift */,
 				1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */,
+				1E13322C2E0CEBD5005F18F8 /* VoiceControlViewController.swift */,
 			);
 			path = "Controllers seeker";
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				1EE028B02DC81966009C3A4B /* UIColor+Hex.swift in Sources */,
 				1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */,
 				1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */,
+				1E13322D2E0CEBD5005F18F8 /* VoiceControlViewController.swift in Sources */,
 				1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */,
 				1EFA95DA2D6D17DA00139613 /* ResetPasswordViewController.swift in Sources */,
 				1EEE64B82D64122B00C43761 /* OnboardingSecViewController.swift in Sources */,

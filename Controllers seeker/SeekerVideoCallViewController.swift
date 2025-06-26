@@ -67,7 +67,7 @@ class SeekerVideoCallViewController: UIViewController {
         MeetingService.shared.createMeeting(type: type, helperId: helperId) { [weak self] result in
             switch result {
             case .success(let response):
-                if response.status == 200, let data = response.data {
+                if response.status == "success", let data = response.data {
                     self?.token = data.token
                     self?.roomName = data.roomName
                     self?.identity = data.identity

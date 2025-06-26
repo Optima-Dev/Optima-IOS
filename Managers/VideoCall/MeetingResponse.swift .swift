@@ -28,10 +28,10 @@ struct Meeting: Codable {
     }
 }
 
-// MARK: - Token Generation
+// MARK: - Token Generation (FIXED status type)
 
 struct MeetingTokenResponse: Codable {
-    let status: Int
+    let status: String  // ✅ FIXED from Int to String
     let message: String?
     let data: TokenData?
 }
