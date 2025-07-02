@@ -31,7 +31,7 @@ struct Meeting: Codable {
 // MARK: - Token Generation (FIXED status type)
 
 struct MeetingTokenResponse: Codable {
-    let status: String  // ✅ FIXED from Int to String
+    let status: String
     let message: String?
     let data: TokenData?
 }
@@ -40,6 +40,11 @@ struct TokenData: Codable {
     let token: String
     let roomName: String
     let identity: String
+    let meeting: Meeting?
+    
+    var meetingId: String? {
+        return meeting?.id
+    }
 }
 
 // MARK: - Check if Pending Global Help Request Exists

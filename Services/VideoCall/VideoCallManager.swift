@@ -35,7 +35,6 @@ class VideoCallManager {
 
         self.room = TwilioVideoSDK.connect(options: options, delegate: delegate)
     }
-
     func flipCamera() {
         guard let camera = camera else { return }
         guard let current = camera.device?.position else { return }

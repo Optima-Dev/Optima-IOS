@@ -10,7 +10,6 @@
 		1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */; };
 		1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */; };
 		1E13322D2E0CEBD5005F18F8 /* VoiceControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E13322C2E0CEBD5005F18F8 /* VoiceControlViewController.swift */; };
-		1E1332312E0CF4D0005F18F8 /* VoiceCommandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1332302E0CF4D0005F18F8 /* VoiceCommandManager.swift */; };
 		1E257E1C2D7D63BC00397A33 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */; };
 		1E257E362D7D70A000397A33 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */; };
 		1E2BE7032E061C87009E566A /* SeekerVideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */; };
@@ -28,6 +27,7 @@
 		1E94F13E2E0B79090066D492 /* HelpRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94F13D2E0B79090066D492 /* HelpRequestViewController.swift */; };
 		1E94F1422E0B7BFD0066D492 /* HelperVideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94F1412E0B7BFD0066D492 /* HelperVideoCallViewController.swift */; };
 		1E9BEAA22D7EBB0500976BFF /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BEAA12D7EBB0400976BFF /* KeychainWrapper.swift */; };
+		1EA2A43B2E14D4F2004651DF /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA2A43A2E14D4F2004651DF /* CommunityViewController.swift */; };
 		1EA866962D6FF13400B44BDE /* BlindHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */; };
 		1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */; };
 		1EA8669A2D6FF66100B44BDE /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */; };
@@ -67,7 +67,6 @@
 		1E00D5D02D667447008D9EA8 /* PrivacyTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyTermsViewController.swift; sourceTree = "<group>"; };
 		1E0AD0DF2D6C3154002338A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E13322C2E0CEBD5005F18F8 /* VoiceControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceControlViewController.swift; sourceTree = "<group>"; };
-		1E1332302E0CF4D0005F18F8 /* VoiceCommandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandManager.swift; sourceTree = "<group>"; };
 		1E257E1B2D7D63BC00397A33 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		1E2BE7022E061C87009E566A /* SeekerVideoCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekerVideoCallViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		1E94F13D2E0B79090066D492 /* HelpRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpRequestViewController.swift; sourceTree = "<group>"; };
 		1E94F1412E0B7BFD0066D492 /* HelperVideoCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperVideoCallViewController.swift; sourceTree = "<group>"; };
 		1E9BEAA12D7EBB0400976BFF /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		1EA2A43A2E14D4F2004651DF /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindHomeViewController.swift; sourceTree = "<group>"; };
 		1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingForBlindViewController.swift; sourceTree = "<group>"; };
 		1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
@@ -115,9 +115,9 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		1E13322F2E0CF4A6005F18F8 /* New Folder */ = {
+		1E13322F2E0CF4A6005F18F8 /* Voice commands */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "New Folder";
+			path = "Voice commands";
 			sourceTree = "<group>";
 		};
 		1E2BE7092E062592009E566A /* VideoCall */ = {
@@ -141,6 +141,16 @@
 		1E43514A2D62AB60008872C8 /* OptimaUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = OptimaUITests;
+			sourceTree = "<group>";
+		};
+		1EA2A4382E14C97A004651DF /* Models */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1EA2A4392E14CA73004651DF /* Cells */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		1EB61B9D2E09055A0026EDC6 /* Auth */ = {
@@ -213,6 +223,7 @@
 				1E2FC4BE2D8B4CB5006A0683 /* NotificationsViewController.swift */,
 				1E94F13D2E0B79090066D492 /* HelpRequestViewController.swift */,
 				1E94F1412E0B7BFD0066D492 /* HelperVideoCallViewController.swift */,
+				1EA2A43A2E14D4F2004651DF /* CommunityViewController.swift */,
 			);
 			path = "Controllers helper";
 			sourceTree = "<group>";
@@ -235,13 +246,11 @@
 		1E43511E2D62AB5E008872C8 = {
 			isa = PBXGroup;
 			children = (
-				1EEE64A32D63D2A000C43761 /* Controllers general */,
-				1E2FC4BD2D8B4BEA006A0683 /* Controllers seeker */,
-				1E2FC4BC2D8B4BAB006A0683 /* Controllers helper */,
+				1EA2A4352E14C8E5004651DF /* Controllers */,
 				1EEE64A82D63D2ED00C43761 /* Security */,
-				1EEE64A62D63D2D000C43761 /* Managers */,
-				1EEE64A52D63D2C400C43761 /* Models */,
+				1EEE64A62D63D2D000C43761 /* Services */,
 				1EEE64A42D63D2B800C43761 /* Views */,
+				1EA2A4382E14C97A004651DF /* Models */,
 				1E4351292D62AB5E008872C8 /* Optima */,
 				1E43514A2D62AB60008872C8 /* OptimaUITests */,
 				1E4351402D62AB60008872C8 /* OptimaTests */,
@@ -258,6 +267,16 @@
 				1E4351472D62AB60008872C8 /* OptimaUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1EA2A4352E14C8E5004651DF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1E2FC4BC2D8B4BAB006A0683 /* Controllers helper */,
+				1E2FC4BD2D8B4BEA006A0683 /* Controllers seeker */,
+				1EEE64A32D63D2A000C43761 /* Controllers general */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		1EEE64A32D63D2A000C43761 /* Controllers general */ = {
@@ -284,6 +303,7 @@
 		1EEE64A42D63D2B800C43761 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1EA2A4392E14CA73004651DF /* Cells */,
 				1EE028AF2DC81966009C3A4B /* UIColor+Hex.swift */,
 				1E257E352D7D70A000397A33 /* UIViewController+Alert.swift */,
 				1EEE64BD2D64239B00C43761 /* UIButton+Style.swift */,
@@ -293,18 +313,10 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		1EEE64A52D63D2C400C43761 /* Models */ = {
+		1EEE64A62D63D2D000C43761 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		1EEE64A62D63D2D000C43761 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				1E1332302E0CF4D0005F18F8 /* VoiceCommandManager.swift */,
-				1E13322F2E0CF4A6005F18F8 /* New Folder */,
+				1E13322F2E0CF4A6005F18F8 /* Voice commands */,
 				1EB61BA22E0906060026EDC6 /* UserInfo */,
 				1EB61BA12E0905DD0026EDC6 /* MyPeople */,
 				1EB61B9F2E0905B60026EDC6 /* MyVision */,
@@ -312,7 +324,7 @@
 				1EB61B9D2E09055A0026EDC6 /* Auth */,
 				1E2BE7092E062592009E566A /* VideoCall */,
 			);
-			path = Managers;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		1EEE64A82D63D2ED00C43761 /* Security */ = {
@@ -339,9 +351,11 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				1E13322F2E0CF4A6005F18F8 /* New Folder */,
+				1E13322F2E0CF4A6005F18F8 /* Voice commands */,
 				1E2BE7092E062592009E566A /* VideoCall */,
 				1E4351292D62AB5E008872C8 /* Optima */,
+				1EA2A4382E14C97A004651DF /* Models */,
+				1EA2A4392E14CA73004651DF /* Cells */,
 				1EB61B9D2E09055A0026EDC6 /* Auth */,
 				1EB61B9E2E0905830026EDC6 /* Networking */,
 				1EB61B9F2E0905B60026EDC6 /* MyVision */,
@@ -483,6 +497,7 @@
 				1E74D39B2D71FDAF00F3978E /* SupportSeekerViewController.swift in Sources */,
 				1EEE64BA2D64123C00C43761 /* OnboardingThirdViewController.swift in Sources */,
 				1E257E362D7D70A000397A33 /* UIViewController+Alert.swift in Sources */,
+				1EA2A43B2E14D4F2004651DF /* CommunityViewController.swift in Sources */,
 				1E80C6712DED0AA200BDF766 /* MyVisionViewController.swift in Sources */,
 				1EEE64BC2D6420BB00C43761 /* ChooseRoleViewController.swift in Sources */,
 				1E39D73B2D66B2F9004C9089 /* SplashScreenViewController.swift in Sources */,
@@ -502,7 +517,6 @@
 				1EFA96482D6D63DB00139613 /* ConfirmPasswordViewController.swift in Sources */,
 				1EE028B02DC81966009C3A4B /* UIColor+Hex.swift in Sources */,
 				1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */,
-				1E1332312E0CF4D0005F18F8 /* VoiceCommandManager.swift in Sources */,
 				1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */,
 				1E13322D2E0CEBD5005F18F8 /* VoiceControlViewController.swift in Sources */,
 				1E0AD0E02D6C3154002338A9 /* LoginViewController.swift in Sources */,

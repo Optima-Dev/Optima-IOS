@@ -71,6 +71,8 @@ class SeekerVideoCallViewController: UIViewController {
                     self?.token = data.token
                     self?.roomName = data.roomName
                     self?.identity = data.identity
+                    self?.meetingId = data.meetingId ?? "" // ✅ meeting._id from backend
+
                     self?.connectToRoom()
                 } else {
                     print("❌ Server Error: \(response.message ?? "No message")")
@@ -82,13 +84,14 @@ class SeekerVideoCallViewController: UIViewController {
     }
 
     private func connectToRoom() {
-        guard !token.isEmpty, !roomName.isEmpty else {
-            print("❌ Missing token or room name")
+        guard !token.isEmpty, !roomName.isEmpty, !identity.isEmpty else {
+            print("❌ Missing token or room name or identity")
             return
         }
 
         print("💬 TOKEN RECEIVED FROM API:\n\(token)")
         print("💬 ROOM NAME:\n\(roomName)")
+        print("💬 IDENTITY:\n\(identity)")
 
         VideoCallManager.shared.connectToRoom(
             token: token,
