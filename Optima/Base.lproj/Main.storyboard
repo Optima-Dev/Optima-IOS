@@ -4125,10 +4125,10 @@ today the “Optima” application.</string>
             </objects>
             <point key="canvasLocation" x="6926" y="3169"/>
         </scene>
-        <!--SeekerVideoCallViewController-->
+        <!--HelperVideoCallViewController-->
         <scene sceneID="fY6-Vl-n7I">
             <objects>
-                <viewController storyboardIdentifier="HelperVideoCallViewController" title="SeekerVideoCallViewController" id="EZ5-Hn-xXT" customClass="HelperVideoCallViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HelperVideoCallViewController" title="HelperVideoCallViewController" id="EZ5-Hn-xXT" customClass="HelperVideoCallViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EeN-RG-iE8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4179,7 +4179,7 @@ today the “Optima” application.</string>
                     <connections>
                         <outlet property="endCallButton" destination="luc-49-EbL" id="YlT-pl-s7B"/>
                         <outlet property="statusLabel" destination="v2g-s6-HW1" id="ZEe-zq-yju"/>
-                        <outlet property="videoContainerView" destination="q7e-zr-SUe" id="jQV-Cp-7GO"/>
+                        <outlet property="videoContainerView" destination="q7e-zr-SUe" id="Ylx-Lm-Mqp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lBg-jW-5BQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

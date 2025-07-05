@@ -7,12 +7,19 @@ class HelpRequestViewController: UIViewController {
     @IBOutlet weak var notificationButton: UIButton!
 
     private var backgroundImageView: UIImageView!
+    private var refreshTimer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         setupBackground()
         checkHelpRequest()
+        startAutoRefresh()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        stopAutoRefresh()
     }
 
     private func setupBackground() {
@@ -56,8 +63,20 @@ class HelpRequestViewController: UIViewController {
         }
     }
 
+    private func startAutoRefresh() {
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            self?.checkHelpRequest()
+        }
+    }
+
+    private func stopAutoRefresh() {
+        refreshTimer?.invalidate()
+        refreshTimer = nil
+    }
+
     @IBAction func acceptButtonTapped(_ sender: UIButton) {
         acceptButton.isEnabled = false
+        stopAutoRefresh() // stop timer when accept
         HelpRequestService.shared.acceptHelpRequest { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -67,6 +86,7 @@ class HelpRequestViewController: UIViewController {
                 case .failure(let error):
                     self?.showError(error)
                     self?.acceptButton.isEnabled = true
+                    self?.startAutoRefresh()
                 }
             }
         }
