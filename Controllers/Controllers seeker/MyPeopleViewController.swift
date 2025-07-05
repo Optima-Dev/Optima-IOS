@@ -1,6 +1,6 @@
 import UIKit
 
-class MyPeopleViewController: UIViewController {
+class MyPeopleViewController: SeekerBaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editView: UIView!

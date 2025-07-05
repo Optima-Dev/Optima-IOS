@@ -15,7 +15,12 @@ class VoiceCommandManager: NSObject, SFSpeechRecognizerDelegate {
     private override init() {
         super.init()
         speechRecognizer?.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(stopListening), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(stopListening),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
     }
 
     func startListening(in viewController: UIViewController) {
@@ -25,19 +30,32 @@ class VoiceCommandManager: NSObject, SFSpeechRecognizerDelegate {
 
         SFSpeechRecognizer.requestAuthorization { authStatus in
             if authStatus == .authorized {
-                self.startRecording(in: viewController)
+                DispatchQueue.main.async {
+                    self.startRecording(in: viewController)
+                }
+            } else {
+                print("Speech recognition not authorized ❌")
             }
         }
     }
 
     @objc func stopListening() {
-        audioEngine.stop()
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            audioEngine.inputNode.removeTap(onBus: 0)
+        }
         recognitionRequest?.endAudio()
         recognitionTask?.cancel()
+        recognitionTask = nil
     }
 
     private func startRecording(in viewController: UIViewController) {
         stopListening()
+
+        if audioEngine.isRunning {
+            print("Audio engine already running – skipping restart 🚫")
+            return
+        }
 
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let request = recognitionRequest else { return }
@@ -50,39 +68,63 @@ class VoiceCommandManager: NSObject, SFSpeechRecognizerDelegate {
         }
 
         audioEngine.prepare()
-        try? audioEngine.start()
+        do {
+            try audioEngine.start()
+        } catch {
+            print("❌ Failed to start audio engine: \(error.localizedDescription)")
+            return
+        }
 
         recognitionTask = speechRecognizer?.recognitionTask(with: request) { result, error in
             if let result = result {
                 let command = result.bestTranscription.formattedString.lowercased()
-                self.handleCommand(command, in: viewController)
+                let didHandle = self.handleCommand(command, in: viewController)
+
+                if didHandle {
+                    self.stopListening()
+                }
             }
 
-            if error != nil || (result?.isFinal ?? false) {
+            if error != nil {
                 self.stopListening()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.startListening(in: viewController)
-                }
             }
         }
     }
 
-    private func handleCommand(_ command: String, in viewController: UIViewController) {
+    private func handleCommand(_ command: String, in viewController: UIViewController) -> Bool {
         switch command {
         case let str where str.contains("open my vision"):
             presentViewController(withIdentifier: "MyVisionViewController", from: viewController)
+            AudioFeedback.shared.vibrateLight()
+            return true
+
         case let str where str.contains("open my people"):
             presentViewController(withIdentifier: "MyPeopleViewController", from: viewController)
+            AudioFeedback.shared.vibrateLight()
+            return true
+
         case let str where str.contains("open support"):
             presentViewController(withIdentifier: "SupportSeekerViewController", from: viewController)
+            AudioFeedback.shared.vibrateLight()
+            return true
+
         case let str where str.contains("open settings"):
             presentViewController(withIdentifier: "SettingForBlindViewController", from: viewController)
+            AudioFeedback.shared.vibrateLight()
+            return true
+
         case let str where str.contains("take a picture"):
             (viewController as? MyVisionViewController)?.captureImage()
+            AudioFeedback.shared.vibrateMedium()
+            return true
+
         case let str where str.contains("repeat"):
             (viewController as? MyVisionViewController)?.repeatResult()
+            AudioFeedback.shared.vibrateLight()
+            return true
+
         default:
-            break
+            return false
         }
     }
 
@@ -97,6 +139,6 @@ class VoiceCommandManager: NSObject, SFSpeechRecognizerDelegate {
     }
 
     private func isUserSeeker(from viewController: UIViewController) -> Bool {
-        return viewController is SupportSeekerViewController
+        return viewController is SeekerBaseViewController
     }
 }

@@ -4,7 +4,7 @@ class HelpRequestService {
     static let shared = HelpRequestService()
     private init() {}
 
-    // Check if there's a pending help request (used in HelpRequestViewController)
+    // Check if there's a pending global meeting
     func checkPendingHelpRequest(completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
             completion(.failure(.unauthorized))
@@ -29,7 +29,7 @@ class HelpRequestService {
         }
     }
 
-    //  Accept help request (used in HelperVideoCallViewController)
+    // Accept first global meeting request
     func acceptHelpRequest(completion: @escaping (Result<MeetingTokenResponse, NetworkError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
             completion(.failure(.unauthorized))

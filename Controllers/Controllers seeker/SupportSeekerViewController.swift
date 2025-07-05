@@ -1,6 +1,6 @@
 import UIKit
 
-class SupportSeekerViewController: UIViewController {
+class SupportSeekerViewController: SeekerBaseViewController {
 
     @IBOutlet weak var myPeople: UIButton!
 
@@ -19,8 +19,6 @@ class SupportSeekerViewController: UIViewController {
         myPeople.layer.cornerRadius = 22
         myPeople.clipsToBounds = true
 
-        //  Start voice command manager
-        VoiceCommandManager.shared.startListening(in: self)
     }
 
     @IBAction func callAVolunteerTapped(_ sender: UIButton) {
@@ -38,7 +36,7 @@ class SupportSeekerViewController: UIViewController {
                         vc.token = tokenData.token
                         vc.roomName = tokenData.roomName
                         vc.identity = tokenData.identity
-                        vc.meetingId = tokenData.identity 
+                        vc.meetingId = tokenData.meetingId ?? ""
                         self.navigationController?.pushViewController(vc, animated: true)
                     } else {
                         print("❌ Token data is nil")

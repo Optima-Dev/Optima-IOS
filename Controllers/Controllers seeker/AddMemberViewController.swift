@@ -1,6 +1,6 @@
 import UIKit
 
-class AddMemberViewController: UIViewController {
+class AddMemberViewController: SeekerBaseViewController {
     
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!

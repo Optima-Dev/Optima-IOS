@@ -32,6 +32,7 @@
 		1EA866982D6FF24200B44BDE /* SettingForBlindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */; };
 		1EA8669A2D6FF66100B44BDE /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */; };
 		1EA866A42D7026EA00B44BDE /* VolunteerhomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */; };
+		1EAE0EEB2E19B86800B7A624 /* SeekerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE0EEA2E19B86800B7A624 /* SeekerBaseViewController.swift */; };
 		1EE028B02DC81966009C3A4B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE028AF2DC81966009C3A4B /* UIColor+Hex.swift */; };
 		1EEE64AE2D63D3A500C43761 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */; };
 		1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */; };
@@ -91,6 +92,7 @@
 		1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingForBlindViewController.swift; sourceTree = "<group>"; };
 		1EA866992D6FF66100B44BDE /* AccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
 		1EA866A32D7026EA00B44BDE /* VolunteerhomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerhomeViewController.swift; sourceTree = "<group>"; };
+		1EAE0EEA2E19B86800B7A624 /* SeekerBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekerBaseViewController.swift; sourceTree = "<group>"; };
 		1EE028AF2DC81966009C3A4B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		1EEE64AD2D63D3A500C43761 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		1EEE64B52D63FE1A00C43761 /* OnboardingFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,11 @@
 		1EA2A4392E14CA73004651DF /* Cells */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		1EAE0EE52E19B61300B7A624 /* New Folder */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "New Folder";
 			sourceTree = "<group>";
 		};
 		1EB61B9D2E09055A0026EDC6 /* Auth */ = {
@@ -232,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				1EA866952D6FF13400B44BDE /* BlindHomeViewController.swift */,
+				1EAE0EEA2E19B86800B7A624 /* SeekerBaseViewController.swift */,
 				1E74D39A2D71FDAF00F3978E /* SupportSeekerViewController.swift */,
 				1EA866972D6FF24200B44BDE /* SettingForBlindViewController.swift */,
 				1E424B702D83F1930034CC49 /* MyPeopleViewController.swift */,
@@ -249,6 +257,7 @@
 				1EA2A4352E14C8E5004651DF /* Controllers */,
 				1EEE64A82D63D2ED00C43761 /* Security */,
 				1EEE64A62D63D2D000C43761 /* Services */,
+				1EAE0EE52E19B61300B7A624 /* New Folder */,
 				1EEE64A42D63D2B800C43761 /* Views */,
 				1EA2A4382E14C97A004651DF /* Models */,
 				1E4351292D62AB5E008872C8 /* Optima */,
@@ -356,6 +365,7 @@
 				1E4351292D62AB5E008872C8 /* Optima */,
 				1EA2A4382E14C97A004651DF /* Models */,
 				1EA2A4392E14CA73004651DF /* Cells */,
+				1EAE0EE52E19B61300B7A624 /* New Folder */,
 				1EB61B9D2E09055A0026EDC6 /* Auth */,
 				1EB61B9E2E0905830026EDC6 /* Networking */,
 				1EB61B9F2E0905B60026EDC6 /* MyVision */,
@@ -515,6 +525,7 @@
 				1E00D5D12D667447008D9EA8 /* PrivacyTermsViewController.swift in Sources */,
 				1E257E1C2D7D63BC00397A33 /* ProfileEditViewController.swift in Sources */,
 				1EFA96482D6D63DB00139613 /* ConfirmPasswordViewController.swift in Sources */,
+				1EAE0EEB2E19B86800B7A624 /* SeekerBaseViewController.swift in Sources */,
 				1EE028B02DC81966009C3A4B /* UIColor+Hex.swift in Sources */,
 				1EEE64BE2D64239B00C43761 /* UIButton+Style.swift in Sources */,
 				1EEE64B62D63FE1A00C43761 /* OnboardingFirstViewController.swift in Sources */,

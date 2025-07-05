@@ -103,7 +103,7 @@ however with many available options.</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTm-rw-sdR">
-                                <rect key="frame" x="19" y="158" width="285" height="94"/>
+                                <rect key="frame" x="18" y="158" width="285" height="94"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <string key="text">HELP SPREDING
 THE VISION !</string>
@@ -2292,7 +2292,7 @@ button or by reading out loud
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEB-Z6-iqo">
-                                <rect key="frame" x="16" y="118" width="331" height="110"/>
+                                <rect key="frame" x="15" y="118" width="331" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <string key="text">HELLO OUR 
 FRIEND !</string>
@@ -4069,7 +4069,7 @@ connection.</string>
                                                 <rect key="frame" x="11" y="92" width="364" height="372"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <mutableString key="text">Lorem ipsum dolor sit amet consectetur. Quis 
+                                                <string key="text">Lorem ipsum dolor sit amet consectetur. Quis 
 faucibus gravida euismod porta sapie. Nibh leo 
 pulvinar viverra elit sed sed enim enim. Platea 
 eget nunc aliquam purus adipiscing non mauris.
@@ -4080,7 +4080,7 @@ gravida arcu iaculienim. Nunc faucibus volutpat
 dapibus nisi molestie purus dignissim. 
 Proin mauris lacus amet. Netus quis molestie eu 
 feugiat. Mollis mauris egestas lobortis amet.
-Tellus pellentesque massa cras nuncissim.</mutableString>
+Tellus pellentesque massa cras nuncissim.</string>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -4786,13 +4786,13 @@ the people we help. </string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="CGP-FR-SoJ"/>
-        <segue reference="LCP-95-ZZy"/>
+        <segue reference="yAe-AY-4BD"/>
         <segue reference="Sdc-6h-O6i"/>
         <segue reference="jaX-R7-LBr"/>
         <segue reference="jgd-Yn-haz"/>
         <segue reference="cGr-oX-nkb"/>
         <segue reference="uUN-N6-zYT"/>
-        <segue reference="Xg8-ld-UAb"/>
+        <segue reference="Y5a-Ip-Fes"/>
         <segue reference="8KN-Dp-g41"/>
         <segue reference="pce-Px-7h4"/>
         <segue reference="fkH-OL-KSi"/>

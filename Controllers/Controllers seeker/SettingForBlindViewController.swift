@@ -1,6 +1,6 @@
 import UIKit
 
-class SettingForBlindViewController: UIViewController {
+class SettingForBlindViewController: SeekerBaseViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     

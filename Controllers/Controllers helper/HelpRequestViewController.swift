@@ -10,7 +10,6 @@ class HelpRequestViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         setupBackground()
         checkHelpRequest()
@@ -62,7 +61,8 @@ class HelpRequestViewController: UIViewController {
         HelpRequestService.shared.acceptHelpRequest { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success:
+                case .success(let response):
+                    print("✅ Token received: \(response.data?.token ?? "no token")")
                     self?.navigateToCall()
                 case .failure(let error):
                     self?.showError(error)

@@ -1,7 +1,7 @@
 import UIKit
 import AVFoundation
 
-class MyVisionViewController: UIViewController {
+class MyVisionViewController: SeekerBaseViewController {
 
     @IBOutlet weak var cameraPreview: UIView!
     @IBOutlet weak var takePictureMainButton: UIButton!

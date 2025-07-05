@@ -21,6 +21,8 @@ class SeekerVideoCallViewController: UIViewController {
     var identity: String = ""
     var meetingId: String = ""
 
+    private var hasConnectedParticipant = false // Track if someone joined
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -71,7 +73,7 @@ class SeekerVideoCallViewController: UIViewController {
                     self?.token = data.token
                     self?.roomName = data.roomName
                     self?.identity = data.identity
-                    self?.meetingId = data.meetingId ?? "" // ✅ meeting._id from backend
+                    self?.meetingId = data.meetingId ?? ""
 
                     self?.connectToRoom()
                 } else {
@@ -108,7 +110,8 @@ class SeekerVideoCallViewController: UIViewController {
     @IBAction func endCallTapped(_ sender: UIButton) {
         VideoCallManager.shared.disconnect()
 
-        if !meetingId.isEmpty {
+        // Only send endMeeting request if someone actually joined
+        if hasConnectedParticipant && !meetingId.isEmpty {
             MeetingService.shared.endMeeting(meetingId: meetingId) { result in
                 switch result {
                 case .success:
@@ -118,7 +121,7 @@ class SeekerVideoCallViewController: UIViewController {
                 }
             }
         } else {
-            print("⚠️ No meetingId to end")
+            print("⚠️ No participant joined or meetingId missing. Skipping endMeeting request.")
         }
 
         dismiss(animated: true)
@@ -142,6 +145,7 @@ extension SeekerVideoCallViewController: RoomDelegate {
 
     func participantDidConnect(room: Room, participant: RemoteParticipant) {
         print("🟢 Participant connected")
+        hasConnectedParticipant = true
         DispatchQueue.main.async {
             self.removeBlurAndStatus()
         }
