@@ -16,7 +16,7 @@ class AddMemberViewController: SeekerBaseViewController {
     // MARK: - Setup Methods
     private func setupBackground() {
         let backgroundImage = UIImageView(frame: view.bounds)
-        backgroundImage.image = UIImage(named: "MyPeople")
+        backgroundImage.image = UIImage(named: "Background")
         backgroundImage.contentMode = .scaleAspectFill
         backgroundImage.clipsToBounds = true
         view.insertSubview(backgroundImage, at: 0)

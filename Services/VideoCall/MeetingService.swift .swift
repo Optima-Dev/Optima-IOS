@@ -17,7 +17,10 @@ class MeetingService {
             body["helper"] = helperId
         }
 
-        let headers = ["Authorization": "Bearer \(token)", "Content-Type": "application/json"]
+        let headers = [
+            "Authorization": "Bearer \(token)",
+            "Content-Type": "application/json"
+        ]
 
         APIManager.shared.performRequest(
             url: endpoint,
@@ -73,6 +76,23 @@ class MeetingService {
         }
 
         let endpoint = "\(APIEndpoints.getMeetingDetails)/\(meetingId)"
+        let headers = ["Authorization": "Bearer \(token)"]
+
+        APIManager.shared.performRequest(
+            url: endpoint,
+            method: "GET",
+            headers: headers,
+            completion: completion
+        )
+    }
+
+    // ✅ NEW: Check if there's a pending global meeting (Seeker side)
+    func getPendingGlobalMeeting(completion: @escaping (Result<PendingMeetingsResponse, NetworkError>) -> Void) {
+        guard let token = AuthManager.shared.authToken else {
+            return completion(.failure(.unauthorized))
+        }
+
+        let endpoint = APIEndpoints.getPendingHelpRequest
         let headers = ["Authorization": "Bearer \(token)"]
 
         APIManager.shared.performRequest(

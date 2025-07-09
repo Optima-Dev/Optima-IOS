@@ -8,7 +8,8 @@ class HelpRequestViewController: UIViewController {
 
     private var backgroundImageView: UIImageView!
     private var refreshTimer: Timer?
-
+    private var didAcceptRequest = false // to stop loops
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -37,13 +38,17 @@ class HelpRequestViewController: UIViewController {
     }
 
     private func checkHelpRequest() {
+        guard !didAcceptRequest else { return } // ✅ امنع التكرار بعد القبول
+
         HelpRequestService.shared.checkPendingHelpRequest { [weak self] result in
             DispatchQueue.main.async {
+                guard let self = self else { return }
+
                 switch result {
                 case .success(let hasRequest):
-                    self?.updateUI(hasPending: hasRequest)
+                    self.updateUI(hasPending: hasRequest)
                 case .failure:
-                    self?.updateUI(hasPending: false)
+                    self.updateUI(hasPending: false)
                 }
             }
         }
@@ -76,26 +81,35 @@ class HelpRequestViewController: UIViewController {
 
     @IBAction func acceptButtonTapped(_ sender: UIButton) {
         acceptButton.isEnabled = false
-        stopAutoRefresh() // stop timer when accept
+        stopAutoRefresh()
+
         HelpRequestService.shared.acceptHelpRequest { [weak self] result in
             DispatchQueue.main.async {
+                guard let self = self else { return }
+
                 switch result {
                 case .success(let response):
+                    self.didAcceptRequest = true // ✅ هنا نوقف التكرار بعد القبول
                     print("✅ Token received: \(response.data?.token ?? "no token")")
-                    self?.navigateToCall()
+                    self.navigateToCall()
                 case .failure(let error):
-                    self?.showError(error)
-                    self?.acceptButton.isEnabled = true
-                    self?.startAutoRefresh()
+                    self.showError(error)
+                    self.acceptButton.isEnabled = true
+                    self.startAutoRefresh()
                 }
             }
         }
     }
 
     private func navigateToCall() {
-        let vc = HelperVideoCallViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "HelperVideoCallViewController") as? HelperVideoCallViewController {
+            vc.modalPresentationStyle = .fullScreen
+            vc.isSpecificMeeting = false
+            self.present(vc, animated: true)
+        } else {
+            print("❌ Failed to instantiate HelperVideoCallViewController")
+        }
     }
 
     private func showError(_ error: Error) {

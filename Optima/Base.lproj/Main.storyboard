@@ -1186,6 +1186,13 @@ At least one Number and one symbol.</string>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZfT-mV-fMG" userLabel="videoContainerView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="729"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0LG-aa-fR3" userLabel="remoteParticipantView">
+                                        <rect key="frame" x="267" y="52" width="139" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="separatorColor"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="869-LZ-HEZ">
@@ -1249,6 +1256,7 @@ At least one Number and one symbol.</string>
                     <connections>
                         <outlet property="endCallButton" destination="hIW-9O-1o4" id="68z-aO-PWk"/>
                         <outlet property="flipCameraButton" destination="gK8-g7-X3v" id="kBx-yY-RVJ"/>
+                        <outlet property="remoteParticipantView" destination="0LG-aa-fR3" id="OWt-0O-k8b"/>
                         <outlet property="statusLabel" destination="869-LZ-HEZ" id="Zsn-Q6-Wat"/>
                         <outlet property="videoContainerView" destination="ZfT-mV-fMG" id="7Qx-BM-Qba"/>
                     </connections>
@@ -3493,6 +3501,80 @@ pick-up a call :</string>
                                             <outlet property="nameLabel" destination="JDV-TW-Xk7" id="szo-O6-Uvs"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="VideoRequestCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="VideoRequestCell" id="qke-PW-Jh3" userLabel="VideoRequestCell" customClass="VideoRequestCell" customModule="Optima" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="98" width="414" height="48"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qke-PW-Jh3" id="1bH-Mf-fGl" customClass="VideoRequestCell" customModule="Optima" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fk-9g-zrP">
+                                                    <rect key="frame" x="91" y="12" width="303" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="406-fS-3wx">
+                                                    <rect key="frame" x="213" y="45" width="80" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.1529411765" green="0.1529411765" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Accept">
+                                                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </buttonConfiguration>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="15"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="acceptTapped:" destination="qke-PW-Jh3" eventType="touchUpInside" id="BZa-3O-imM"/>
+                                                        <action selector="acceptTapped:" destination="1bH-Mf-fGl" eventType="touchUpInside" id="Olx-bG-Ifj"/>
+                                                        <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pX4-nN-5Or"/>
+                                                        <action selector="verifyButtonTapped:" destination="B0J-A8-qMH" eventType="touchUpInside" id="Cbq-Xg-fpa"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3w-El-noA">
+                                                    <rect key="frame" x="315" y="45" width="86" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Remove">
+                                                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                        <color key="baseForegroundColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </buttonConfiguration>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="15"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="declineTapped:" destination="qke-PW-Jh3" eventType="touchUpInside" id="Mke-R7-Bmi"/>
+                                                        <action selector="declineTapped:" destination="1bH-Mf-fGl" eventType="touchUpInside" id="PyS-dh-web"/>
+                                                        <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gDL-Th-HFG"/>
+                                                        <action selector="verifyButtonTapped:" destination="B0J-A8-qMH" eventType="touchUpInside" id="Fpz-ha-TBo"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="vidReq" translatesAutoresizingMaskIntoConstraints="NO" id="VNP-8h-Lq1">
+                                                    <rect key="frame" x="20" y="14" width="55" height="55"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <connections>
+                                                <outlet property="acceptButton" destination="406-fS-3wx" id="FFb-5B-4Sr"/>
+                                                <outlet property="declineButton" destination="n3w-El-noA" id="wCQ-Ow-ws5"/>
+                                                <outlet property="iconImageView" destination="VNP-8h-Lq1" id="bUv-LP-dfP"/>
+                                                <outlet property="nameLabel" destination="4fk-9g-zrP" id="29q-0n-1zd"/>
+                                            </connections>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="acceptButton" destination="406-fS-3wx" id="bFE-2R-zxY"/>
+                                            <outlet property="declineButton" destination="n3w-El-noA" id="jEY-OA-gMx"/>
+                                            <outlet property="iconImageView" destination="VNP-8h-Lq1" id="cBG-OG-dVk"/>
+                                            <outlet property="nameLabel" destination="4fk-9g-zrP" id="sFR-HT-w5J"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syj-Xe-LvD">
@@ -3549,7 +3631,7 @@ pick-up a call :</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Hk-IC-9oL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5470" y="3830"/>
+            <point key="canvasLocation" x="5469.5652173913049" y="3829.6875"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ify-dj-jja">
@@ -4124,67 +4206,6 @@ today the “Optima” application.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tUp-Zn-IaG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6926" y="3169"/>
-        </scene>
-        <!--HelperVideoCallViewController-->
-        <scene sceneID="fY6-Vl-n7I">
-            <objects>
-                <viewController storyboardIdentifier="HelperVideoCallViewController" title="HelperVideoCallViewController" id="EZ5-Hn-xXT" customClass="HelperVideoCallViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EeN-RG-iE8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7e-zr-SUe" userLabel="videoContainerView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="729"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wait till we assign you to the call .." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2g-s6-HW1">
-                                <rect key="frame" x="49" y="362" width="331" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                <color key="textColor" red="0.91764706370000004" green="0.91764706370000004" blue="0.91764706370000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="scR-HG-DOM" userLabel="buttonView">
-                                <rect key="frame" x="0.0" y="724" width="414" height="172"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="luc-49-EbL">
-                                        <rect key="frame" x="38" y="36" width="356" height="65"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemRedColor"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="End Call">
-                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="24"/>
-                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </buttonConfiguration>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="20"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="endCallTapped:" destination="EZ5-Hn-xXT" eventType="touchUpInside" id="21v-Y0-775"/>
-                                            <action selector="secondaryTakePictureTapped:" destination="p5A-56-OnS" eventType="touchUpInside" id="ndv-gR-zhV"/>
-                                            <segue destination="mhX-Bx-Flr" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="CGP-FR-SoJ"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="BuL-rH-UoV"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <connections>
-                        <outlet property="endCallButton" destination="luc-49-EbL" id="YlT-pl-s7B"/>
-                        <outlet property="statusLabel" destination="v2g-s6-HW1" id="ZEe-zq-yju"/>
-                        <outlet property="videoContainerView" destination="q7e-zr-SUe" id="Ylx-Lm-Mqp"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lBg-jW-5BQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4668" y="3891"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="HSb-Lc-hUu">
@@ -4783,9 +4804,76 @@ the people we help. </string>
             </objects>
             <point key="canvasLocation" x="6302.898550724638" y="2420.7589285714284"/>
         </scene>
+        <!--HelperVideoCallViewController-->
+        <scene sceneID="oto-hr-2XM">
+            <objects>
+                <viewController restorationIdentifier="HelperVideoCallViewController" storyboardIdentifier="HelperVideoCallViewController" title="HelperVideoCallViewController" id="1zJ-NP-ODT" customClass="HelperVideoCallViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QDv-PG-E2z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QoO-Md-HcN" userLabel="videoContainerView">
+                                <rect key="frame" x="0.0" y="0.0" width="436" height="729"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g7G-bg-6bU" userLabel="remoteParticipantView">
+                                        <rect key="frame" x="254" y="54" width="139" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="separatorColor"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wait till we assign you to the call .." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rX-AL-UWt">
+                                <rect key="frame" x="49" y="362" width="331" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <color key="textColor" red="0.91764706370000004" green="0.91764706370000004" blue="0.91764706370000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2oM-Ra-YOJ" userLabel="buttonView">
+                                <rect key="frame" x="0.0" y="724" width="436" height="217"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxk-vP-61D">
+                                        <rect key="frame" x="29" y="63" width="356" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="End Call">
+                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="24"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="endCallTapped:" destination="1zJ-NP-ODT" eventType="touchUpInside" id="k1C-5U-F7V"/>
+                                            <action selector="secondaryTakePictureTapped:" destination="p5A-56-OnS" eventType="touchUpInside" id="sNd-2F-B2W"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RHB-2Z-52X"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="endCallButton" destination="nxk-vP-61D" id="yU5-bx-7tX"/>
+                        <outlet property="remoteParticipantView" destination="g7G-bg-6bU" id="dsG-gE-aty"/>
+                        <outlet property="statusLabel" destination="0rX-AL-UWt" id="cY2-YY-ryC"/>
+                        <outlet property="videoContainerView" destination="QoO-Md-HcN" id="piS-nt-5Kt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0hw-MX-JlP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4611.594202898551" y="3829.6875"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CGP-FR-SoJ"/>
         <segue reference="yAe-AY-4BD"/>
         <segue reference="Sdc-6h-O6i"/>
         <segue reference="jaX-R7-LBr"/>
@@ -4850,11 +4938,15 @@ the people we help. </string>
         <image name="terms1" width="49" height="49"/>
         <image name="terms2" width="48" height="49"/>
         <image name="terms3" width="47" height="48"/>
+        <image name="vidReq" width="53" height="53"/>
         <image name="video-call 1" width="90" height="90"/>
         <image name="voice-command 1" width="81" height="81"/>
         <image name="voiceControl" width="33" height="41"/>
         <image name="volunteer" width="104" height="104"/>
         <image name="warning_icon" width="64" height="62"/>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -155,9 +155,9 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		1EAE0EE52E19B61300B7A624 /* New Folder */ = {
+		1EAE0EE52E19B61300B7A624 /* Helpers */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "New Folder";
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		1EB61B9D2E09055A0026EDC6 /* Auth */ = {
@@ -257,7 +257,7 @@
 				1EA2A4352E14C8E5004651DF /* Controllers */,
 				1EEE64A82D63D2ED00C43761 /* Security */,
 				1EEE64A62D63D2D000C43761 /* Services */,
-				1EAE0EE52E19B61300B7A624 /* New Folder */,
+				1EAE0EE52E19B61300B7A624 /* Helpers */,
 				1EEE64A42D63D2B800C43761 /* Views */,
 				1EA2A4382E14C97A004651DF /* Models */,
 				1E4351292D62AB5E008872C8 /* Optima */,
@@ -365,7 +365,7 @@
 				1E4351292D62AB5E008872C8 /* Optima */,
 				1EA2A4382E14C97A004651DF /* Models */,
 				1EA2A4392E14CA73004651DF /* Cells */,
-				1EAE0EE52E19B61300B7A624 /* New Folder */,
+				1EAE0EE52E19B61300B7A624 /* Helpers */,
 				1EB61B9D2E09055A0026EDC6 /* Auth */,
 				1EB61B9E2E0905830026EDC6 /* Networking */,
 				1EB61B9F2E0905B60026EDC6 /* MyVision */,

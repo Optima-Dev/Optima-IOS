@@ -103,6 +103,11 @@ struct FriendRequest: Codable {
 // MARK: - Empty Response
 struct EmptyResponse: Decodable {}
 
+// MARK: - General API Error Response
+struct APIErrorResponse: Codable {
+    let status: Int
+    let message: String
+}
 // MARK: - Error Handling
 enum NetworkError: Error {
     case invalidURL

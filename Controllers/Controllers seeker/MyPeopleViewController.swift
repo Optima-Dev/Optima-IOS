@@ -138,9 +138,10 @@ class MyPeopleViewController: SeekerBaseViewController {
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "SeekerVideoCallViewController") as? SeekerVideoCallViewController {
+            vc.modalPresentationStyle = .fullScreen  
             vc.helperId = friend.id
             vc.callType = .friend
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.present(vc, animated: true)
         }
     }
 

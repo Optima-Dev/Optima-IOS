@@ -1,10 +1,9 @@
-// APIManager.swift
 import Foundation
 
 class APIManager {
     static let shared = APIManager()
     private init() {}
-    
+
     // MARK: - Generic Request Handler
     func performRequest<T: Decodable>(
         url: String,
@@ -87,11 +86,18 @@ class APIManager {
                 completion(.success(decodedResponse))
             } catch {
                 print("🔴 Decoding Error: \(error)")
-                completion(.failure(.decodingError))
+
+                // ✅ Try to decode server error message
+                if let apiError = try? JSONDecoder().decode(APIErrorResponse.self, from: data) {
+                    print("🔴 Server error message: \(apiError.message)")
+                    completion(.failure(.requestFailed(apiError.message)))
+                } else {
+                    completion(.failure(.decodingError))
+                }
             }
         }.resume()
     }
-    
+
     // MARK: - Fetch Friends (Optional)
     func fetchFriends(completion: @escaping (Result<[Friend], NetworkError>) -> Void) {
         guard let token = AuthManager.shared.authToken else {
@@ -100,7 +106,7 @@ class APIManager {
         }
 
         let headers = ["Authorization": "Bearer \(token)"]
-        
+
         performRequest(
             url: APIEndpoints.fetchFriends,
             method: "GET",

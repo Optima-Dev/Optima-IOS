@@ -9,6 +9,7 @@ enum CallType {
 class SeekerVideoCallViewController: UIViewController {
 
     @IBOutlet weak var videoContainerView: UIView!
+    @IBOutlet weak var remoteParticipantView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var flipCameraButton: UIButton!
     @IBOutlet weak var endCallButton: UIButton!
@@ -21,7 +22,8 @@ class SeekerVideoCallViewController: UIViewController {
     var identity: String = ""
     var meetingId: String = ""
 
-    private var hasConnectedParticipant = false // Track if someone joined
+    private var hasConnectedParticipant = false
+    private var hasStartedMeeting = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,17 +57,24 @@ class SeekerVideoCallViewController: UIViewController {
     }
 
     private func removeBlurAndStatus() {
-        if let blur = videoContainerView.viewWithTag(999) {
-            blur.removeFromSuperview()
-        }
-        if let background = videoContainerView.viewWithTag(998) {
-            background.removeFromSuperview()
-        }
+        videoContainerView.viewWithTag(999)?.removeFromSuperview()
+        videoContainerView.viewWithTag(998)?.removeFromSuperview()
         statusLabel.isHidden = true
     }
 
     private func startMeeting() {
+        guard !hasStartedMeeting else {
+            print("⛔️ Meeting already started. Skipping duplicate call.")
+            return
+        }
+        hasStartedMeeting = true
+
         let type = callType == .friend ? "specific" : "global"
+
+        createNewMeeting(type: type)
+    }
+
+    private func createNewMeeting(type: String) {
         MeetingService.shared.createMeeting(type: type, helperId: helperId) { [weak self] result in
             switch result {
             case .success(let response):
@@ -74,10 +83,9 @@ class SeekerVideoCallViewController: UIViewController {
                     self?.roomName = data.roomName
                     self?.identity = data.identity
                     self?.meetingId = data.meetingId ?? ""
-
                     self?.connectToRoom()
                 } else {
-                    print("❌ Server Error: \(response.message ?? "No message")")
+                    print("❌ Server error: \(response.message ?? "Unknown error")")
                 }
             case .failure(let error):
                 print("❌ Failed to create meeting: \(error)")
@@ -87,11 +95,11 @@ class SeekerVideoCallViewController: UIViewController {
 
     private func connectToRoom() {
         guard !token.isEmpty, !roomName.isEmpty, !identity.isEmpty else {
-            print("❌ Missing token or room name or identity")
+            print("❌ Missing token, room name, or identity")
             return
         }
 
-        print("💬 TOKEN RECEIVED FROM API:\n\(token)")
+        print("💬 TOKEN:\n\(token)")
         print("💬 ROOM NAME:\n\(roomName)")
         print("💬 IDENTITY:\n\(identity)")
 
@@ -99,7 +107,8 @@ class SeekerVideoCallViewController: UIViewController {
             token: token,
             roomName: roomName,
             enableVideo: true,
-            delegate: self
+            delegate: self,
+            previewView: self.videoContainerView
         )
     }
 
@@ -110,8 +119,7 @@ class SeekerVideoCallViewController: UIViewController {
     @IBAction func endCallTapped(_ sender: UIButton) {
         VideoCallManager.shared.disconnect()
 
-        // Only send endMeeting request if someone actually joined
-        if hasConnectedParticipant && !meetingId.isEmpty {
+        if !meetingId.isEmpty {
             MeetingService.shared.endMeeting(meetingId: meetingId) { result in
                 switch result {
                 case .success:
@@ -121,7 +129,7 @@ class SeekerVideoCallViewController: UIViewController {
                 }
             }
         } else {
-            print("⚠️ No participant joined or meetingId missing. Skipping endMeeting request.")
+            print("⚠️ No meetingId. Skipping endMeeting.")
         }
 
         dismiss(animated: true)
@@ -129,10 +137,11 @@ class SeekerVideoCallViewController: UIViewController {
 }
 
 // MARK: - RoomDelegate
-
 extension SeekerVideoCallViewController: RoomDelegate {
     func roomDidConnect(room: Room) {
         print("🟢 Connected to room: \(room.name)")
+
+        VideoCallManager.shared.publishLocalVideoTrack()
     }
 
     func roomDidDisconnect(room: Room, error: Error?) {
@@ -148,6 +157,11 @@ extension SeekerVideoCallViewController: RoomDelegate {
         hasConnectedParticipant = true
         DispatchQueue.main.async {
             self.removeBlurAndStatus()
+            if let videoTrack = participant.remoteVideoTracks.first?.remoteTrack {
+                VideoCallManager.shared.renderRemoteVideoTrack(videoTrack, in: self.remoteParticipantView)
+            } else {
+                print("⚠️ No remote video track found")
+            }
         }
     }
 

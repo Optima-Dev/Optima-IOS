@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "vidReq.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

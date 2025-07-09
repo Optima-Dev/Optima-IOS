@@ -33,4 +33,7 @@ struct APIEndpoints {
     // Helper Help Requests
     static let getPendingHelpRequest = "\(baseURL)/meetings/global"
     static let acceptHelpRequest = "\(baseURL)/meetings/accept-first"
+    static let getPendingSpecificMeetings = "\(baseURL)/meetings/pending-specific"
+    static let acceptSpecificMeeting = "\(baseURL)/meetings/accept-specific"
+    static let rejectSpecificMeeting = "\(baseURL)/meetings/reject"
 }

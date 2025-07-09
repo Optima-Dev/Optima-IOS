@@ -4,17 +4,31 @@ import TwilioVideo
 class HelperVideoCallViewController: UIViewController {
 
     @IBOutlet weak var videoContainerView: UIView!
+    @IBOutlet weak var remoteParticipantView: UIView!
     @IBOutlet weak var endCallButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
 
     private var accessToken: String?
     private var roomName: String?
+    private var hasStartedCallFlow = false
+    private var isProcessingCall = false // ✅ Prevents multiple calls
+
+    // ✅ NEW: to distinguish meeting type
+    var isSpecificMeeting: Bool = false
+    var specificMeetingId: String? // used if isSpecificMeeting = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         addBlurEffect()
-        startCallFlow()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !hasStartedCallFlow {
+            hasStartedCallFlow = true
+            startCallFlow()
+        }
     }
 
     private func setupUI() {
@@ -35,28 +49,56 @@ class HelperVideoCallViewController: UIViewController {
     }
 
     private func removeBlurAndStatus() {
-        if let blur = videoContainerView.viewWithTag(999) {
-            blur.removeFromSuperview()
-        }
+        videoContainerView.viewWithTag(999)?.removeFromSuperview()
         statusLabel.isHidden = true
     }
 
     private func startCallFlow() {
-        HelpRequestService.shared.acceptHelpRequest { [weak self] result in
-            switch result {
-            case .success(let response):
-                if let tokenData = response.data {
-                    self?.accessToken = tokenData.token
-                    self?.roomName = tokenData.roomName
-                    DispatchQueue.main.async {
-                        self?.connectToRoom()
-                    }
-                } else {
-                    print("❌ Token data is nil")
+        guard !isProcessingCall else {
+            print("⛔️ Call already in progress, skipping.")
+            return
+        }
+        isProcessingCall = true
+
+        print("🟡 Starting call flow | isSpecific: \(isSpecificMeeting) | meetingId: \(specificMeetingId ?? "nil")")
+
+        if isSpecificMeeting, let meetingId = specificMeetingId {
+            // ✅ Specific meeting logic
+            HelpRequestService.shared.acceptSpecificMeeting(meetingId: meetingId) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    self?.handleTokenResponse(response)
+                case .failure(let error):
+                    print("❌ Failed to accept specific meeting: \(error)")
                 }
-            case .failure(let error):
-                print("❌ Failed to fetch token: \(error)")
             }
+        } else {
+            // ✅ Global meeting logic
+            HelpRequestService.shared.acceptHelpRequest { [weak self] result in
+                switch result {
+                case .success(let response):
+                    self?.handleTokenResponse(response)
+                case .failure(let error):
+                    print("❌ Failed to accept global meeting: \(error)")
+                }
+            }
+        }
+    }
+
+    private func handleTokenResponse(_ response: MeetingTokenResponse) {
+        guard let tokenData = response.data else {
+            print("❌ Token data is nil")
+            return
+        }
+
+        accessToken = tokenData.token
+        roomName = tokenData.roomName
+
+        print("🟢 Token: \(tokenData.token)")
+        print("🟢 Room Name: \(tokenData.roomName)")
+
+        DispatchQueue.main.async {
+            self.connectToRoom()
         }
     }
 
@@ -66,13 +108,10 @@ class HelperVideoCallViewController: UIViewController {
             return
         }
 
-        print("💬 TOKEN RECEIVED FROM API:\n\(token)")
-        print("💬 ROOM NAME:\n\(room)")
-
         VideoCallManager.shared.connectToRoom(
             token: token,
             roomName: room,
-            enableVideo: false, // Helper does not share video
+            enableVideo: false,
             delegate: self
         )
     }
@@ -80,7 +119,6 @@ class HelperVideoCallViewController: UIViewController {
     @IBAction func endCallTapped(_ sender: UIButton) {
         VideoCallManager.shared.disconnect()
 
-        // مش محتاجين meetingId لإن الـ backend بيربط الـ helper تلقائيًا
         MeetingService.shared.endMeetingForCurrentUser { result in
             switch result {
             case .success:
@@ -92,24 +130,46 @@ class HelperVideoCallViewController: UIViewController {
 
         dismiss(animated: true)
     }
+
+    private func showRemoteVideo(_ videoTrack: VideoTrack) {
+        let remoteView = VideoView(frame: remoteParticipantView.bounds)
+        remoteView.contentMode = .scaleAspectFill
+        remoteView.shouldMirror = false
+        remoteView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        videoTrack.addRenderer(remoteView)
+        remoteParticipantView.addSubview(remoteView)
+    }
 }
 
+// MARK: - RoomDelegate
 extension HelperVideoCallViewController: RoomDelegate {
     func roomDidConnect(room: Room) {
         print("🟢 Connected to room: \(room.name)")
+        for participant in room.remoteParticipants {
+            print("👤 Existing participant: \(participant.identity)")
+            participant.delegate = self
+
+            if let videoTrack = participant.remoteVideoTracks.first?.remoteTrack {
+                DispatchQueue.main.async {
+                    self.showRemoteVideo(videoTrack)
+                    self.removeBlurAndStatus()
+                }
+            }
+        }
     }
 
     func roomDidDisconnect(room: Room, error: Error?) {
         print("🔴 Disconnected from room. Error: \(error?.localizedDescription ?? "none")")
         DispatchQueue.main.async {
-            self.statusLabel.text = "Disconnected"
+            self.statusLabel?.text = "Disconnected"
         }
     }
 
     func roomDidFailToConnect(room: Room, error: Error) {
         print("❌ Connection failed: \(error.localizedDescription)")
         DispatchQueue.main.async {
-            self.statusLabel.text = "Connection failed"
+            self.statusLabel?.text = "Connection failed"
         }
     }
 
@@ -118,12 +178,35 @@ extension HelperVideoCallViewController: RoomDelegate {
         DispatchQueue.main.async {
             self.removeBlurAndStatus()
         }
+        participant.delegate = self
     }
 
     func participantDidDisconnect(room: Room, participant: RemoteParticipant) {
         print("🔴 Participant left")
         DispatchQueue.main.async {
-            self.statusLabel.text = "Participant left"
+            self.statusLabel?.text = "Participant left"
         }
+    }
+}
+
+// MARK: - RemoteParticipantDelegate
+extension HelperVideoCallViewController: RemoteParticipantDelegate {
+    func remoteParticipant(_ participant: RemoteParticipant, publishedVideoTrack publication: RemoteVideoTrackPublication) {
+        print("📹 Remote video track published")
+    }
+
+    func remoteParticipant(_ participant: RemoteParticipant, unpublishedVideoTrack publication: RemoteVideoTrackPublication) {
+        print("🚫 Remote video track unpublished")
+    }
+
+    func remoteParticipant(_ participant: RemoteParticipant, subscribedTo videoTrack: RemoteVideoTrack, publication: RemoteVideoTrackPublication) {
+        print("✅ Subscribed to remote video track")
+        DispatchQueue.main.async {
+            self.showRemoteVideo(videoTrack)
+        }
+    }
+
+    func remoteParticipant(_ participant: RemoteParticipant, unsubscribedFrom videoTrack: RemoteVideoTrack, publication: RemoteVideoTrackPublication) {
+        print("🔕 Unsubscribed from remote video")
     }
 }

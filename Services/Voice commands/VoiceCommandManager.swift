@@ -24,9 +24,7 @@ class VoiceCommandManager: NSObject, SFSpeechRecognizerDelegate {
     }
 
     func startListening(in viewController: UIViewController) {
-        guard isUserSeeker(from: viewController) else {
-            return
-        }
+        guard isUserSeeker(from: viewController) else { return }
 
         SFSpeechRecognizer.requestAuthorization { authStatus in
             if authStatus == .authorized {
@@ -122,6 +120,29 @@ class VoiceCommandManager: NSObject, SFSpeechRecognizerDelegate {
             (viewController as? MyVisionViewController)?.repeatResult()
             AudioFeedback.shared.vibrateLight()
             return true
+
+        case let str where str.contains("call a volunteer"):
+            (viewController as? SupportSeekerViewController)?.callAVolunteerTapped(UIButton())
+            AudioFeedback.shared.vibrateMedium()
+            return true
+
+        case let str where str.contains("call"):
+            if let myPeopleVC = viewController as? MyPeopleViewController {
+                let words = str.components(separatedBy: " ")
+                if let nameIndex = words.firstIndex(of: "call"), nameIndex + 1 < words.count {
+                    let name = words[nameIndex + 1].lowercased()
+
+                    if let friend = myPeopleVC.friends.first(where: {
+                        $0.firstName.lowercased() == name || $0.lastName.lowercased() == name
+                    }) {
+                        myPeopleVC.selectedFriend = friend
+                        myPeopleVC.callButtonTapped(UIButton())
+                        AudioFeedback.shared.vibrateMedium()
+                        return true
+                    }
+                }
+            }
+            return false
 
         default:
             return false
