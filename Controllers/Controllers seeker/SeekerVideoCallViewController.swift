@@ -70,7 +70,7 @@ class SeekerVideoCallViewController: UIViewController {
         hasStartedMeeting = true
 
         let type = callType == .friend ? "specific" : "global"
-
+        print("📞 Requesting new meeting with type: \(type), helperId: \(helperId ?? "nil")")
         createNewMeeting(type: type)
     }
 
@@ -83,6 +83,12 @@ class SeekerVideoCallViewController: UIViewController {
                     self?.roomName = data.roomName
                     self?.identity = data.identity
                     self?.meetingId = data.meetingId ?? ""
+
+                    print("📥 Received meeting data")
+                    print("🧾 Room Name: \(data.roomName)")
+                    print("🧾 Token: \(data.token.prefix(20))...")
+                    print("🧾 Meeting ID: \(data.meetingId ?? "nil")")
+
                     self?.connectToRoom()
                 } else {
                     print("❌ Server error: \(response.message ?? "Unknown error")")
@@ -99,9 +105,8 @@ class SeekerVideoCallViewController: UIViewController {
             return
         }
 
-        print("💬 TOKEN:\n\(token)")
-        print("💬 ROOM NAME:\n\(roomName)")
-        print("💬 IDENTITY:\n\(identity)")
+        print("🚀 Connecting to room: \(roomName)")
+        print("📸 enableVideo: true")
 
         VideoCallManager.shared.connectToRoom(
             token: token,
@@ -139,8 +144,7 @@ class SeekerVideoCallViewController: UIViewController {
 // MARK: - RoomDelegate
 extension SeekerVideoCallViewController: RoomDelegate {
     func roomDidConnect(room: Room) {
-        print("🟢 Connected to room: \(room.name)")
-
+        print("✅ Seeker connected to room: \(room.name)")
         VideoCallManager.shared.publishLocalVideoTrack()
     }
 
@@ -153,14 +157,16 @@ extension SeekerVideoCallViewController: RoomDelegate {
     }
 
     func participantDidConnect(room: Room, participant: RemoteParticipant) {
-        print("🟢 Participant connected")
-        hasConnectedParticipant = true
+        print("👤 Participant connected to seeker room: \(participant.identity)")
+        print("📦 Remote tracks count: \(participant.remoteVideoTracks.count)")
+
         DispatchQueue.main.async {
             self.removeBlurAndStatus()
             if let videoTrack = participant.remoteVideoTracks.first?.remoteTrack {
+                print("📺 Remote video track found at seeker side")
                 VideoCallManager.shared.renderRemoteVideoTrack(videoTrack, in: self.remoteParticipantView)
             } else {
-                print("⚠️ No remote video track found")
+                print("⚠️ No remote video track found at seeker side")
             }
         }
     }

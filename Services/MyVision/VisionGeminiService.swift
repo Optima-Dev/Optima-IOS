@@ -17,7 +17,6 @@ class VisionGeminiService {
         let base64Image = imageData.base64EncodedString()
         let requestURL = URL(string: "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=\(apiKey)")!
 
-        // Prompt to avoid generic intro sentence
         let requestBody: [String: Any] = [
             "contents": [
                 [
@@ -62,19 +61,29 @@ class VisionGeminiService {
             }
 
             do {
-                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let candidates = json["candidates"] as? [[String: Any]],
-                   let content = candidates.first?["content"] as? [String: Any],
-                   let parts = content["parts"] as? [[String: Any]],
-                   let text = parts.first?["text"] as? String {
-                    completion(.success(text))
+                // 🔍 Try to print the full response JSON for debugging
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                    print("📦 Gemini Raw JSON Response:\n\(json)")
+
+                    if let candidates = json["candidates"] as? [[String: Any]],
+                       let content = candidates.first?["content"] as? [String: Any],
+                       let parts = content["parts"] as? [[String: Any]],
+                       let text = parts.first?["text"] as? String {
+                        completion(.success(text))
+                    } else {
+                        completion(.failure(NSError(
+                            domain: "ParsingError",
+                            code: -2,
+                            userInfo: [NSLocalizedDescriptionKey: "Failed to parse API response."])))
+                    }
                 } else {
                     completion(.failure(NSError(
-                        domain: "ParsingError",
-                        code: -2,
-                        userInfo: [NSLocalizedDescriptionKey: "Failed to parse API response."])))
+                        domain: "InvalidJSON",
+                        code: -3,
+                        userInfo: [NSLocalizedDescriptionKey: "Response is not a valid JSON object."])))
                 }
             } catch {
+                print("❌ JSON Decode Error: \(error)")
                 completion(.failure(error))
             }
         }.resume()

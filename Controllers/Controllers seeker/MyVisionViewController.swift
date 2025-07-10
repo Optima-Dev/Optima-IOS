@@ -21,11 +21,23 @@ class MyVisionViewController: SeekerBaseViewController {
     private let synthesizer = AVSpeechSynthesizer()
     private var geminiService = VisionGeminiService()
 
+    // ⏳ Used to limit API calls
+    private var isWaiting = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCamera()
         configureInitialUI()
         synthesizer.delegate = self
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        // 🛑 Stop speaking if still active when the view disappears
+        if synthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
+        }
     }
 
     private func configureInitialUI() {
@@ -82,7 +94,18 @@ class MyVisionViewController: SeekerBaseViewController {
     // MARK: - Button Actions
 
     @IBAction func takePictureMainTapped(_ sender: UIButton) {
+        guard !isWaiting else {
+            showWaitAlert()
+            return
+        }
+
+        isWaiting = true
         takePicture()
+
+        // Reset the waiting flag after 30 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 30.0) {
+            self.isWaiting = false
+        }
     }
 
     @IBAction func repeatTapped(_ sender: UIButton) {
@@ -125,17 +148,30 @@ class MyVisionViewController: SeekerBaseViewController {
     }
 
     private func speak(text: String) {
+        if synthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
+        }
         isSpeaking = true
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         synthesizer.speak(utterance)
     }
 
+    private func showWaitAlert() {
+        let alert = UIAlertController(title: nil, message: "Please wait before taking another picture.", preferredStyle: .alert)
+        self.present(alert, animated: true)
+
+        // Dismiss alert automatically after 1.5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            alert.dismiss(animated: true)
+        }
+    }
+
     // MARK: - Voice Command Actions
 
     func captureImage() {
         print("📸 Voice Command Triggered: Take A Picture")
-        takePicture()
+        takePictureMainTapped(takePictureMainButton)
     }
 
     func repeatResult() {
@@ -152,7 +188,6 @@ extension MyVisionViewController: AVCapturePhotoCaptureDelegate {
         if let imageData = photo.fileDataRepresentation(),
            let image = UIImage(data: imageData) {
 
-            // Show loader
             resultOverlayView.isHidden = false
             activityIndicator.startAnimating()
             resultLabel.text = ""

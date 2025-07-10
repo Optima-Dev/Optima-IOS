@@ -11,11 +11,10 @@ class HelperVideoCallViewController: UIViewController {
     private var accessToken: String?
     private var roomName: String?
     private var hasStartedCallFlow = false
-    private var isProcessingCall = false // ✅ Prevents multiple calls
+    private var isProcessingCall = false // Prevents multiple connections
 
-    // ✅ NEW: to distinguish meeting type
     var isSpecificMeeting: Bool = false
-    var specificMeetingId: String? // used if isSpecificMeeting = true
+    var specificMeetingId: String? // Assigned from previous screen if specific meeting
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +24,16 @@ class HelperVideoCallViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !hasStartedCallFlow {
-            hasStartedCallFlow = true
-            startCallFlow()
+
+        // Make sure we only start the call flow once
+        guard !hasStartedCallFlow else {
+            print("⛔️ Call flow already started (viewDidAppear)")
+            return
         }
+
+        hasStartedCallFlow = true
+        print("🟢 viewDidAppear triggered startCallFlow()")
+        startCallFlow()
     }
 
     private func setupUI() {
@@ -53,38 +58,37 @@ class HelperVideoCallViewController: UIViewController {
         statusLabel.isHidden = true
     }
 
+    // Entry point for joining the meeting
     private func startCallFlow() {
-        guard !isProcessingCall else {
-            print("⛔️ Call already in progress, skipping.")
+        if isProcessingCall {
+            print("⛔️ Already processing call. Skipping.")
             return
         }
-        isProcessingCall = true
 
+        isProcessingCall = true
         print("🟡 Starting call flow | isSpecific: \(isSpecificMeeting) | meetingId: \(specificMeetingId ?? "nil")")
 
-        if isSpecificMeeting, let meetingId = specificMeetingId {
-            // ✅ Specific meeting logic
-            HelpRequestService.shared.acceptSpecificMeeting(meetingId: meetingId) { [weak self] result in
-                switch result {
-                case .success(let response):
-                    self?.handleTokenResponse(response)
-                case .failure(let error):
-                    print("❌ Failed to accept specific meeting: \(error)")
-                }
-            }
-        } else {
-            // ✅ Global meeting logic
-            HelpRequestService.shared.acceptHelpRequest { [weak self] result in
-                switch result {
-                case .success(let response):
-                    self?.handleTokenResponse(response)
-                case .failure(let error):
-                    print("❌ Failed to accept global meeting: \(error)")
-                }
+        // Validate meeting type
+        guard isSpecificMeeting, let meetingId = specificMeetingId else {
+            print("❌ ERROR: Invalid meeting setup. isSpecificMeeting is false or meetingId is nil.")
+            return
+        }
+
+        // Accept specific meeting request
+        HelpRequestService.shared.acceptSpecificMeeting(meetingId: meetingId) { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("✅ Specific meeting accepted successfully.")
+                self?.handleTokenResponse(response)
+
+            case .failure(let error):
+                print("❌ Failed to accept specific meeting: \(error)")
+                self?.isProcessingCall = false
             }
         }
     }
 
+    // Process response and connect to room
     private func handleTokenResponse(_ response: MeetingTokenResponse) {
         guard let tokenData = response.data else {
             print("❌ Token data is nil")
@@ -94,19 +98,23 @@ class HelperVideoCallViewController: UIViewController {
         accessToken = tokenData.token
         roomName = tokenData.roomName
 
-        print("🟢 Token: \(tokenData.token)")
-        print("🟢 Room Name: \(tokenData.roomName)")
+        print("🧾 Received helper token: \(tokenData.token.prefix(20))...")
+        print("🧾 Received room name: \(tokenData.roomName)")
 
         DispatchQueue.main.async {
             self.connectToRoom()
         }
     }
 
+    // Connect to Twilio room
     private func connectToRoom() {
         guard let token = accessToken, let room = roomName else {
             print("❌ Missing token or room name")
             return
         }
+
+        print("🚀 Helper connecting to room: \(room)")
+        print("📹 Enable Video: false")
 
         VideoCallManager.shared.connectToRoom(
             token: token,
@@ -116,6 +124,7 @@ class HelperVideoCallViewController: UIViewController {
         )
     }
 
+    // End the call
     @IBAction func endCallTapped(_ sender: UIButton) {
         VideoCallManager.shared.disconnect()
 
@@ -131,6 +140,7 @@ class HelperVideoCallViewController: UIViewController {
         dismiss(animated: true)
     }
 
+    // Display incoming video track from seeker
     private func showRemoteVideo(_ videoTrack: VideoTrack) {
         let remoteView = VideoView(frame: remoteParticipantView.bounds)
         remoteView.contentMode = .scaleAspectFill
@@ -146,15 +156,20 @@ class HelperVideoCallViewController: UIViewController {
 extension HelperVideoCallViewController: RoomDelegate {
     func roomDidConnect(room: Room) {
         print("🟢 Connected to room: \(room.name)")
+        print("👥 Remote participants count: \(room.remoteParticipants.count)")
+
         for participant in room.remoteParticipants {
             print("👤 Existing participant: \(participant.identity)")
             participant.delegate = self
 
             if let videoTrack = participant.remoteVideoTracks.first?.remoteTrack {
+                print("📺 Found remote video track on connect")
                 DispatchQueue.main.async {
                     self.showRemoteVideo(videoTrack)
                     self.removeBlurAndStatus()
                 }
+            } else {
+                print("⚠️ No remote video track found on connect")
             }
         }
     }
@@ -174,7 +189,7 @@ extension HelperVideoCallViewController: RoomDelegate {
     }
 
     func participantDidConnect(room: Room, participant: RemoteParticipant) {
-        print("🟢 Participant connected")
+        print("🟢 Participant connected: \(participant.identity)")
         DispatchQueue.main.async {
             self.removeBlurAndStatus()
         }
@@ -182,7 +197,7 @@ extension HelperVideoCallViewController: RoomDelegate {
     }
 
     func participantDidDisconnect(room: Room, participant: RemoteParticipant) {
-        print("🔴 Participant left")
+        print("🔴 Participant left: \(participant.identity)")
         DispatchQueue.main.async {
             self.statusLabel?.text = "Participant left"
         }
@@ -192,21 +207,21 @@ extension HelperVideoCallViewController: RoomDelegate {
 // MARK: - RemoteParticipantDelegate
 extension HelperVideoCallViewController: RemoteParticipantDelegate {
     func remoteParticipant(_ participant: RemoteParticipant, publishedVideoTrack publication: RemoteVideoTrackPublication) {
-        print("📹 Remote video track published")
+        print("📹 Remote video track published by: \(participant.identity)")
     }
 
     func remoteParticipant(_ participant: RemoteParticipant, unpublishedVideoTrack publication: RemoteVideoTrackPublication) {
-        print("🚫 Remote video track unpublished")
+        print("🚫 Remote video track unpublished by: \(participant.identity)")
     }
 
     func remoteParticipant(_ participant: RemoteParticipant, subscribedTo videoTrack: RemoteVideoTrack, publication: RemoteVideoTrackPublication) {
-        print("✅ Subscribed to remote video track")
+        print("✅ Subscribed to remote video track from: \(participant.identity)")
         DispatchQueue.main.async {
             self.showRemoteVideo(videoTrack)
         }
     }
 
     func remoteParticipant(_ participant: RemoteParticipant, unsubscribedFrom videoTrack: RemoteVideoTrack, publication: RemoteVideoTrackPublication) {
-        print("🔕 Unsubscribed from remote video")
+        print("🔕 Unsubscribed from remote video from: \(participant.identity)")
     }
 }

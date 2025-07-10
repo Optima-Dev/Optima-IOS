@@ -103,12 +103,13 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Video Requests appear first
+        // ✅ Video Requests appear first
         if indexPath.row < videoRequests.count {
             let request = videoRequests[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "VideoRequestCell", for: indexPath) as! VideoRequestCell
             cell.configure(with: request)
 
+            // ✅ Handle accept video request
             cell.acceptAction = { [weak self] in
                 guard let self = self else { return }
 
@@ -119,6 +120,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                             if let vc = storyboard.instantiateViewController(withIdentifier: "HelperVideoCallViewController") as? HelperVideoCallViewController {
                                 vc.modalPresentationStyle = .fullScreen
+                                vc.isSpecificMeeting = true // ✅ Needed
+                                vc.specificMeetingId = request.id // ✅ Needed
                                 self.present(vc, animated: true)
                             }
                         case .failure(let error):
@@ -128,6 +131,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 }
             }
 
+            // ✅ Handle decline video request
             cell.declineAction = { [weak self] in
                 guard let self = self else { return }
 
@@ -147,7 +151,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             return cell
         }
 
-        // Friend Requests after Video Requests
+        // ✅ Friend Requests after Video Requests
         let index = indexPath.row - videoRequests.count
         let request = friendRequests[index]
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRequestCell", for: indexPath) as! FriendRequestCell
@@ -160,23 +164,19 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         cell.acceptAction = { [weak self] in
             guard let self = self else { return }
 
-            HelpRequestService.shared.acceptSpecificMeeting(meetingId: request.id) { result in
+            FriendService.shared.acceptFriendRequest(requestId: request.id) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        if let vc = storyboard.instantiateViewController(withIdentifier: "HelperVideoCallViewController") as? HelperVideoCallViewController {
-                            vc.modalPresentationStyle = .fullScreen
-                            vc.isSpecificMeeting = true
-                            vc.specificMeetingId = request.id
-                            self.present(vc, animated: true)
-                        }
+                        self.acceptedRequestIds.insert(request.id)
+                        self.tableView.reloadRows(at: [indexPath], with: .none)
                     case .failure(let error):
                         self.showAlert(message: "Accept failed: \(error.localizedDescription)")
                     }
                 }
             }
         }
+
         cell.declineAction = { [weak self] in
             guard let self = self else { return }
 

@@ -1118,7 +1118,7 @@ At least one Number and one symbol.</string>
                                 <connections>
                                     <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gil-Ub-4D5"/>
                                     <action selector="signUpButtonTapped:" destination="dD2-dN-6mM" eventType="touchUpInside" id="FtH-Za-ejO"/>
-                                    <segue destination="p5A-56-OnS" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="Y5a-Ip-Fes"/>
+                                    <segue destination="p5A-56-OnS" kind="show" id="Y5a-Ip-Fes"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nextv" translatesAutoresizingMaskIntoConstraints="NO" id="noJ-fs-QP3">
@@ -1148,7 +1148,7 @@ At least one Number and one symbol.</string>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gvn-Yw-fPa"/>
-                                    <segue destination="YXn-ix-JpC" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="yAe-AY-4BD"/>
+                                    <segue destination="YXn-ix-JpC" kind="show" id="yAe-AY-4BD"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You can use your voice to control the whole app." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxa-T3-wIM">
@@ -1270,7 +1270,7 @@ At least one Number and one symbol.</string>
             <objects>
                 <viewController restorationIdentifier="MyVisionViewController" storyboardIdentifier="MyVisionViewController" id="p5A-56-OnS" customClass="MyVisionViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tdx-MH-Qr7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIT-T6-cwY">
@@ -1365,6 +1365,7 @@ At least one Number and one symbol.</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="My Vision" image="myVision1" selectedImage="MyVision2" id="Qgm-Ow-TFC"/>
+                    <navigationItem key="navigationItem" id="ys5-v8-890"/>
                     <connections>
                         <outlet property="activityIndicator" destination="gOi-YB-puM" id="dQp-V0-2x3"/>
                         <outlet property="cameraPreview" destination="5Fd-oO-vb1" id="CLx-qO-477"/>
@@ -1922,7 +1923,7 @@ the world</string>
             <objects>
                 <viewController storyboardIdentifier="AccountSettingViewController" id="z02-la-raB" customClass="AccountSettingViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rJc-pf-gMG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMq-zm-e9d">
@@ -1973,7 +1974,7 @@ the world</string>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         First Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="jHg-7X-r6R">
-                                <rect key="frame" x="13" y="215" width="388" height="59"/>
+                                <rect key="frame" x="13" y="201" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1981,7 +1982,7 @@ the world</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="        Last Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="5wC-qN-Yg0">
-                                <rect key="frame" x="13" y="307" width="388" height="59"/>
+                                <rect key="frame" x="13" y="287" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1989,7 +1990,7 @@ the world</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="family-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         mail" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="WvO-Q3-Ua4">
-                                <rect key="frame" x="13" y="402" width="388" height="59"/>
+                                <rect key="frame" x="13" y="376" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2032,7 +2033,7 @@ the world</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uLK-HQ-uKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9609" y="1289"/>
+            <point key="canvasLocation" x="8771" y="1256"/>
         </scene>
         <!--Blind Home View Controller-->
         <scene sceneID="U2y-7y-IAz">
@@ -2435,6 +2436,9 @@ our app in the most efficient way.</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title=""/>
+                                <connections>
+                                    <segue destination="Wde-0P-5Ko" kind="show" id="Xpq-yr-GA1"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COy-FB-mEw">
                                 <rect key="frame" x="101" y="303" width="132" height="67"/>
@@ -2594,6 +2598,9 @@ our app in the most efficient way.</string>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eLg-cs-ht5">
                                 <rect key="frame" x="342" y="496" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="darkModeSwitchChanged:" destination="hfA-wZ-Qpe" eventType="touchUpInside" id="jb6-vn-1ap"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jvd-US-Nkq"/>
@@ -2602,6 +2609,7 @@ our app in the most efficient way.</string>
                     <tabBarItem key="tabBarItem" title="Settings" image="Setting1" selectedImage="Setting2" id="vkh-5O-NUv"/>
                     <navigationItem key="navigationItem" id="byE-DZ-4fZ"/>
                     <connections>
+                        <outlet property="darkModeSwitch" destination="eLg-cs-ht5" id="jhx-bD-RXC"/>
                         <outlet property="emailLabel" destination="0IX-l3-YiQ" id="o1c-us-LWe"/>
                         <outlet property="userNameLabel" destination="RxO-24-V2D" id="Cwc-Je-j5A"/>
                     </connections>
@@ -2773,23 +2781,20 @@ native language as yours.  </string>
                             </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="H9o-Cw-dc1"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="Q5H-jH-2dF"/>
-                    <connections>
-                        <segue destination="hfA-wZ-Qpe" kind="show" id="jaX-R7-LBr"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmm-in-f74" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10126" y="1961"/>
+            <point key="canvasLocation" x="9741" y="1818"/>
         </scene>
         <!--Profile Edit View Controller-->
         <scene sceneID="mhc-Az-cP9">
             <objects>
                 <viewController storyboardIdentifier="ProfileEditViewController" id="eIx-ve-RIr" customClass="ProfileEditViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9cM-xm-gLQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgr-pr-rhV">
@@ -2821,7 +2826,7 @@ native language as yours.  </string>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         First Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="nTx-ys-M3B">
-                                <rect key="frame" x="13" y="220" width="388" height="59"/>
+                                <rect key="frame" x="13" y="206" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2829,7 +2834,7 @@ native language as yours.  </string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="        Last Name" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="QPL-ao-F6m">
-                                <rect key="frame" x="13" y="311" width="388" height="59"/>
+                                <rect key="frame" x="13" y="291" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2837,7 +2842,7 @@ native language as yours.  </string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="family-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="         mail" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="Ga6-pr-sIa">
-                                <rect key="frame" x="13" y="393" width="388" height="59"/>
+                                <rect key="frame" x="13" y="368" width="388" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.79853062909999994" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -3354,6 +3359,9 @@ pick-up a call :</string>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YE8-Mx-JeD">
                                 <rect key="frame" x="311" y="415" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="darkModeSwitchChanged:" destination="2kg-ZX-LQR" eventType="touchUpInside" id="eWh-JX-NMJ"/>
+                                </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77t-Jf-MLg">
                                 <rect key="frame" x="13" y="518" width="388" height="68"/>
@@ -3399,6 +3407,7 @@ pick-up a call :</string>
                     </view>
                     <navigationItem key="navigationItem" id="qmy-xq-khB"/>
                     <connections>
+                        <outlet property="darkModeSwitch" destination="YE8-Mx-JeD" id="ZVV-gI-B2T"/>
                         <outlet property="emailLabel" destination="eOx-kZ-dxJ" id="XD3-lf-lSu"/>
                         <outlet property="nameLabel" destination="XhW-mb-lvA" id="8nn-Wf-spb"/>
                     </connections>
@@ -3702,8 +3711,9 @@ pick-up a call :</string>
                 <navigationController restorationIdentifier="MyPeopleViewController" automaticallyAdjustsScrollViewInsets="NO" id="YXn-ix-JpC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My People" image="MyPeople1" selectedImage="Mypeople2" id="KpC-R8-eSL"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="dFo-Tr-5qF"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jUi-fy-aOL">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3720,7 +3730,7 @@ pick-up a call :</string>
             <objects>
                 <viewController restorationIdentifier="MyPeopleViewController" storyboardIdentifier="MyPeopleViewController" id="jkl-nX-fmL" customClass="MyPeopleViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fj1-zd-4gt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My People" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8J-mq-hc5">
@@ -4232,7 +4242,7 @@ today the “Optima” application.</string>
             <objects>
                 <viewController storyboardIdentifier="voiceControl" id="SI8-bk-jZh" customClass="VoiceControlViewController" customModule="Optima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Inw-sv-yQg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mEf-se-NXo">
@@ -4876,15 +4886,15 @@ the people we help. </string>
     <inferredMetricsTieBreakers>
         <segue reference="yAe-AY-4BD"/>
         <segue reference="Sdc-6h-O6i"/>
-        <segue reference="jaX-R7-LBr"/>
-        <segue reference="jgd-Yn-haz"/>
+        <segue reference="Xpq-yr-GA1"/>
+        <segue reference="997-AR-GUO"/>
         <segue reference="cGr-oX-nkb"/>
         <segue reference="uUN-N6-zYT"/>
         <segue reference="Y5a-Ip-Fes"/>
         <segue reference="8KN-Dp-g41"/>
         <segue reference="pce-Px-7h4"/>
         <segue reference="fkH-OL-KSi"/>
-        <segue reference="eKI-1l-H7D"/>
+        <segue reference="NlY-gD-reb"/>
         <segue reference="WAG-is-dZ7"/>
     </inferredMetricsTieBreakers>
     <resources>
